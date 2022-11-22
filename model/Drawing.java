@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Drawing<Drawable> implements Serializable, Iterable<Drawable>  {
+public class Drawing implements Serializable, Iterable<Drawable>  {
     private List<Drawable> listDrawables;
 
     public Drawing(){
-        this.listDrawables = new ArrayList<Drawable>();
+        this.listDrawables = new ArrayList<>();
     }
 
     public void addDrawable(Drawable drawable){
