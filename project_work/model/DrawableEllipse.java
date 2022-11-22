@@ -1,8 +1,7 @@
-package model;
+package project_work.model;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 
 public class DrawableEllipse extends Ellipse2D.Double implements Drawable{
     private Paint fillColor;

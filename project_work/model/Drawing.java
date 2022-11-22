@@ -1,4 +1,4 @@
-package model;
+package project_work.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

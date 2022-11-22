@@ -1,4 +1,4 @@
-package model;
+package project_work.model;
 import java.awt.*;
 
 public interface Drawable{

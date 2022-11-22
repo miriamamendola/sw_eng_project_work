@@ -1,18 +1,18 @@
-package view;
+package project_work.view;
 
-import model.Drawable;
-import model.Drawing;
+import project_work.Context;
+import project_work.model.Drawable;
+import project_work.model.Drawing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Iterator;
 
 public class CanvasView extends JPanel {
 
     private Drawing drawing;
 
-    public CanvasView(Drawing drawing) {
-        this.drawing = drawing;
+    public CanvasView() {
+        this.drawing = Context.getInstance().getCurrentDrawing();
     }
 
     public Drawing getDrawing() {

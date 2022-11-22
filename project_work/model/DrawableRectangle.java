@@ -1,7 +1,6 @@
-package model;
+package project_work.model;
 
 import java.awt.*;
-import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 public class DrawableRectangle extends Rectangle2D.Double implements Drawable {

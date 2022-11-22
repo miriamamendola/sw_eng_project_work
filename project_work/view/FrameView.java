@@ -1,6 +1,5 @@
-package view;
-
-import model.Drawing;
+package project_work.view;
+import project_work.Context;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ public class FrameView {
     public static void createView(){
         JFrame frame = new JFrame("Drawing software");
         frame.setSize(600,600);
-        CanvasView canvas = new CanvasView(new Drawing());                  //create canvas for draw
+        CanvasView canvas = new CanvasView(); //create canvas for draw
         frame.add(canvas);
         JPanel vPanel = new JPanel();
         BoxLayout boxButton = new BoxLayout(vPanel, BoxLayout.Y_AXIS);      //create a "vbox " for  tools
