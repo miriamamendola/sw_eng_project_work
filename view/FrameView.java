@@ -17,6 +17,8 @@ public class FrameView {
         JPanel vPanel = new JPanel();
         BoxLayout boxButton = new BoxLayout(vPanel, BoxLayout.Y_AXIS);
         vPanel.setLayout(boxButton);
+        vPanel.add(new JButton(new ImageIcon("assets/icons/cursor.png")));
+        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         vPanel.add(new JButton(new ImageIcon("assets/icons/line.png")));
         vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         vPanel.add(new JButton(new ImageIcon("assets/icons/rectangle.png") ));
