@@ -10,7 +10,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Context.getInstance().setCurrentDrawing(new Drawing());
-                FrameView.createView();
+                FrameView.createView();                         //createView ritorna un oggetto frame
             }
         });
     }

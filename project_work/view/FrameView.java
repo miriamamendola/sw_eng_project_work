@@ -12,7 +12,11 @@ import java.awt.*;
 public class FrameView {
 
 
-    public static void createView(){
+    public static JFrame createView(){
+
+    return createFrame();
+    }
+    private static JFrame createFrame(){
         CanvasController cc = new CanvasController();
         JPanel vPanel = new JPanel();
         CanvasView canvas = new CanvasView(); //create canvas for draw
@@ -27,6 +31,7 @@ public class FrameView {
         JButton cursorButton = new JButton(new ImageIcon("assets/icons/cursor.png"));
         vPanel.add(cursorButton);
         cursorButton.addActionListener(actionEvent ->{});
+        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         JButton lineButton = new JButton(new ImageIcon("assets/icons/line.png"));
         vPanel.add(lineButton);
@@ -59,6 +64,6 @@ public class FrameView {
         frame.setIconImage(icon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);//making the frame visible
-
+        return frame;
     }
 }
