@@ -10,7 +10,10 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Context.getInstance().setCurrentDrawing(new Drawing());
-                FrameView.createView();                         //createView ritorna un oggetto frame
+                JFrame frame = FrameView.createView();
+                frame.setSize(600,600);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);//making the frame visible
             }
         });
     }

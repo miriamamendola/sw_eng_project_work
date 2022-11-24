@@ -13,57 +13,71 @@ public class FrameView {
 
 
     public static JFrame createView(){
-
-    return createFrame();
-    }
-    private static JFrame createFrame(){
         CanvasController cc = new CanvasController();
-        JPanel vPanel = new JPanel();
         CanvasView canvas = new CanvasView(); //create canvas for draw
         JFrame frame = new JFrame("Drawing software");
-
-        frame.setSize(600,600);
         frame.add(canvas);
-        BoxLayout boxButton = new BoxLayout(vPanel, BoxLayout.Y_AXIS);      //create a "vbox " for  tools
-        vPanel.setLayout(boxButton);
+        JPanel toolBar =createToolBar(cc,canvas);
+        frame.add(toolBar, BorderLayout.WEST);
+        ImageIcon icon = new ImageIcon("assets/icons/palette.png");          //app icon
+        frame.setIconImage(icon.getImage());
+        return frame;
+    }
 
-        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+
+
+    private static JPanel createToolBar(CanvasController cc,CanvasView canvas){
+        JPanel toolPanel = new JPanel();
+        BoxLayout boxButton = new BoxLayout(toolPanel, BoxLayout.Y_AXIS);      //create a "vbox " for  tools
+        toolPanel.setLayout(boxButton);
+        toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));        //may i can create a method to insert automatically space between component
+        JButton cursorButton = cursorButtonCreate(cc,canvas);
+        toolPanel.add(cursorButton);
+        toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        JButton lineButton = lineButtonCreate(cc,canvas);
+        toolPanel.add(lineButton);
+        toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        JButton rectangleButton = rectangleButtonCreate(cc,canvas);
+        toolPanel.add(rectangleButton);
+        toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        JButton ellipseButton = ellipseButtonCreate(cc,canvas);
+        toolPanel.add(ellipseButton);
+        toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        return toolPanel;
+    }
+
+
+
+
+    private static JButton cursorButtonCreate(CanvasController cc,CanvasView canvas){
         JButton cursorButton = new JButton(new ImageIcon("assets/icons/cursor.png"));
-        vPanel.add(cursorButton);
         cursorButton.addActionListener(actionEvent ->{});
-        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 
+        return cursorButton;
+    }
+
+    private static  JButton lineButtonCreate(CanvasController cc,CanvasView canvas){
         JButton lineButton = new JButton(new ImageIcon("assets/icons/line.png"));
-        vPanel.add(lineButton);
         lineButton.addActionListener(actionEvent ->{
             cc.setCurrentTool(new LineTool(canvas));
             cc.executeTool();
         });
-        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-
+        return lineButton;
+    }
+    private static  JButton rectangleButtonCreate(CanvasController cc,CanvasView canvas){
         JButton rectangleButton = new JButton(new ImageIcon("assets/icons/rectangle.png"));
-        vPanel.add(rectangleButton);
         rectangleButton.addActionListener(actionEvent ->{
             cc.setCurrentTool(new RectangleTool(canvas));
             cc.executeTool();
         });
-        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-
-
+        return rectangleButton;
+    }
+    private static  JButton ellipseButtonCreate(CanvasController cc,CanvasView canvas){
         JButton ellipseButton = new JButton(new ImageIcon("assets/icons/ellipse.png"));
-        vPanel.add(ellipseButton);
         ellipseButton.addActionListener(actionEvent ->{
             cc.setCurrentTool(new EllipseTool(canvas));
             cc.executeTool();
         });
-        vPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-
-        frame.add(vPanel, BorderLayout.WEST);
-        ImageIcon icon = new ImageIcon("assets/icons/palette.png");          //app icon
-
-        frame.setIconImage(icon.getImage());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);//making the frame visible
-        return frame;
+        return ellipseButton;
     }
 }
