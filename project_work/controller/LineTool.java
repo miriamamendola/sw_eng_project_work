@@ -1,15 +1,11 @@
 package project_work.controller;
 
-import project_work.Context;
-import project_work.model.DrawableEllipse;
 import project_work.model.DrawableLine;
 import project_work.view.CanvasView;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
-public class LineTool implements Tool, MouseListener, MouseMotionListener {
+public class LineTool implements Tool {
 
     private DrawableLine line;
 
@@ -20,10 +16,10 @@ public class LineTool implements Tool, MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void execute() {
-        Context.getInstance().getCurrentDrawing().addDrawable(line);
+    public void mousePressed(MouseEvent mouseEvent) {
+        line = new DrawableLine(mouseEvent.getPoint(), mouseEvent.getPoint());
+        canvas.setDummyDrawable(line);
     }
-
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
@@ -31,34 +27,13 @@ public class LineTool implements Tool, MouseListener, MouseMotionListener {
         canvas.repaint();
     }
 
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        line = new DrawableLine(mouseEvent.getPoint(), mouseEvent.getPoint());
-        canvas.repaint();
-    }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        if(!line.getP1().equals(line.getP2())){
+            canvas.getDrawing().addDrawable(line);
+        }
 
     }
 
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
 }

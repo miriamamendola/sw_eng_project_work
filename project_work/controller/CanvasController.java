@@ -8,6 +8,6 @@ public class CanvasController {
     }
 
     public void executeTool(){
-        this.currentTool.execute();
+
     }
 }

@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class RectangleTool implements Tool, MouseListener, MouseMotionListener {
+public class RectangleTool implements Tool {
 
     private DrawableRectangle rect;
 
@@ -20,10 +20,10 @@ public class RectangleTool implements Tool, MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void execute() {
-        Context.getInstance().getCurrentDrawing().addDrawable(rect);
+    public void mousePressed(MouseEvent mouseEvent) {
+        rect = new DrawableRectangle(mouseEvent.getX(), mouseEvent.getY());
+        canvas.setDummyDrawable(rect);
     }
-
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
@@ -33,34 +33,13 @@ public class RectangleTool implements Tool, MouseListener, MouseMotionListener {
         canvas.repaint();
     }
 
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        rect = new DrawableRectangle(mouseEvent.getX(), mouseEvent.getY());
-        canvas.repaint();
-    }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-
+        if (rect.getWidth() > 0 && rect.getHeight() > 0){
+            canvas.getDrawing().addDrawable(rect);
+        }
+        canvas.clearDummyDrawable();
     }
 
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
 }

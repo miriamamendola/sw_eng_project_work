@@ -1,15 +1,11 @@
 package project_work.controller;
 
-import project_work.Context;
 import project_work.model.DrawableEllipse;
-import project_work.model.DrawableRectangle;
 import project_work.view.CanvasView;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
-public class EllipseTool implements Tool, MouseListener, MouseMotionListener {
+public class EllipseTool implements Tool {
 
     private DrawableEllipse ellipse;
 
@@ -20,12 +16,6 @@ public class EllipseTool implements Tool, MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void execute() {
-        Context.getInstance().getCurrentDrawing().addDrawable(ellipse);
-    }
-
-
-    @Override
     public void mouseDragged(MouseEvent mouseEvent) {
         double width = mouseEvent.getX() - ellipse.getX();
         double height = mouseEvent.getY() - ellipse.getY();
@@ -34,33 +24,17 @@ public class EllipseTool implements Tool, MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
     public void mousePressed(MouseEvent mouseEvent) {
         ellipse = new DrawableEllipse(mouseEvent.getX(), mouseEvent.getY());
-        canvas.repaint();
+        canvas.setDummyDrawable(ellipse);
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        if(ellipse.getWidth() > 0 && ellipse.getHeight() > 0){
+            canvas.getDrawing().addDrawable(ellipse);
+        }
 
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
+        canvas.clearDummyDrawable();
     }
 }

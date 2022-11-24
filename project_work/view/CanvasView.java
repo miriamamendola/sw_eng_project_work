@@ -1,18 +1,43 @@
 package project_work.view;
 
 import project_work.Context;
+import project_work.controller.DefaultTool;
+import project_work.controller.Tool;
 import project_work.model.Drawable;
 import project_work.model.Drawing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CanvasView extends JPanel {
 
     private Drawing drawing;
+    private Drawable dummyDrawable;
+    private Tool currentTool;
 
     public CanvasView() {
         this.drawing = Context.getInstance().getCurrentDrawing();
+        currentTool = new DefaultTool();
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                currentTool.mousePressed(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                currentTool.mouseReleased(e);
+            }
+        });
+
+        this.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                currentTool.mouseDragged(e);
+            }
+        });
     }
 
     public Drawing getDrawing() {
@@ -21,7 +46,14 @@ public class CanvasView extends JPanel {
 
     public void setDrawing(Drawing drawing) {
         this.drawing = drawing;
+    }
 
+    public void setDummyDrawable(Drawable drawable) {
+        this.dummyDrawable = drawable;
+    }
+
+    public void clearDummyDrawable(){
+        this.dummyDrawable = null;
     }
 
     @Override
@@ -33,5 +65,10 @@ public class CanvasView extends JPanel {
         for (Drawable d : this.drawing) {
             d.draw((Graphics2D) g);
         }
+
+        if(dummyDrawable != null){
+            dummyDrawable.draw((Graphics2D) g);
+        }
     }
+
 }
