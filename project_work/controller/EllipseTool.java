@@ -11,8 +11,11 @@ public class EllipseTool implements Tool {
 
     private final CanvasView canvas;
 
-    public EllipseTool(CanvasView canvas){
+    private final Invoker invoker;
+
+    public EllipseTool(CanvasView canvas, Invoker invoker){
         this.canvas = canvas;
+        this.invoker = invoker;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class EllipseTool implements Tool {
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if(ellipse.getWidth() > 0 && ellipse.getHeight() > 0){
-            canvas.getDrawing().addDrawable(ellipse);
+            invoker.executeCommand(new ShapeCommand(canvas, ellipse));
         }
 
         canvas.clearDummyDrawable();

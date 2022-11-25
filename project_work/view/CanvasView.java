@@ -56,6 +56,14 @@ public class CanvasView extends JPanel {
         this.dummyDrawable = null;
     }
 
+    public void setCurrentTool(Tool currentTool) {
+        this.currentTool = currentTool;
+    }
+
+    public Tool getCurrentTool() {
+        return currentTool;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

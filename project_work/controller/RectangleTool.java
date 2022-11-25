@@ -1,13 +1,9 @@
 package project_work.controller;
 
-import project_work.Context;
 import project_work.model.DrawableRectangle;
 import project_work.view.CanvasView;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 public class RectangleTool implements Tool {
 
@@ -15,8 +11,11 @@ public class RectangleTool implements Tool {
 
     private final CanvasView canvas;
 
-    public RectangleTool(CanvasView canvas){
+    private final Invoker invoker;
+
+    public RectangleTool(CanvasView canvas, Invoker invoker){
         this.canvas = canvas;
+        this.invoker = invoker;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class RectangleTool implements Tool {
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if (rect.getWidth() > 0 && rect.getHeight() > 0){
-            canvas.getDrawing().addDrawable(rect);
+            invoker.executeCommand(new ShapeCommand(canvas, rect));
         }
         canvas.clearDummyDrawable();
     }
