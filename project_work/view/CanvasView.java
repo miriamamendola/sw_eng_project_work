@@ -17,10 +17,17 @@ public class CanvasView extends JPanel {
     private Drawable dummyDrawable;
     private Tool currentTool;
 
+
+
+    private Shape selectedShape;
+
     public CanvasView() {
         this.drawing = Context.getInstance().getCurrentDrawing();
-        currentTool = new DefaultTool();
+        currentTool = new DefaultTool(this);
         this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {currentTool.mouseClicked(e);
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 currentTool.mousePressed(e);
@@ -59,7 +66,13 @@ public class CanvasView extends JPanel {
     public void setCurrentTool(Tool currentTool) {
         this.currentTool = currentTool;
     }
+    public Shape getSelectedShape() {
+        return selectedShape;
+    }
 
+    public void setSelectedShape(Shape selectedShape) {
+        this.selectedShape = selectedShape;
+    }
     public Tool getCurrentTool() {
         return currentTool;
     }

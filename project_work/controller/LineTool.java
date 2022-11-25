@@ -38,5 +38,9 @@ public class LineTool implements Tool {
         }
         canvas.clearDummyDrawable();
     }
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
 
 }

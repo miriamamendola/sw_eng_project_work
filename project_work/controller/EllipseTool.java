@@ -40,4 +40,8 @@ public class EllipseTool implements Tool {
 
         canvas.clearDummyDrawable();
     }
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
 }
