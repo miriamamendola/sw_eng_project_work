@@ -19,7 +19,7 @@ public class EllipseTool implements Tool {
 
     private Point2D startingPoint;
 
-    public EllipseTool(CanvasView canvas, Invoker invoker){
+    public EllipseTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         canvas.clearSelectedDrawable();
@@ -46,12 +46,13 @@ public class EllipseTool implements Tool {
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if(ellipse.getWidth() > 0 && ellipse.getHeight() > 0){
+        if (ellipse.getWidth() > 0 && ellipse.getHeight() > 0) {
             invoker.executeCommand(new ShapeCommand(canvas, ellipse));
         }
 
         canvas.clearDummyDrawable();
     }
+
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 

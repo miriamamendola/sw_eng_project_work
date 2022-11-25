@@ -18,7 +18,6 @@ public class CanvasView extends JPanel {
     private Tool currentTool;
 
 
-
     private Drawable selectedDrawable;
 
     public CanvasView() {
@@ -26,7 +25,10 @@ public class CanvasView extends JPanel {
         currentTool = new SelectionTool(this);
         this.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {currentTool.mouseClicked(e); }
+            public void mouseClicked(MouseEvent e) {
+                currentTool.mouseClicked(e);
+            }
+
             @Override
             public void mousePressed(MouseEvent e) {
                 currentTool.mousePressed(e);
@@ -53,18 +55,23 @@ public class CanvasView extends JPanel {
     public void setDrawing(Drawing drawing) {
         this.drawing = drawing;
     }
-    public Drawable getDummyDrawable() { return dummyDrawable; }
+
+    public Drawable getDummyDrawable() {
+        return dummyDrawable;
+    }
+
     public void setDummyDrawable(Drawable drawable) {
         this.dummyDrawable = drawable;
     }
 
-    public void clearDummyDrawable(){
+    public void clearDummyDrawable() {
         this.dummyDrawable = null;
     }
 
     public void setCurrentTool(Tool currentTool) {
         this.currentTool = currentTool;
     }
+
     public Drawable getSelectedDrawable() {
         return selectedDrawable;
     }
@@ -73,9 +80,10 @@ public class CanvasView extends JPanel {
         this.selectedDrawable = selectedDrawable;
     }
 
-    public void clearSelectedDrawable(){
+    public void clearSelectedDrawable() {
         this.selectedDrawable = null;
     }
+
     public Tool getCurrentTool() {
         return currentTool;
     }
@@ -90,17 +98,17 @@ public class CanvasView extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHints(rh);
 
-        g2d.clearRect(0,0, this.getWidth(), this.getHeight());
+        g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         for (Drawable d : this.drawing) {
             d.draw(g2d);
         }
 
-        if(dummyDrawable != null){
+        if (dummyDrawable != null) {
             dummyDrawable.draw(g2d);
         }
 
-        if(selectedDrawable != null){
+        if (selectedDrawable != null) {
             selectedDrawable.draw((Graphics2D) g);
         }
     }

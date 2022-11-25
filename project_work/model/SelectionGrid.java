@@ -7,7 +7,7 @@ public class SelectionGrid extends DrawableRectangle {
 
     public SelectionGrid(Shape selectedShape) {
         super(null, Color.blue, selectedShape.getBounds().getX(), selectedShape.getBounds().getY());
-        this.setRect(selectedShape.getBounds().getX()-1, selectedShape.getBounds().getY()-1, selectedShape.getBounds().getWidth()+2, selectedShape.getBounds().getHeight()+2);
+        this.setRect(selectedShape.getBounds().getX() - 1, selectedShape.getBounds().getY() - 1, selectedShape.getBounds().getWidth() + 2, selectedShape.getBounds().getHeight() + 2);
     }
 
     @Override

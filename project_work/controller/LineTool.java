@@ -13,12 +13,13 @@ public class LineTool implements Tool {
 
     private final Invoker invoker;
 
-    public LineTool(CanvasView canvas, Invoker invoker){
+    public LineTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         canvas.clearSelectedDrawable();
         canvas.repaint();
     }
+
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         line = new DrawableLine(mouseEvent.getPoint(), mouseEvent.getPoint());
@@ -34,11 +35,12 @@ public class LineTool implements Tool {
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if(!line.getP1().equals(line.getP2())){
+        if (!line.getP1().equals(line.getP2())) {
             invoker.executeCommand(new ShapeCommand(canvas, line));
         }
         canvas.clearDummyDrawable();
     }
+
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 

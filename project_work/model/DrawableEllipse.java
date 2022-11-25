@@ -2,15 +2,13 @@ package project_work.model;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.beans.PropertyChangeSupport;
-import java.util.Objects;
 
-public class DrawableEllipse extends Ellipse2D.Double implements Drawable{
+public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
     private Paint fillColor;
     private Paint strokeColor;
 
     public DrawableEllipse(Paint fillColor, Paint strokeColor, double x, double y) {
-        super(x,y,0,0);
+        super(x, y, 0, 0);
         this.fillColor = fillColor;
         this.strokeColor = strokeColor;
     }
@@ -26,12 +24,13 @@ public class DrawableEllipse extends Ellipse2D.Double implements Drawable{
         g2d.setPaint(strokeColor);
         g2d.draw(this);
     }
+
     @Override
     public boolean equals(Object o) {
         return this == o;
     }
 
-    public void setSize(double w, double h){
+    public void setSize(double w, double h) {
         this.setFrame(this.getX(), this.getY(), w, h);
     }
 }

@@ -12,9 +12,10 @@ import java.util.Iterator;
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
 
-    public SelectionTool(CanvasView canvas){
+    public SelectionTool(CanvasView canvas) {
         this.canvas = canvas;
     }
+
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
@@ -37,16 +38,16 @@ public class SelectionTool implements Tool {
         Point2D point = mouseEvent.getPoint();
         boolean found = false;
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
-        while (itr.hasNext()){
+        while (itr.hasNext()) {
             Shape s = (Shape) itr.next();
-            if(s.contains(point)) {
+            if (s.contains(point)) {
                 canvas.setSelectedDrawable(new SelectionGrid(s));
                 canvas.repaint();
                 found = true;
                 break;
             }
         }
-        if (!found){
+        if (!found) {
             canvas.clearSelectedDrawable();
             canvas.repaint();
         }

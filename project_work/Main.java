@@ -16,7 +16,7 @@ public class Main {
                 logger.setLevel(Level.ALL);
                 Context.getInstance().setCurrentDrawing(new Drawing());
                 JFrame frame = FrameView.createView();
-                frame.setSize(600,600);
+                frame.setSize(600, 600);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);//making the frame visible
             }

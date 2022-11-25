@@ -8,12 +8,12 @@ public class Context {
 
     private Drawing currentDrawing;
 
-    private Context(){
+    private Context() {
         this.currentDrawing = new Drawing();
     }
 
-    public static Context getInstance(){
-        if (instance == null){
+    public static Context getInstance() {
+        if (instance == null) {
             instance = new Context();
         }
 

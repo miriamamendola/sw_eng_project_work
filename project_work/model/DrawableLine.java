@@ -4,9 +4,10 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
-public class DrawableLine extends Line2D.Double implements Drawable  {
+public class DrawableLine extends Line2D.Double implements Drawable {
     private Paint strokeColor;
     private static final int HIT_BOX_SIZE = 5;
+
     public DrawableLine(Paint strokeColor, Point2D p1, Point2D p2) {
         super(p1, p2);
         this.strokeColor = strokeColor;
@@ -29,7 +30,7 @@ public class DrawableLine extends Line2D.Double implements Drawable  {
     }
 
     @Override
-    public boolean contains(Point2D point){
+    public boolean contains(Point2D point) {
         double boxX = point.getX() - HIT_BOX_SIZE / 2;
         double boxY = point.getY() - HIT_BOX_SIZE / 2;
 
@@ -37,6 +38,6 @@ public class DrawableLine extends Line2D.Double implements Drawable  {
         int height = HIT_BOX_SIZE;
 
         return this.intersects(boxX, boxY, width, height);
-        }
+    }
 
 }
