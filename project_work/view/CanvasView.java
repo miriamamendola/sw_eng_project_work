@@ -101,7 +101,6 @@ public class CanvasView extends JPanel {
         }
 
         if(selectedDrawable != null){
-            System.out.println("AA");
             selectedDrawable.draw((Graphics2D) g);
         }
     }

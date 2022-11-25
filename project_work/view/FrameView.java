@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.logging.Logger;
 
 
 public class FrameView {
@@ -46,13 +47,9 @@ public class FrameView {
                 if(selectedFile != null)
                     invoker.executeCommand(new SaveCommand(canvasView, selectedFile));
                 else
-                    System.out.println("No such file selected");
+                    Logger.getLogger("root").info("No such file selected");
             }
         });
-
-        /*
-        * */
-
 
         menuBar.add(fileMenu);
 

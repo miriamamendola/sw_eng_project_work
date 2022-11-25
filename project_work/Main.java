@@ -5,10 +5,15 @@ import javax.swing.*;
 import project_work.model.Drawing;
 import project_work.view.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Logger logger = Logger.getLogger("root");
+                logger.setLevel(Level.ALL);
                 Context.getInstance().setCurrentDrawing(new Drawing());
                 JFrame frame = FrameView.createView();
                 frame.setSize(600,600);
