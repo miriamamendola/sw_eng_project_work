@@ -1,7 +1,7 @@
 package project_work.view;
 
 import project_work.Context;
-import project_work.controller.DefaultTool;
+import project_work.controller.SelectionTool;
 import project_work.controller.Tool;
 import project_work.model.Drawable;
 import project_work.model.Drawing;
@@ -17,10 +17,16 @@ public class CanvasView extends JPanel {
     private Drawable dummyDrawable;
     private Tool currentTool;
 
+
+
+    private Drawable selectedDrawable;
+
     public CanvasView() {
         this.drawing = Context.getInstance().getCurrentDrawing();
-        currentTool = new DefaultTool();
+        currentTool = new SelectionTool(this);
         this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {currentTool.mouseClicked(e); }
             @Override
             public void mousePressed(MouseEvent e) {
                 currentTool.mousePressed(e);
@@ -47,7 +53,7 @@ public class CanvasView extends JPanel {
     public void setDrawing(Drawing drawing) {
         this.drawing = drawing;
     }
-
+    public Drawable getDummyDrawable() { return dummyDrawable; }
     public void setDummyDrawable(Drawable drawable) {
         this.dummyDrawable = drawable;
     }
@@ -59,7 +65,17 @@ public class CanvasView extends JPanel {
     public void setCurrentTool(Tool currentTool) {
         this.currentTool = currentTool;
     }
+    public Drawable getSelectedDrawable() {
+        return selectedDrawable;
+    }
 
+    public void setSelectedDrawable(Drawable selectedDrawable) {
+        this.selectedDrawable = selectedDrawable;
+    }
+
+    public void clearSelectedDrawable(){
+        this.selectedDrawable = null;
+    }
     public Tool getCurrentTool() {
         return currentTool;
     }
@@ -83,6 +99,10 @@ public class CanvasView extends JPanel {
         if(dummyDrawable != null){
             dummyDrawable.draw(g2d);
         }
-    }
 
+        if(selectedDrawable != null){
+            System.out.println("AA");
+            selectedDrawable.draw((Graphics2D) g);
+        }
+    }
 }

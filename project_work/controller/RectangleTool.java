@@ -51,4 +51,9 @@ public class RectangleTool implements Tool {
         canvas.clearDummyDrawable();
     }
 
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
 }

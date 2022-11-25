@@ -1,14 +1,14 @@
 package project_work.model;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
 
 public class Drawing implements Serializable, Iterable<Drawable>  {
-    private List<Drawable> listDrawables;
+    private LinkedList<Drawable> listDrawables;
 
     public Drawing(){
-        this.listDrawables = new ArrayList<>();
+        this.listDrawables = new LinkedList<>();
+
     }
 
     public void addDrawable(Drawable drawable){
@@ -30,5 +30,9 @@ public class Drawing implements Serializable, Iterable<Drawable>  {
     @Override
     public Iterator<Drawable> iterator() {
         return listDrawables.iterator();
+    }
+
+    public Iterator<Drawable> descendingIterator(){
+        return listDrawables.descendingIterator();
     }
 }

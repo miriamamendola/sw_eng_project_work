@@ -8,4 +8,5 @@ public interface Tool {
     void mouseDragged(MouseEvent mouseEvent);
     void mouseReleased(MouseEvent mouseEvent);
 
+    void mouseClicked(MouseEvent mouseEvent);
 }
