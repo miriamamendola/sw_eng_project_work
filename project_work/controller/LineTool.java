@@ -16,8 +16,9 @@ public class LineTool implements Tool {
     public LineTool(CanvasView canvas, Invoker invoker){
         this.canvas = canvas;
         this.invoker = invoker;
+        canvas.clearSelectedDrawable();
+        canvas.repaint();
     }
-
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         line = new DrawableLine(mouseEvent.getPoint(), mouseEvent.getPoint());

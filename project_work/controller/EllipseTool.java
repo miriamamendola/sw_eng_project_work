@@ -22,6 +22,8 @@ public class EllipseTool implements Tool {
     public EllipseTool(CanvasView canvas, Invoker invoker){
         this.canvas = canvas;
         this.invoker = invoker;
+        canvas.clearSelectedDrawable();
+        canvas.repaint();
     }
 
     @Override

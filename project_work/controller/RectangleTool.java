@@ -22,6 +22,8 @@ public class RectangleTool implements Tool {
     public RectangleTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
+        canvas.clearSelectedDrawable();
+        canvas.repaint();
     }
 
     @Override
