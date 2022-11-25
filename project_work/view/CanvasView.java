@@ -53,7 +53,7 @@ public class CanvasView extends JPanel {
     public void setDrawing(Drawing drawing) {
         this.drawing = drawing;
     }
-
+    public Drawable getDummyDrawable() { return dummyDrawable; }
     public void setDummyDrawable(Drawable drawable) {
         this.dummyDrawable = drawable;
     }
