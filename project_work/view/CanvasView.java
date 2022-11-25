@@ -1,7 +1,7 @@
 package project_work.view;
 
 import project_work.Context;
-import project_work.controller.DefaultTool;
+import project_work.controller.SelectionTool;
 import project_work.controller.Tool;
 import project_work.model.Drawable;
 import project_work.model.Drawing;
@@ -19,15 +19,14 @@ public class CanvasView extends JPanel {
 
 
 
-    private Shape selectedShape;
+    private Drawable selectedDrawable;
 
     public CanvasView() {
         this.drawing = Context.getInstance().getCurrentDrawing();
-        currentTool = new DefaultTool(this);
+        currentTool = new SelectionTool(this);
         this.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {currentTool.mouseClicked(e);
-            }
+            public void mouseClicked(MouseEvent e) {currentTool.mouseClicked(e); }
             @Override
             public void mousePressed(MouseEvent e) {
                 currentTool.mousePressed(e);
@@ -66,12 +65,12 @@ public class CanvasView extends JPanel {
     public void setCurrentTool(Tool currentTool) {
         this.currentTool = currentTool;
     }
-    public Shape getSelectedShape() {
-        return selectedShape;
+    public Drawable getSelectedDrawable() {
+        return selectedDrawable;
     }
 
-    public void setSelectedShape(Shape selectedShape) {
-        this.selectedShape = selectedShape;
+    public void setSelectedDrawable(Drawable selectedDrawable) {
+        this.selectedDrawable = selectedDrawable;
     }
     public Tool getCurrentTool() {
         return currentTool;
@@ -90,6 +89,10 @@ public class CanvasView extends JPanel {
         if(dummyDrawable != null){
             dummyDrawable.draw((Graphics2D) g);
         }
-    }
 
+        if(selectedDrawable != null){
+            System.out.println("AA");
+            selectedDrawable.draw((Graphics2D) g);
+        }
+    }
 }

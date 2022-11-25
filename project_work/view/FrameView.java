@@ -47,8 +47,7 @@ public class FrameView {
 
     private static JButton cursorButtonCreate(CanvasView canvas){
         JButton cursorButton = new JButton(new ImageIcon("assets/icons/cursor.png"));
-        cursorButton.addActionListener(actionEvent -> canvas.setCurrentTool(new DefaultTool(canvas)));
-
+        cursorButton.addActionListener(actionEvent -> canvas.setCurrentTool(new SelectionTool(canvas)));
         return cursorButton;
     }
 
