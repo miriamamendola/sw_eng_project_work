@@ -2,7 +2,11 @@ package project_work.view;
 import project_work.controller.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 
 public class FrameView {
@@ -15,11 +19,45 @@ public class FrameView {
         frame.add(canvas);
         JPanel toolBar =createToolBar(invoker,canvas);
         frame.add(toolBar, BorderLayout.WEST);
+
+        frame.add(createMenuBar(canvas, invoker), BorderLayout.NORTH);
         ImageIcon icon = new ImageIcon("assets/icons/palette.png");          //app icon
         frame.setIconImage(icon.getImage());
         return frame;
     }
 
+    private static JMenuBar createMenuBar(CanvasView canvasView, Invoker invoker){
+        JMenuBar menuBar =new JMenuBar();
+
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem saveMenuItem, loadMenuItem, saveAsMenuItem;
+        saveMenuItem=new JMenuItem("Save");
+        fileMenu.add(saveMenuItem);
+
+
+        loadMenuItem=new JMenuItem("Load");
+        fileMenu.add(loadMenuItem);
+        saveAsMenuItem=new JMenuItem("Save as");
+        fileMenu.add(saveAsMenuItem);
+        saveAsMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                File selectedFile = showSaveDialog(menuBar.getParent());
+                if(selectedFile != null)
+                    invoker.executeCommand(new SaveCommand(canvasView, selectedFile));
+                else
+                    System.out.println("No such file selected");
+            }
+        });
+
+        /*
+        * */
+
+
+        menuBar.add(fileMenu);
+
+        return menuBar;
+    }
 
 
     private static JPanel createToolBar(Invoker invoker,CanvasView canvas){
@@ -66,5 +104,16 @@ public class FrameView {
         JButton ellipseButton = new JButton(new ImageIcon("assets/icons/ellipse.png"));
         ellipseButton.addActionListener(actionEvent -> canvas.setCurrentTool(new EllipseTool(canvas, invoker)));
         return ellipseButton;
+    }
+
+    private static File showSaveDialog(Component parent){
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Drawing file", "draw");
+        chooser.addChoosableFileFilter(filter);
+        int returnVal = chooser.showSaveDialog(parent);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            return new File(chooser.getSelectedFile().toString() + ".draw");
+        }
+        return null;
     }
 }
