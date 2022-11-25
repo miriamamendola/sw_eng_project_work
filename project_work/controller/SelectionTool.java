@@ -35,15 +35,20 @@ public class SelectionTool implements Tool {
     public void mouseClicked(MouseEvent mouseEvent) {
 
         Point2D point = mouseEvent.getPoint();
-
+        boolean found = false;
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
         while (itr.hasNext()){
             Shape s = (Shape) itr.next();
-            if(s.contains(point)){
+            if(s.contains(point)) {
                 canvas.setSelectedDrawable(new SelectionGrid(s));
                 canvas.repaint();
+                found = true;
                 break;
             }
+        }
+        if (!found){
+            canvas.clearSelectedDrawable();
+            canvas.repaint();
         }
 
     }

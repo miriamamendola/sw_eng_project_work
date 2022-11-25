@@ -72,6 +72,10 @@ public class CanvasView extends JPanel {
     public void setSelectedDrawable(Drawable selectedDrawable) {
         this.selectedDrawable = selectedDrawable;
     }
+
+    public void clearSelectedDrawable(){
+        this.selectedDrawable = null;
+    }
     public Tool getCurrentTool() {
         return currentTool;
     }
