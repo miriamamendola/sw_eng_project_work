@@ -7,6 +7,7 @@ import project_work.view.CanvasView;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.util.Iterator;
 
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
@@ -34,8 +35,11 @@ public class SelectionTool implements Tool {
     public void mouseClicked(MouseEvent mouseEvent) {
 
         Point2D point = mouseEvent.getPoint();
-        for (Drawable d: canvas.getDrawing()){Shape s = (Shape) d;
-           if(s.contains(point)){
+
+        Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
+        while (itr.hasNext()){
+            Shape s = (Shape) itr.next();
+            if(s.contains(point)){
                 canvas.setSelectedDrawable(new SelectionGrid(s));
                 canvas.repaint();
                 break;
