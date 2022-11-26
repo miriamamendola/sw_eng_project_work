@@ -5,6 +5,7 @@ import project_work.controller.SelectionTool;
 import project_work.controller.Tool;
 import project_work.model.Drawable;
 import project_work.model.Drawing;
+import project_work.model.SelectionGrid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,8 @@ public class CanvasView extends JPanel {
     private Tool currentTool;
 
 
-    private Drawable selectedDrawable;
+    private SelectionGrid selectionGrid;
+
 
     public CanvasView() {
         this.drawing = Context.getInstance().getCurrentDrawing();
@@ -72,16 +74,16 @@ public class CanvasView extends JPanel {
         this.currentTool = currentTool;
     }
 
-    public Drawable getSelectedDrawable() {
-        return selectedDrawable;
+    public SelectionGrid getSelectionGrid() {
+        return selectionGrid;
     }
 
-    public void setSelectedDrawable(Drawable selectedDrawable) {
-        this.selectedDrawable = selectedDrawable;
+    public void setSelectionGrid(SelectionGrid selectionGrid) {
+        this.selectionGrid = selectionGrid;
     }
 
     public void clearSelectedDrawable() {
-        this.selectedDrawable = null;
+        this.selectionGrid = null;
     }
 
     public Tool getCurrentTool() {
@@ -108,8 +110,9 @@ public class CanvasView extends JPanel {
             dummyDrawable.draw(g2d);
         }
 
-        if (selectedDrawable != null) {
-            selectedDrawable.draw((Graphics2D) g);
+        if (selectionGrid != null) {
+            selectionGrid.draw((Graphics2D) g);
         }
     }
+
 }
