@@ -1,8 +1,8 @@
 package project_work.view;
 
 import project_work.Context;
-import project_work.controller.SelectionTool;
-import project_work.controller.Tool;
+import project_work.controller.tool.SelectionTool;
+import project_work.controller.tool.Tool;
 import project_work.model.Drawable;
 import project_work.model.Drawing;
 import project_work.model.SelectionGrid;

@@ -1,4 +1,4 @@
-package project_work.controller;
+package project_work.controller.tool;
 
 import project_work.model.Drawable;
 import project_work.model.SelectionGrid;

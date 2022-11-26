@@ -2,7 +2,7 @@ package test.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import project_work.controller.ShapeCommand;
+import project_work.controller.command.ShapeCommand;
 import project_work.model.Drawable;
 import project_work.model.DrawableEllipse;
 import project_work.model.DrawableLine;
@@ -11,7 +11,7 @@ import project_work.view.CanvasView;
 
 import java.awt.geom.Point2D;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class ShapeCommandTest {
 

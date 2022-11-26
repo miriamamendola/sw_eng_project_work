@@ -1,4 +1,4 @@
-package project_work.controller;
+package project_work.controller.tool;
 
 import java.awt.event.MouseEvent;
 
