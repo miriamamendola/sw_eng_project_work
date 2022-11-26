@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class FrameView {
 
     private final static int imgDimension = 32;
+
     public static JFrame createView() {
         int whiteIntensity = 230;
         Invoker invoker = new Invoker();
@@ -40,6 +41,17 @@ public class FrameView {
 
 
         loadMenuItem = new JMenuItem("Load");
+        loadMenuItem.addActionListener(new ActionListener() {
+                                           @Override
+                                           public void actionPerformed(ActionEvent e) {
+                                               File selectedFile = showOpenDialog(menuBar.getParent());
+                                               if (selectedFile != null)
+                                                   invoker.executeCommand(new LoadCommand(canvasView, selectedFile));
+                                               else
+                                                   Logger.getLogger("root").info("No such file selected");
+                                           }
+                                       }
+        );
         fileMenu.add(loadMenuItem);
         saveAsMenuItem = new JMenuItem("Save as");
         fileMenu.add(saveAsMenuItem);
@@ -69,7 +81,7 @@ public class FrameView {
         toolPanel.add(cursorButton);
         toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         JButton lineButton = lineButtonCreate(invoker, canvas);
-        lineButton.setPreferredSize(new Dimension(30,30));
+        lineButton.setPreferredSize(new Dimension(30, 30));
         toolPanel.add(lineButton);
         toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         JButton rectangleButton = rectangleButtonCreate(invoker, canvas);
@@ -113,6 +125,17 @@ public class FrameView {
         int returnVal = chooser.showSaveDialog(parent);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             return new File(chooser.getSelectedFile().toString() + ".draw");
+        }
+        return null;
+    }
+
+    private static File showOpenDialog(Component parent) {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Drawing file", "draw");
+        chooser.addChoosableFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(parent);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            return chooser.getSelectedFile();
         }
         return null;
     }

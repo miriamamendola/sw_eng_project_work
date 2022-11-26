@@ -28,21 +28,21 @@ public class ShapeCommandTest {
         Point2D p1 = new Point2D.Double(10, 10);
         Point2D p2 = new Point2D.Double(20, 20);
         shape = new DrawableLine(p1, p2);
-        new ShapeCommand(canvas,shape).execute();
+        new ShapeCommand(canvas, shape).execute();
         assertTrue(canvas.getDrawing().containsDrawable(shape));
     }
 
     @Test
     public void testExecuteWithRectangle() {
         shape = new DrawableRectangle(10, 10);
-        new ShapeCommand(canvas,shape).execute();
+        new ShapeCommand(canvas, shape).execute();
         assertTrue(canvas.getDrawing().containsDrawable(shape));
     }
 
     @Test
     public void testExecuteWithEllipse() {
         shape = new DrawableEllipse(10, 10);
-        new ShapeCommand(canvas,shape).execute();
+        new ShapeCommand(canvas, shape).execute();
         assertTrue(canvas.getDrawing().containsDrawable(shape));
     }
 
