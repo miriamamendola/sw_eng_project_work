@@ -24,7 +24,6 @@ public class LineToolTest {
         canvas = new CanvasView();
         invoker = new Invoker();
         lineTool = new LineTool(canvas, invoker);
-
     }
 
     @Test
