@@ -1,4 +1,4 @@
-package project_work.controller;
+package project_work.controller.command;
 
 import project_work.model.Drawable;
 import project_work.view.CanvasView;

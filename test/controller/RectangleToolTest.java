@@ -2,8 +2,8 @@ package test.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import project_work.controller.Invoker;
-import project_work.controller.RectangleTool;
+import project_work.controller.command.Invoker;
+import project_work.controller.tool.RectangleTool;
 import project_work.model.DrawableRectangle;
 import project_work.view.CanvasView;
 

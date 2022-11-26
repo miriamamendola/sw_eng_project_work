@@ -2,7 +2,7 @@ package test.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import project_work.controller.SelectionTool;
+import project_work.controller.tool.SelectionTool;
 import project_work.model.DrawableLine;
 import project_work.view.CanvasView;
 
@@ -11,7 +11,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SelectionToolTest {
     private CanvasView canvas;
