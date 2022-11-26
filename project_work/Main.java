@@ -12,6 +12,12 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException | IllegalAccessException | InstantiationException |
+                         UnsupportedLookAndFeelException e) {
+                    throw new RuntimeException(e);
+                }
                 Logger logger = Logger.getLogger("root");
                 logger.setLevel(Level.ALL);
                 Context.getInstance().setCurrentDrawing(new Drawing());

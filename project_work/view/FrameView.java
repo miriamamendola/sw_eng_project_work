@@ -13,8 +13,9 @@ import java.util.logging.Logger;
 
 public class FrameView {
 
-
+    private final static int imgDimension = 32;
     public static JFrame createView() {
+        int whiteIntensity = 230;
         Invoker invoker = new Invoker();
         CanvasView canvas = new CanvasView(); //create canvas for draw
         JFrame frame = new JFrame("Drawing software");
@@ -25,6 +26,7 @@ public class FrameView {
         frame.add(createMenuBar(canvas, invoker), BorderLayout.NORTH);
         ImageIcon icon = new ImageIcon("assets/icons/palette.png");          //app icon
         frame.setIconImage(icon.getImage());
+        frame.setBackground(new Color(whiteIntensity, whiteIntensity, whiteIntensity));
         return frame;
     }
 
@@ -67,6 +69,7 @@ public class FrameView {
         toolPanel.add(cursorButton);
         toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         JButton lineButton = lineButtonCreate(invoker, canvas);
+        lineButton.setPreferredSize(new Dimension(30,30));
         toolPanel.add(lineButton);
         toolPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         JButton rectangleButton = rectangleButtonCreate(invoker, canvas);
@@ -80,25 +83,25 @@ public class FrameView {
 
 
     private static JButton cursorButtonCreate(CanvasView canvas) {
-        JButton cursorButton = new JButton(new ImageIcon("assets/icons/cursor.png"));
+        JButton cursorButton = new JButton(new ImageIcon(new ImageIcon("assets/icons/cursor.png").getImage().getScaledInstance(imgDimension, imgDimension, Image.SCALE_SMOOTH)));
         cursorButton.addActionListener(actionEvent -> canvas.setCurrentTool(new SelectionTool(canvas)));
         return cursorButton;
     }
 
     private static JButton lineButtonCreate(Invoker invoker, CanvasView canvas) {
-        JButton lineButton = new JButton(new ImageIcon("assets/icons/line.png"));
+        JButton lineButton = new JButton(new ImageIcon(new ImageIcon("assets/icons/line.png").getImage().getScaledInstance(imgDimension, imgDimension, Image.SCALE_SMOOTH)));
         lineButton.addActionListener(actionEvent -> canvas.setCurrentTool(new LineTool(canvas, invoker)));
         return lineButton;
     }
 
     private static JButton rectangleButtonCreate(Invoker invoker, CanvasView canvas) {
-        JButton rectangleButton = new JButton(new ImageIcon("assets/icons/rectangle.png"));
+        JButton rectangleButton = new JButton(new ImageIcon(new ImageIcon("assets/icons/rectangle.png").getImage().getScaledInstance(imgDimension, imgDimension, Image.SCALE_SMOOTH)));
         rectangleButton.addActionListener(actionEvent -> canvas.setCurrentTool(new RectangleTool(canvas, invoker)));
         return rectangleButton;
     }
 
     private static JButton ellipseButtonCreate(Invoker invoker, CanvasView canvas) {
-        JButton ellipseButton = new JButton(new ImageIcon("assets/icons/ellipse.png"));
+        JButton ellipseButton = new JButton(new ImageIcon(new ImageIcon("assets/icons/ellipse.png").getImage().getScaledInstance(imgDimension, imgDimension, Image.SCALE_SMOOTH)));
         ellipseButton.addActionListener(actionEvent -> canvas.setCurrentTool(new EllipseTool(canvas, invoker)));
         return ellipseButton;
     }
