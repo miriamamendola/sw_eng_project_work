@@ -14,13 +14,15 @@ public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
     }
 
     public DrawableEllipse(double x, double y) {
-        this(Color.white, Color.black, x, y);
+        this(null, Color.black, x, y);
     }
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.setPaint(fillColor);
-        g2d.fill(this);
+        if(fillColor != null) {
+            g2d.setPaint(fillColor);
+            g2d.fill(this);
+        }
         g2d.setPaint(strokeColor);
         g2d.draw(this);
     }
@@ -30,7 +32,4 @@ public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
         return this == o;
     }
 
-    public void setSize(double w, double h) {
-        this.setFrame(this.getX(), this.getY(), w, h);
-    }
 }
