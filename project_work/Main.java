@@ -1,6 +1,5 @@
 package project_work;
 
-import project_work.model.Drawing;
 import project_work.view.FrameView;
 
 import javax.swing.*;
@@ -25,7 +24,6 @@ public class Main {
                 }
                 Context.getInstance().setSaved(true);
 
-                Context.getInstance().setCurrentDrawing(new Drawing());
                 JFrame frame = FrameView.createView(appTitle);
 
                 frame.setSize(600, 600);
