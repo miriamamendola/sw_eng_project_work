@@ -3,6 +3,7 @@ package src.model;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.util.Objects;
 
 /**
  * Defines the actual line shape and it's properties.
@@ -57,7 +58,17 @@ public class DrawableLine extends Line2D.Double implements Drawable {
      */
     @Override
     public boolean equals(Object o) {
-        return this == o;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DrawableLine that = (DrawableLine) o;
+
+        return Objects.equals(strokeColor, that.strokeColor);
+    }
+
+    @Override
+    public int hashCode() {
+        return strokeColor != null ? strokeColor.hashCode() : 0;
     }
 
     /**
@@ -76,5 +87,4 @@ public class DrawableLine extends Line2D.Double implements Drawable {
 
         return this.intersects(boxX, boxY, HIT_BOX_SIZE, HIT_BOX_SIZE);
     }
-
 }

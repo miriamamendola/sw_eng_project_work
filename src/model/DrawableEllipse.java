@@ -2,6 +2,7 @@ package src.model;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.Objects;
 
 /**
  * Defines the actual ellipse shape and it's properties.
@@ -62,7 +63,21 @@ public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
      */
     @Override
     public boolean equals(Object o) {
-        return this == o;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        DrawableEllipse that = (DrawableEllipse) o;
+
+        if (!Objects.equals(fillColor, that.fillColor)) return false;
+        return Objects.equals(strokeColor, that.strokeColor);
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (fillColor != null ? fillColor.hashCode() : 0);
+        result = 31 * result + (strokeColor != null ? strokeColor.hashCode() : 0);
+        return result;
+    }
 }
