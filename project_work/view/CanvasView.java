@@ -1,6 +1,5 @@
 package project_work.view;
 
-import project_work.Context;
 import project_work.controller.tool.SelectionTool;
 import project_work.controller.tool.Tool;
 import project_work.model.Drawable;
@@ -23,7 +22,7 @@ public class CanvasView extends JPanel {
 
 
     public CanvasView() {
-        this.drawing = Context.getInstance().getCurrentDrawing();
+        this.drawing = new Drawing();
         currentTool = new SelectionTool(this);
         this.addMouseListener(new MouseAdapter() {
             @Override
