@@ -25,14 +25,14 @@ public class ColorPanel extends JPanel implements ActionListener {
         panel.setLayout(new FlowLayout());
         if (type == FILL) {
             fillButton = new ColorButton(null);
-            panel.add(new Label("Fill: "));
+            panel.add(new JLabel("Fill: "));
             fillButton.setName("fill");
             fillButton.changeColor(canvas.getCurrentFillColor());
             fillButton.addActionListener(this);
             panel.add(fillButton);
         } else {
             strokeButton = new ColorButton(null);
-            panel.add(new Label("Stroke: "));
+            panel.add(new JLabel("Stroke: "));
             strokeButton.setName("stroke");
             strokeButton.changeColor(canvas.getCurrentStrokeColor());
             strokeButton.addActionListener(this);
