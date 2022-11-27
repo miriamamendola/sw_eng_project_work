@@ -24,7 +24,7 @@ public class LoadMenuItem implements MenuItemFactory {
 
     @Override
     public JMenuItem createMenuItem() {
-        JMenuItem loadMenuItem = new JMenuItem("Load");
+        JMenuItem loadMenuItem = new JMenuItem("Open...");
         loadMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

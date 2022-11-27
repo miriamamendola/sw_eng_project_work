@@ -1,7 +1,10 @@
 package project_work.controller.command;
 
+import project_work.Context;
+import project_work.Main;
 import project_work.view.CanvasView;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +23,11 @@ public class SaveCommand implements Command {
     @Override
     public void execute() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            Context.getInstance().setCurrentFile(file);
+            Context.getInstance().setSaved(true);
             oos.writeObject(canvas.getDrawing());
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
+            frame.setTitle(file.getName() + " - " + Main.appTitle);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

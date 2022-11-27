@@ -1,5 +1,6 @@
 package project_work.view.menu;
 
+import project_work.Main;
 import project_work.controller.command.Invoker;
 import project_work.controller.command.SaveCommand;
 import project_work.view.CanvasView;
@@ -24,20 +25,29 @@ public class SaveAsMenuItem implements MenuItemFactory {
 
     @Override
     public JMenuItem createMenuItem() {
-        JMenuItem saveAsMenuItem = new JMenuItem("Save as");
+        JMenuItem saveAsMenuItem = new JMenuItem("Save as...");
         saveAsMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FileDialog fileDialog = new FileDialog();
-                File selectedFile = null;
+                File selectedFile;
 
                 try {
                     selectedFile = fileDialog.show(canvasView, FileDialog.SAVE_DIALOG);
+                    if (selectedFile.exists()) {
+                        String message = "Are you sure you want to overwrite " + selectedFile.getName() + " ? ";
+
+                        int confirmed = JOptionPane.showConfirmDialog(null, message, Main.appTitle, JOptionPane.YES_NO_OPTION);
+
+                        if (confirmed == JOptionPane.YES_OPTION) {
+                            invoker.executeCommand(new SaveCommand(canvasView, selectedFile));
+                        }
+                    }
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger("root").info("No such file selected");
                 }
 
-                invoker.executeCommand(new SaveCommand(canvasView, selectedFile));
+
             }
         });
         return saveAsMenuItem;

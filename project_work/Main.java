@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    private static final String appTitle = "Drawing software";
+    public static final String appTitle = "Drawing software";
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -23,12 +23,14 @@ public class Main {
                          UnsupportedLookAndFeelException e) {
                     throw new RuntimeException(e);
                 }
+                Context.getInstance().setSaved(true);
 
                 Context.getInstance().setCurrentDrawing(new Drawing());
                 JFrame frame = FrameView.createView(appTitle);
 
                 frame.setSize(600, 600);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
                 frame.setVisible(true);//making the frame visible
             }
         });

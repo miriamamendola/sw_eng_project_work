@@ -1,6 +1,7 @@
 package project_work.view;
 
 import project_work.Context;
+import project_work.Main;
 import project_work.controller.command.Invoker;
 import project_work.view.menu.LoadMenuItem;
 import project_work.view.menu.SaveAsMenuItem;
@@ -12,6 +13,9 @@ import project_work.view.toolbar.SelectionToolbarItem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 
 
 public class FrameView {
@@ -22,9 +26,11 @@ public class FrameView {
     public static JFrame createView(String appTitle) {
         Invoker invoker = new Invoker();
 
-        String title = Context.getInstance().getCurrentFile().getName() + " - " + appTitle;
+
+        String title = "untitled - " + appTitle;
         JFrame frame = new JFrame(title);
         frame.setBackground(new Color(whiteIntensity, whiteIntensity, whiteIntensity));
+
 
         CanvasView canvas = new CanvasView();
         frame.add(canvas);
@@ -38,6 +44,42 @@ public class FrameView {
         ImageIcon icon = new ImageIcon("assets/icons/icon.png");
         frame.setIconImage(icon.getImage());
 
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                //check if modified
+                Logger.getLogger("root").info("byebye");
+                if (Context.getInstance().isSaved()) {
+                    frame.dispose();
+                } else {
+                    String title;
+
+                    if (Context.getInstance().getCurrentFile() == null) {
+                        title = "untitled";
+                    } else {
+                        title = Context.getInstance().getCurrentFile().getName();
+                    }
+
+                    String message = "Do you want to save changes to " + title + " ? ";
+
+                    int confirmed = JOptionPane.showConfirmDialog(null,
+                            message, Main.appTitle,
+                            JOptionPane.YES_NO_CANCEL_OPTION);
+
+                    if (confirmed == JOptionPane.YES_OPTION) {
+                        new SaveMenuItem(canvas, invoker).actionPerformed(null);
+                        frame.dispose();
+                    } else if (confirmed == JOptionPane.NO_OPTION) {
+                        frame.dispose();
+                    }
+
+                }
+
+            }
+        });
+
+
         return frame;
     }
 
@@ -46,11 +88,12 @@ public class FrameView {
 
         JMenu fileMenu = new JMenu("File");
 
-        JMenuItem saveMenuItem = new SaveMenuItem().createMenuItem();
-        fileMenu.add(saveMenuItem);
 
         JMenuItem loadMenuItem = new LoadMenuItem(canvasView, invoker).createMenuItem();
         fileMenu.add(loadMenuItem);
+
+        JMenuItem saveMenuItem = new SaveMenuItem(canvasView, invoker).createMenuItem();
+        fileMenu.add(saveMenuItem);
 
         JMenuItem saveAsMenuItem = new SaveAsMenuItem(canvasView, invoker).createMenuItem();
         fileMenu.add(saveAsMenuItem);

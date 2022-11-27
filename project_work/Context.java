@@ -7,14 +7,13 @@ import java.io.File;
 public class Context {
 
     private static Context instance = null;
-
     private Drawing currentDrawing;
-
     private File currentFile;
+
+    private boolean saved;
 
     private Context() {
         this.currentDrawing = new Drawing();
-        this.currentFile = new File("untitled.draw");
     }
 
     public static Context getInstance() {
@@ -40,4 +39,13 @@ public class Context {
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
     }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
 }

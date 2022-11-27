@@ -20,7 +20,7 @@ public class FileDialog {
     public File show(Component parent, int type) throws FileNotFoundException, IllegalArgumentException {
         int returnVal;
         if (type == OPEN_DIALOG) {
-            returnVal = chooser.showSaveDialog(parent);
+            returnVal = chooser.showOpenDialog(parent);
         } else if (type == SAVE_DIALOG) {
             returnVal = chooser.showSaveDialog(parent);
         } else {
