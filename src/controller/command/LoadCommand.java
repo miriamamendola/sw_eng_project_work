@@ -11,11 +11,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * Implements a ConcreteCommand class; in this case, the Command is the Load command.
+ */
 public class LoadCommand implements Command {
 
     private final CanvasView canvas;
     private final File file;
 
+    /**
+     * Allows the ConcreteCommand object to have a reference to the
+     * receiver.
+     *
+     * @param canvas
+     * @param file
+     */
     public LoadCommand(CanvasView canvas, File file) {
         this.canvas = canvas;
         this.file = file;
