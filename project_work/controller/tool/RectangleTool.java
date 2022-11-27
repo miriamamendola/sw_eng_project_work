@@ -30,7 +30,7 @@ public class RectangleTool implements Tool {
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        this.rect = new DrawableRectangle(mouseEvent.getX(), mouseEvent.getY());
+        this.rect = new DrawableRectangle(canvas.getCurrentFillColor(), canvas.getCurrentStrokeColor(), mouseEvent.getX(), mouseEvent.getY());
         this.startingPoint = mouseEvent.getPoint();
     }
 

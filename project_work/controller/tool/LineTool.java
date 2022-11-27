@@ -24,7 +24,7 @@ public class LineTool implements Tool {
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        line = new DrawableLine(mouseEvent.getPoint(), mouseEvent.getPoint());
+        line = new DrawableLine(canvas.getCurrentStrokeColor(), mouseEvent.getPoint(), mouseEvent.getPoint());
         canvas.setDummyDrawable(line);
     }
 

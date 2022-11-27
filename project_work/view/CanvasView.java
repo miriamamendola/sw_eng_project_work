@@ -17,6 +17,9 @@ public class CanvasView extends JPanel {
     private Drawable dummyDrawable;
     private Tool currentTool;
 
+    private Color currentFillColor;
+
+    private Color currentStrokeColor = Color.black;
 
     private SelectionGrid selectionGrid;
 
@@ -87,6 +90,22 @@ public class CanvasView extends JPanel {
 
     public Tool getCurrentTool() {
         return currentTool;
+    }
+
+    public Color getCurrentFillColor() {
+        return currentFillColor;
+    }
+
+    public void setCurrentFillColor(Color currentFillColor) {
+        this.currentFillColor = currentFillColor;
+    }
+
+    public Color getCurrentStrokeColor() {
+        return currentStrokeColor;
+    }
+
+    public void setCurrentStrokeColor(Color currentStrokeColor) {
+        this.currentStrokeColor = currentStrokeColor;
     }
 
     @Override
