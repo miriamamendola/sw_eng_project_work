@@ -74,10 +74,7 @@ public class DrawableLine extends Line2D.Double implements Drawable {
         double boxX = point.getX() - HIT_BOX_SIZE / 2;
         double boxY = point.getY() - HIT_BOX_SIZE / 2;
 
-        int width = HIT_BOX_SIZE;
-        int height = HIT_BOX_SIZE;
-
-        return this.intersects(boxX, boxY, width, height);
+        return this.intersects(boxX, boxY, HIT_BOX_SIZE, HIT_BOX_SIZE);
     }
 
 }
