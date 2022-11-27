@@ -2,7 +2,7 @@ package test.module;
 
 import org.junit.Before;
 import org.junit.Test;
-import project_work.model.DrawableLine;
+import src.model.DrawableLine;
 
 import java.awt.geom.Point2D;
 

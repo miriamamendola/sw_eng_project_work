@@ -2,10 +2,10 @@ package test.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import project_work.controller.command.Invoker;
-import project_work.controller.tool.LineTool;
-import project_work.model.DrawableLine;
-import project_work.view.CanvasView;
+import src.controller.command.Invoker;
+import src.controller.tool.LineTool;
+import src.model.DrawableLine;
+import src.view.CanvasView;
 
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
