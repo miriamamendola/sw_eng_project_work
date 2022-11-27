@@ -17,22 +17,6 @@ public class SelectionTool implements Tool {
     }
 
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
         Point2D point = mouseEvent.getPoint();

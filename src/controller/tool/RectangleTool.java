@@ -10,7 +10,10 @@ import java.awt.geom.Point2D;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
-
+/**
+ * Defines the behaviour of the canvas when the Rectangle Tool is selected.
+ * When this state is selected, the user can draw a rectangle on the canvas by dragging the mouse.
+ */
 public class RectangleTool implements Tool {
 
     private DrawableRectangle rect;
@@ -28,12 +31,24 @@ public class RectangleTool implements Tool {
         canvas.repaint();
     }
 
+    /**
+     * Defines how the canvas reacts when holding the mouse button down.
+     * It creates the Rectangle according to the mouse coordinates and the current colors.
+     *
+     * @param mouseEvent the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         this.rect = new DrawableRectangle(canvas.getCurrentFillColor(), canvas.getCurrentStrokeColor(), mouseEvent.getX(), mouseEvent.getY());
         this.startingPoint = mouseEvent.getPoint();
     }
 
+    /**
+     * Defines how the canvas reacts to dragging the mouse.
+     * The rectangle is rendered according to the direction of the dragging.
+     *
+     * @param mouseEvent the event to be processed
+     */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
         double x = min(startingPoint.getX(), mouseEvent.getX());
@@ -46,18 +61,18 @@ public class RectangleTool implements Tool {
         canvas.repaint();
     }
 
-
+    /**
+     * Defines how the canvas reacts when releasing the mouse button.
+     * Prevents creating a new rectangle when the shape has a dimension equal to zero.
+     *
+     * @param mouseEvent the event to be processed
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if (rect.getWidth() > 0 && rect.getHeight() > 0) {
             invoker.executeCommand(new ShapeCommand(canvas, rect));
         }
         canvas.clearDummyDrawable();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-
     }
 
 }
