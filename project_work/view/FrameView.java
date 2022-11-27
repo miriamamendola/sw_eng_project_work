@@ -39,7 +39,7 @@ public class FrameView {
         frame.add(toolBar, BorderLayout.WEST);
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);
-        frame.add(menuBar, BorderLayout.NORTH);
+        frame.setJMenuBar(menuBar);
 
         ImageIcon icon = new ImageIcon("assets/icons/icon.png");
         frame.setIconImage(icon.getImage());
