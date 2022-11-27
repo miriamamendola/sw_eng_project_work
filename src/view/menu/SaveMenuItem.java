@@ -30,6 +30,13 @@ public class SaveMenuItem implements MenuItemFactory, ActionListener {
         return saveMenuItem;
     }
 
+    /**
+     * When the menu item is pressed, if the user is working on a new drawing,
+     * a new file dialog will show and the file selected by the user will be used to save the drawing,
+     * otherwise the drawing will be saved on the previous selected file.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         File selectedFile = Context.getInstance().getCurrentFile();

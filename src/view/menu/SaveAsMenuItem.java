@@ -27,6 +27,14 @@ public class SaveAsMenuItem implements MenuItemFactory {
     public JMenuItem createMenuItem() {
         JMenuItem saveAsMenuItem = new JMenuItem("Save as...");
         saveAsMenuItem.addActionListener(new ActionListener() {
+            /**
+             * When the menu item is pressed, a new file dialog will show and the file
+             * selected by the user will be used to save the drawing.
+             * If the selected file already exists, the user will be prompted with
+             * a dialog asking to confirm overwriting the file.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 FileDialog fileDialog = new FileDialog();

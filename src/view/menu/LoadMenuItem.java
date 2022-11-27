@@ -26,6 +26,12 @@ public class LoadMenuItem implements MenuItemFactory {
     public JMenuItem createMenuItem() {
         JMenuItem loadMenuItem = new JMenuItem("Open...");
         loadMenuItem.addActionListener(new ActionListener() {
+            /**
+             * When the menu item is pressed, a new file dialog will show and the file
+             * selected by the user will be used to load the drawing.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 FileDialog fileDialog = new FileDialog();
