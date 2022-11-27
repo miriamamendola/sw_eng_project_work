@@ -51,7 +51,12 @@ public class ColorPanel extends JPanel implements ActionListener {
     }
 
     /**
-     * @param actionEvent
+     * When the ColorButton is pressed, it will show a JColorChooser dialog, from which the user
+     * will select the desired color, which will be saved as a property of the canvas.
+     * The behaviour will change accordingly to the button pressed (fill or stroke).
+     * Once the color is selected, it will affect the coloring of new shapes.
+     *
+     * @param actionEvent the event to be processed
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

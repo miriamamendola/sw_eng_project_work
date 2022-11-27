@@ -6,22 +6,28 @@ import java.awt.*;
 
 public class ColorButton extends JButton {
 
-    private ColorButtonUI buttonUI;
+    private final ColorButtonUI buttonUI;
 
-    /**
-     *
-     */
     public ColorButton(Color color) {
         super();
-        this.setPreferredSize(new Dimension(20, 20));
+        this.setPreferredSize(new Dimension(30, 30));
         buttonUI = new ColorButtonUI(color);
         this.setUI(buttonUI);
     }
 
+    /**
+     * Updates the ButtonUI by changing the color.
+     *
+     * @param color selected color
+     */
     public void changeColor(Color color) {
         buttonUI.setColor(color);
     }
 
+    /**
+     * Defines a custom UI for ColorButtons. It will show a squared button with
+     * the selected color.
+     */
     private class ColorButtonUI extends BasicButtonUI {
 
         public Color getColor() {
@@ -39,13 +45,8 @@ public class ColorButton extends JButton {
             this.color = color;
         }
 
-        /**
-         * @param g
-         * @param c
-         */
         @Override
         public void paint(Graphics g, JComponent c) {
-            JButton button = (JButton) c;
             g.setColor(color);
             g.fill3DRect(0, 0, c.getWidth(), c.getHeight(), true);
             super.paint(g, c);
