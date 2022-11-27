@@ -6,6 +6,12 @@ package src.controller.command;
  * in order to memorize the executed commands.
  */
 public class Invoker {
+    /**
+     * Allows the invoker to call for the execution of a command given as
+     * an input parameter.
+     *
+     * @param command is the command to be executed by the receiver.
+     */
     public void executeCommand(Command command) {
         command.execute();
     }
