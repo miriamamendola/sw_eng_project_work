@@ -23,14 +23,20 @@ public class LoadCommand implements Command {
      * Allows the ConcreteCommand object to have a reference to the
      * receiver.
      *
-     * @param canvas
-     * @param file
+     * @param canvas is the reference to the receiver which will perform the required action.
+     * @param file   is the file to be loaded.
      */
     public LoadCommand(CanvasView canvas, File file) {
         this.canvas = canvas;
         this.file = file;
     }
 
+    /**
+     * First, it opens a windows that allows to choose the file to be loaded, and then loads
+     * the selected file.
+     * The operation is completed by adding the shapes in the file to the Drawing data structure
+     * and then repainting the canvas in order to show such drawn shapes.
+     */
     @Override
     public void execute() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
