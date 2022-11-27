@@ -43,7 +43,7 @@ public class EllipseTool implements Tool {
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         this.startingPoint = mouseEvent.getPoint();
-        ellipse = new DrawableEllipse(mouseEvent.getX(), mouseEvent.getY());
+        ellipse = new DrawableEllipse(canvas.getCurrentFillColor(), canvas.getCurrentStrokeColor(), mouseEvent.getX(), mouseEvent.getY());
     }
 
     @Override

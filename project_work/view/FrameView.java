@@ -38,6 +38,9 @@ public class FrameView {
         JToolBar toolBar = createToolBar(canvas, invoker);
         frame.add(toolBar, BorderLayout.WEST);
 
+        ColorPanel colorPanel = new ColorPanel(canvas);
+        frame.add(colorPanel, BorderLayout.SOUTH);
+
         JMenuBar menuBar = createMenuBar(canvas, invoker);
         frame.setJMenuBar(menuBar);
 
