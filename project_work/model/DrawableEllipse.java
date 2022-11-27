@@ -4,14 +4,14 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 /**
- * Defines the actual rectangle shape and it's properties.
+ * Defines the actual ellipse shape and it's properties.
  */
 public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
     private Paint fillColor;
     private Paint strokeColor;
 
     /**
-     * Creates an ellipse in which the properties will be set the input parameters' values.
+     * Creates an ellipse in which the properties will be set to the input parameters' values.
      *
      * @param fillColor   is the internal color of the shape.
      * @param strokeColor is the outline color of the shape.
