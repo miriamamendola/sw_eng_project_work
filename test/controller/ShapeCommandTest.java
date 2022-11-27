@@ -2,12 +2,12 @@ package test.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import project_work.controller.command.ShapeCommand;
-import project_work.model.Drawable;
-import project_work.model.DrawableEllipse;
-import project_work.model.DrawableLine;
-import project_work.model.DrawableRectangle;
-import project_work.view.CanvasView;
+import src.controller.command.ShapeCommand;
+import src.model.Drawable;
+import src.model.DrawableEllipse;
+import src.model.DrawableLine;
+import src.model.DrawableRectangle;
+import src.view.CanvasView;
 
 import java.awt.geom.Point2D;
 

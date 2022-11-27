@@ -1,19 +1,19 @@
 package test.module;
+
 import org.junit.Before;
 import org.junit.Test;
-import project_work.model.Drawable;
-import project_work.model.DrawableEllipse;
-import project_work.model.DrawableRectangle;
-import project_work.model.Drawing;
+import src.model.DrawableRectangle;
+import src.model.Drawing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DrawingTest {
     private Drawing d;
     private DrawableRectangle dr;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         d = new Drawing();
         dr = new DrawableRectangle(33, 33);
     }
