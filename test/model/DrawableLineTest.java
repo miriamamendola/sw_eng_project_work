@@ -1,4 +1,4 @@
-package test.module;
+package test.model;
 
 import org.junit.Before;
 import org.junit.Test;
