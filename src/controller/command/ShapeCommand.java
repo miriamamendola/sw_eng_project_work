@@ -8,6 +8,9 @@ import src.view.CanvasView;
 import javax.swing.*;
 import java.io.File;
 
+/**
+ * Used for adding the shapes drawings.
+ */
 public class ShapeCommand implements Command {
 
     private final CanvasView canvas;
@@ -18,6 +21,11 @@ public class ShapeCommand implements Command {
         this.shape = shape;
     }
 
+    /**
+     * Set the saved property to false (because a modification is done),
+     * changes the title by adding the * (used for letting know the user that the drawing is modified).
+     * Adds the shape to the drawing.
+     */
     @Override
     public void execute() {
         Context.getInstance().setSaved(false);

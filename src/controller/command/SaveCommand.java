@@ -10,6 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+/**
+ * Encapsules the saving logic
+ */
 public class SaveCommand implements Command {
 
     private final CanvasView canvas;
@@ -20,6 +23,12 @@ public class SaveCommand implements Command {
         this.file = file;
     }
 
+    /**
+     * Saves the current drawing inside the file.
+     * Updates the saved property and the currentFile property and
+     * changes the current title with the name of the saved file.
+     * Implicitly removes the * (used for letting know the user that the drawing is modified).
+     */
     @Override
     public void execute() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {

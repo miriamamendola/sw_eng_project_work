@@ -9,6 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class Main {
     public static final String appTitle = "Drawing software";
+
+    /**
+     * Sets custom properties for MacOS devices.
+     * Sets the FlatDarkLaf look&feel.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         if (SystemInfo.isMacOS) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
