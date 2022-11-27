@@ -9,6 +9,7 @@ import src.model.DrawableLine;
 import src.model.DrawableRectangle;
 import src.view.CanvasView;
 
+import javax.swing.*;
 import java.awt.geom.Point2D;
 
 import static org.junit.Assert.assertTrue;
@@ -20,7 +21,9 @@ public class ShapeCommandTest {
 
     @Before
     public void setUp() {
+        JFrame frame = new JFrame();
         canvas = new CanvasView();
+        frame.add(canvas);
     }
 
     @Test

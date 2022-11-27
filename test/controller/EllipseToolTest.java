@@ -7,6 +7,7 @@ import src.controller.tool.EllipseTool;
 import src.model.DrawableEllipse;
 import src.view.CanvasView;
 
+import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -21,7 +22,9 @@ public class EllipseToolTest {
 
     @Before
     public void setUp() throws Exception {
+        JFrame frame = new JFrame();
         canvas = new CanvasView();
+        frame.add(canvas);
         invoker = new Invoker();
         ellipseTool = new EllipseTool(canvas, invoker);
     }

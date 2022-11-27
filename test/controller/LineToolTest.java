@@ -7,6 +7,7 @@ import src.controller.tool.LineTool;
 import src.model.DrawableLine;
 import src.view.CanvasView;
 
+import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -21,7 +22,9 @@ public class LineToolTest {
 
     @Before
     public void setUp() {
+        JFrame frame = new JFrame();
         canvas = new CanvasView();
+        frame.add(canvas);
         invoker = new Invoker();
         lineTool = new LineTool(canvas, invoker);
     }
