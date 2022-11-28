@@ -21,6 +21,7 @@ public class SelectionTool implements Tool {
 
         Point2D point = mouseEvent.getPoint();
         boolean found = false;
+
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
         while (itr.hasNext()) {
             Shape s = (Shape) itr.next();

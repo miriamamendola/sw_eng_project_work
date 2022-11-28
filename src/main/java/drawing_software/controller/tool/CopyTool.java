@@ -33,16 +33,7 @@ public class CopyTool implements Tool {
     }
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+        invoker.executeCommand( new CopyCommand(canvasView));
 
-        Point2D point = mouseEvent.getPoint();
-        boolean found = false;
-        Iterator<Drawable> itr = canvasView.getDrawing().descendingIterator();
-        while (itr.hasNext()) {
-            Shape s = (Shape) itr.next();
-            if (s.contains(point)) {
-                invoker.executeCommand(new CopyCommand(s));
-                break;
-            }
-        }
     }
 }

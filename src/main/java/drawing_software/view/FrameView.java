@@ -108,10 +108,8 @@ public class FrameView {
 
     private static JToolBar createToolBar(CanvasView canvas, Invoker invoker) {
         JToolBar toolPanel = new JToolBar(JToolBar.VERTICAL);
-
         BoxLayout layout = new BoxLayout(toolPanel, BoxLayout.PAGE_AXIS);
         toolPanel.setLayout(layout);
-
         toolPanel.setFloatable(false);
         JButton selectionButton = new SelectionToolbarItem(canvas).itemCreate();
         toolPanel.add(selectionButton);
