@@ -8,6 +8,7 @@ import drawing_software.view.CanvasView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class CopyToolBarItem extends ToolbarItemFactory{
     private final Invoker invoker;
@@ -17,7 +18,8 @@ public class CopyToolBarItem extends ToolbarItemFactory{
         this.invoker= invoker;
     }
     public JButton itemCreate() {
-        JButton copyButton = new JButton(new ImageIcon(new ImageIcon("assets/icons/ellipse.png").getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
+        URL url = getClass().getResource("/ellipse.png");
+        JButton copyButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         copyButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new CopyTool(canvasView, invoker)));
         return copyButton;
     }

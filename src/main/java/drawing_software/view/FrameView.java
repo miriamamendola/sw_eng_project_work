@@ -123,7 +123,8 @@ public class FrameView {
         toolPanel.add(ellipseButton);
         JButton copyButton =new CopyToolBarItem(canvas,invoker).itemCreate();
         toolPanel.add(copyButton);
-
+        JButton pasteButton= new PasteToolBarItem(canvas,invoker).itemCreate();
+        toolPanel.add(pasteButton);
         return toolPanel;
     }
 
