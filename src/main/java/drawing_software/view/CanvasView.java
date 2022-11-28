@@ -23,6 +23,8 @@ public class CanvasView extends JPanel {
 
     private SelectionGrid selectionGrid;
 
+    private Drawable copiedShape;
+
 
     public CanvasView() {
         this.drawing = new Drawing();
@@ -88,6 +90,10 @@ public class CanvasView extends JPanel {
         this.selectionGrid = null;
     }
 
+    public void clearCopiedShape() {
+        this.copiedShape = null;
+    }
+
     public Tool getCurrentTool() {
         return currentTool;
     }
@@ -121,6 +127,8 @@ public class CanvasView extends JPanel {
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         for (Drawable d : this.drawing) {
+            System.out.println("TROVATO");
+            System.out.println(d.toString());
             d.draw(g2d);
         }
 
@@ -133,4 +141,11 @@ public class CanvasView extends JPanel {
         }
     }
 
+    public Drawable getCopiedShape() {
+        return copiedShape;
+    }
+
+    public void setCopiedShape(Drawable copiedShape) {
+        this.copiedShape = copiedShape;
+    }
 }
