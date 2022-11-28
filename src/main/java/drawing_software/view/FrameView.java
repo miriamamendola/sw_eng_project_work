@@ -6,10 +6,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.view.menu.LoadMenuItem;
 import drawing_software.view.menu.SaveAsMenuItem;
 import drawing_software.view.menu.SaveMenuItem;
-import drawing_software.view.toolbar.EllipseToolbarItem;
-import drawing_software.view.toolbar.LineToolbarItem;
-import drawing_software.view.toolbar.RectangleToolbarItem;
-import drawing_software.view.toolbar.SelectionToolbarItem;
+import drawing_software.view.toolbar.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,6 +121,8 @@ public class FrameView {
         toolPanel.add(rectangleButton);
         JButton ellipseButton = new EllipseToolbarItem(canvas, invoker).itemCreate();
         toolPanel.add(ellipseButton);
+        JButton copyButton =new CopyToolBarItem(canvas,invoker).itemCreate();
+        toolPanel.add(copyButton);
 
         return toolPanel;
     }
