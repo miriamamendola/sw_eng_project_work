@@ -23,9 +23,10 @@ public class SelectionTool implements Tool {
         boolean found = false;
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
         while (itr.hasNext()) {
-            Shape s = (Shape) itr.next();
+            Drawable d = itr.next();
+            Shape s = (Shape) d;
             if (s.contains(point)) {
-                canvas.setSelectionGrid(new SelectionGrid(s));
+                canvas.setSelectionGrid(new SelectionGrid(d));
                 canvas.repaint();
                 found = true;
                 break;
