@@ -30,7 +30,7 @@ public class FrameView {
         frame.setBackground(new Color(whiteIntensity, whiteIntensity, whiteIntensity));
 
 
-        CanvasView canvas = new CanvasView();
+        CanvasView canvas = new CanvasView(invoker);
         frame.add(canvas);
 
         JToolBar toolBar = createToolBar(canvas, invoker);
@@ -111,7 +111,7 @@ public class FrameView {
         BoxLayout layout = new BoxLayout(toolPanel, BoxLayout.PAGE_AXIS);
         toolPanel.setLayout(layout);
         toolPanel.setFloatable(false);
-        JButton selectionButton = new SelectionToolbarItem(canvas).itemCreate();
+        JButton selectionButton = new SelectionToolbarItem(canvas, invoker).itemCreate();
         toolPanel.add(selectionButton);
         JButton lineButton = new LineToolbarItem(canvas, invoker).itemCreate();
         toolPanel.add(lineButton);

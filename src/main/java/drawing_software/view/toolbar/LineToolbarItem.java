@@ -9,11 +9,9 @@ import java.awt.*;
 import java.net.URL;
 
 public class LineToolbarItem extends ToolbarItemFactory {
-    private Invoker invoker;
 
     public LineToolbarItem(CanvasView canvasView, Invoker invoker) {
-        super(canvasView);
-        this.invoker = invoker;
+        super(canvasView, invoker);
     }
 
     /**
