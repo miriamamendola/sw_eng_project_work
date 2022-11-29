@@ -24,7 +24,7 @@ public class CopyTool implements Tool {
     }
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        Point2D point = mouseEvent.getPoint();
+        /*Point2D point = mouseEvent.getPoint();
         boolean found = false;
 
         Iterator<Drawable> itr = canvasView.getDrawing().descendingIterator();
@@ -48,6 +48,7 @@ public class CopyTool implements Tool {
             canvasView.clearSelectedDrawable();
             System.out.println("Nessuna figura selezionata");
             canvasView.repaint();
-        }
+        }*/
+        invoker.executeCommand(new CopyCommand(canvasView));
     }
 }

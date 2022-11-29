@@ -29,7 +29,7 @@ public class CanvasView extends JPanel {
 
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
-        currentTool = new SelectionTool(this, invoker);
+        currentTool = new SelectionTool(this);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
