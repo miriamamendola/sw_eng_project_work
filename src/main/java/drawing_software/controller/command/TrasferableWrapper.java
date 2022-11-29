@@ -22,7 +22,7 @@ public class TrasferableWrapper implements Transferable {
     }
 
     private Drawable selectedShape;
-
+    private static DataFlavor dmselFlavor = new DataFlavor(TrasferableWrapper.class, "Test data flavor");
 
 
     @Override
@@ -36,7 +36,14 @@ public class TrasferableWrapper implements Transferable {
     }
 
     @Override
-    public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
-        return null;
+    public Drawable getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+
+        if (isDataFlavorSupported(flavor)) {
+            System.out.println("seee");
+            return this.selectedShape;
+        } else {
+            throw new UnsupportedFlavorException(dmselFlavor);
+        }
     }
 }
+

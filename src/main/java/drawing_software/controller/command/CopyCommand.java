@@ -27,7 +27,7 @@ public class CopyCommand implements Command ,ClipboardOwner{
         Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();         //now i have selected shape to copy
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
-        clipboard.setContents(tr,this);
+        clipboard.setContents(tr,canvas);
     }
 
     @Override

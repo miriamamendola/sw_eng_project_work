@@ -49,6 +49,6 @@ public class CopyTool implements Tool {
             System.out.println("Nessuna figura selezionata");
             canvasView.repaint();
         }*/
-        invoker.executeCommand(new CopyCommand(canvasView));
+        //invoker.executeCommand(new CopyCommand(canvasView));
     }
 }
