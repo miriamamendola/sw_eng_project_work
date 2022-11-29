@@ -10,11 +10,9 @@ import java.awt.*;
 import java.net.URL;
 
 public class CopyToolBarItem extends ToolbarItemFactory{
-    private final Invoker invoker;
 
     public  CopyToolBarItem(CanvasView canvasView, Invoker invoker){
-        super(canvasView);
-        this.invoker= invoker;
+        super(canvasView,invoker);
     }
     public JButton itemCreate() {
         URL url = getClass().getResource("/ellipse.png");

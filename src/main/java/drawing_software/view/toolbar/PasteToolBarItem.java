@@ -11,11 +11,9 @@ import java.awt.*;
 import java.net.URL;
 
 public class PasteToolBarItem extends ToolbarItemFactory{
-    private final Invoker invoker;
 
     public  PasteToolBarItem(CanvasView canvasView, Invoker invoker){
-        super(canvasView);
-        this.invoker= invoker;
+        super(canvasView,invoker);
     }
     public JButton itemCreate() {
         URL url = getClass().getResource("/rectangle.png");

@@ -21,7 +21,7 @@ public class SelectionToolbarItem extends ToolbarItemFactory {
     public JButton itemCreate() {
         URL url = getClass().getResource("/cursor.png");
         JButton cursorButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
-        cursorButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new SelectionTool(canvasView, invoker)));
+        cursorButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new SelectionTool(canvasView)));
         return cursorButton;
     }
 }
