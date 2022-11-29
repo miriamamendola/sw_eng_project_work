@@ -1,5 +1,6 @@
 package drawing_software.view.toolbar;
 
+import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
 import drawing_software.view.CanvasView;
 
@@ -9,8 +10,8 @@ import java.net.URL;
 
 public class SelectionToolbarItem extends ToolbarItemFactory {
 
-    public SelectionToolbarItem(CanvasView canvasView) {
-        super(canvasView);
+    public SelectionToolbarItem(CanvasView canvasView, Invoker invoker) {
+        super(canvasView, invoker);
     }
 
     /**
@@ -20,7 +21,7 @@ public class SelectionToolbarItem extends ToolbarItemFactory {
     public JButton itemCreate() {
         URL url = getClass().getResource("/cursor.png");
         JButton cursorButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
-        cursorButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new SelectionTool(canvasView)));
+        cursorButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new SelectionTool(canvasView, invoker)));
         return cursorButton;
     }
 }

@@ -10,11 +10,8 @@ import java.net.URL;
 
 public class EllipseToolbarItem extends ToolbarItemFactory {
 
-    private final Invoker invoker;
-
     public EllipseToolbarItem(CanvasView canvasView, Invoker invoker) {
-        super(canvasView);
-        this.invoker = invoker;
+        super(canvasView, invoker);
     }
 
     /**

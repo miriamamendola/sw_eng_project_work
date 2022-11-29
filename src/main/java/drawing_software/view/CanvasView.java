@@ -1,5 +1,6 @@
 package drawing_software.view;
 
+import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
 import drawing_software.controller.tool.Tool;
 import drawing_software.model.Drawable;
@@ -26,9 +27,9 @@ public class CanvasView extends JPanel {
     private Drawable copiedShape;
 
 
-    public CanvasView() {
+    public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
-        currentTool = new SelectionTool(this);
+        currentTool = new SelectionTool(this, invoker);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
