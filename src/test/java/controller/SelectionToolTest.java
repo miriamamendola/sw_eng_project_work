@@ -1,5 +1,6 @@
 package controller;
 
+import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
 import drawing_software.model.DrawableLine;
 import drawing_software.view.CanvasView;
@@ -17,10 +18,13 @@ public class SelectionToolTest {
     private CanvasView canvas;
     private SelectionTool selectionTool;
 
+    private Invoker invoker;
+
     @Before
     public void setUp() throws Exception {
-        canvas = new CanvasView();
-        selectionTool = new SelectionTool(canvas);
+        invoker = new Invoker();
+        canvas = new CanvasView(invoker);
+        selectionTool = new SelectionTool(canvas, invoker);
     }
     @Test
     public void testMouseClickOnFigure() {

@@ -1,6 +1,7 @@
 package controller;
 
 import drawing_software.controller.command.Command;
+import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.SaveCommand;
 import drawing_software.model.*;
 import drawing_software.view.CanvasView;
@@ -27,10 +28,13 @@ public class SaveCommandTest {
 
     private Command saveCommand;
 
+    private Invoker invoker;
+
     @Before
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
-        canvas = new CanvasView();
+        invoker = new Invoker();
+        canvas = new CanvasView(invoker);
         frame.add(canvas);
 
         canvas.getDrawing().addDrawable(new DrawableRectangle(1, 1));
