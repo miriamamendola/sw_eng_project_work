@@ -1,9 +1,8 @@
 package drawing_software.controller.command;
 
+import drawing_software.Context;
 import drawing_software.model.Drawable;
-import drawing_software.model.DrawableEllipse;
 import drawing_software.model.DrawableLine;
-import drawing_software.model.DrawableRectangle;
 import drawing_software.view.CanvasView;
 
 import java.awt.*;
@@ -11,17 +10,14 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.geom.Point2D;
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.util.Iterator;
 
 public class PasteCommand implements Command {
     private CanvasView canvas;
-    private Point2D point;
 
-    public PasteCommand(CanvasView canvas, Point2D point) {
+    public PasteCommand(CanvasView canvas) {
         this.canvas = canvas;
-        this.point = point;
     }
 
     @Override
@@ -43,41 +39,12 @@ public class PasteCommand implements Command {
         }*/
 
         //creare costruttore vuoto all'inizio
-
-
         try {
             DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType +
-                    ";class=\"" + Drawable.class.getName() + "\"");
+                            ";class=\"" + Drawable.class.getName() + "\"");
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable tr = clipboard.getContents(this);
-            Drawable copiedShape = (Drawable) tr.getTransferData(dataFlavor);
-            System.out.println(copiedShape);
-            System.out.println(copiedShape.getClass().toString());
-            Type c = copiedShape.getClass();
-
-            if (c.equals(DrawableRectangle.class)) {
-                DrawableRectangle dr = (DrawableRectangle) copiedShape;
-                System.out.println("rettangolo");
-                DrawableRectangle rec = new DrawableRectangle(dr.getFillColor(), dr.getStrokeColor(), point.getX(), point.getY());
-                rec.setRect(point.getX(), point.getY(), dr.getBounds().getWidth(), dr.getBounds().getHeight());
-                canvas.getDrawing().addDrawable(rec);
-                canvas.repaint();
-            } else if (c.equals(DrawableEllipse.class)) {
-                DrawableEllipse dr = (DrawableEllipse) copiedShape;
-                System.out.println("ellisse");
-                DrawableEllipse ell = new DrawableEllipse(dr.getFillColor(), dr.getStrokeColor(), point.getX(), point.getY());
-                ell.setFrame(point.getX(), point.getY(), dr.getBounds().getWidth(), dr.getBounds().getHeight());
-                canvas.getDrawing().addDrawable(ell);
-                canvas.repaint();
-            } else {
-                DrawableLine dr = (DrawableLine) copiedShape;
-                System.out.println("line");
-
-                DrawableLine lin = new DrawableLine(dr.getStrokeColor(), point, point);
-                lin.setLine(point.getX(), point.getY(), dr.getBounds().getWidth(), dr.getBounds().getHeight());
-                canvas.getDrawing().addDrawable(lin);
-                canvas.repaint();
-            }
+            System.out.println(tr.getTransferData(dataFlavor));
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -86,6 +53,7 @@ public class PasteCommand implements Command {
         } catch (UnsupportedFlavorException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 }

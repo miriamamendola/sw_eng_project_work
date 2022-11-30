@@ -34,6 +34,7 @@ public class CanvasView extends JPanel implements ClipboardOwner {
         this.drawing = new Drawing();
         currentTool = new SelectionTool(this);
         this.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 currentTool.mouseClicked(e);
