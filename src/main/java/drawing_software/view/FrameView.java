@@ -125,5 +125,11 @@ public class FrameView {
         toolPanel.add(pasteButton);
         return toolPanel;
     }
-
+    private static JPopupMenu createPopUpMenu (CanvasView canvas,Invoker invoker){
+        JPopupMenu popup = new JPopupMenu();
+        popup.add(new JMenuItem("Cut"));
+        popup.add(new JMenuItem("Copy"));
+        popup.add(new JMenuItem("Paste"));
+        return popup;
+    }
 }

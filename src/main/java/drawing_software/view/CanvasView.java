@@ -32,7 +32,7 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
-        currentTool = new SelectionTool(this);
+        currentTool = new SelectionTool(this,invoker);
         this.addMouseListener(new MouseAdapter() {
 
             @Override

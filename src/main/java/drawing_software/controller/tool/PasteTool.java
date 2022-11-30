@@ -23,12 +23,7 @@ public class PasteTool implements Tool {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        /*System.out.println("incolla");
-        double x = mouseEvent.getX();
-        double y = mouseEvent.getY();
-        Drawable cp = canvas.getCopiedShape();
-        invoker.executeCommand(new PasteCommand(canvas, canvas.getCopiedShape()));
-        canvas.repaint();*/
+
         Point2D p = mouseEvent.getPoint();
         invoker.executeCommand(new PasteCommand(canvas,p));
     }

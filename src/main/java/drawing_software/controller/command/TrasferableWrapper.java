@@ -7,7 +7,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-public class TrasferableWrapper implements Transferable {
+public class TrasferableWrapper implements Transferable ,Cloneable{
 
     public Drawable getSelectedShape() {
         return selectedShape;
@@ -42,5 +42,14 @@ public class TrasferableWrapper implements Transferable {
             return this.selectedShape;
 
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+
+        TrasferableWrapper cloned = (TrasferableWrapper) super.clone();
+        return cloned;
+    }
+
+
 }
 

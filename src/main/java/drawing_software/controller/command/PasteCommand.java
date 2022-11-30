@@ -4,6 +4,7 @@ import drawing_software.model.Drawable;
 import drawing_software.model.DrawableEllipse;
 import drawing_software.model.DrawableLine;
 import drawing_software.model.DrawableRectangle;
+import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 
 import java.awt.*;
@@ -23,61 +24,18 @@ public class PasteCommand implements Command {
         this.canvas = canvas;
         this.point = point;
     }
-
     @Override
     public void execute() {
         System.out.println("Sei nel command di paste");
-
-        /*if (copiedShape == null) {
-            Context.getInstance().setSaved(false);
-            System.out.println("Nessuna figura precedentemente selezionata");
-        }
-        System.out.println("Aggiungo");
-        System.out.println(copiedShape);
-        System.out.println("al drawing");
-        canvas.getDrawing().addDrawable(copiedShape);
-        Iterator<Drawable> itr = canvas.getDrawing().iterator();
-        while (itr.hasNext()) {
-            Shape s = (Shape) itr.next();
-            System.out.println(s.getBounds());
-        }*/
-
-        //creare costruttore vuoto all'inizio
-
-
+        DataFlavor dataFlavor = null;
         try {
-            DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType +
+            dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType +
                     ";class=\"" + Drawable.class.getName() + "\"");
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable tr = clipboard.getContents(this);
-            Drawable copiedShape = (Drawable) tr.getTransferData(dataFlavor);
-            System.out.println(copiedShape);
-            System.out.println(copiedShape.getClass().toString());
-            Type c = copiedShape.getClass();
-
-            if (c.equals(DrawableRectangle.class)) {
-                DrawableRectangle dr = (DrawableRectangle) copiedShape;
-                System.out.println("rettangolo");
-                DrawableRectangle rec = new DrawableRectangle(dr.getFillColor(), dr.getStrokeColor(), point.getX(), point.getY());
-                rec.setRect(point.getX(), point.getY(), dr.getBounds().getWidth(), dr.getBounds().getHeight());
-                canvas.getDrawing().addDrawable(rec);
-                canvas.repaint();
-            } else if (c.equals(DrawableEllipse.class)) {
-                DrawableEllipse dr = (DrawableEllipse) copiedShape;
-                System.out.println("ellisse");
-                DrawableEllipse ell = new DrawableEllipse(dr.getFillColor(), dr.getStrokeColor(), point.getX(), point.getY());
-                ell.setFrame(point.getX(), point.getY(), dr.getBounds().getWidth(), dr.getBounds().getHeight());
-                canvas.getDrawing().addDrawable(ell);
-                canvas.repaint();
-            } else {
-                DrawableLine dr = (DrawableLine) copiedShape;
-                System.out.println("line");
-
-                DrawableLine lin = new DrawableLine(dr.getStrokeColor(), point, point);
-                lin.setLine(point.getX(), point.getY(), dr.getBounds().getWidth(), dr.getBounds().getHeight());
-                canvas.getDrawing().addDrawable(lin);
-                canvas.repaint();
-            }
+            Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
+            copiedShape.setLocation(point);
+            canvas.repaint();
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -88,4 +46,6 @@ public class PasteCommand implements Command {
         }
 
     }
+
+
 }

@@ -2,6 +2,7 @@ package drawing_software.controller.command;
 
 import drawing_software.Context;
 import drawing_software.model.Drawable;
+import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 
 import java.awt.*;
@@ -20,14 +21,17 @@ public class CopyCommand implements Command ,ClipboardOwner{
 
     @Override
     public void execute() {
-        /*System.out.println("copiaa");
-        Context.getInstance().setSaved(false);
-        canvas.setCopiedShape(ss);*/
         System.out.println("execute");
-        Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();         //now i have selected shape to copy
+        Shape selectedShape = (Shape) canvas.getSelectionGrid().getSelectedShape();         //now i have selected shape to copy
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
-        clipboard.setContents(tr,canvas);
+        try {
+            TrasferableWrapper t2 = (TrasferableWrapper) tr.clone();
+            clipboard.setContents(t2,canvas);
+
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
