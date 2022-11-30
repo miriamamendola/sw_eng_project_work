@@ -1,7 +1,9 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
+import drawing_software.model.Drawing;
 
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -45,9 +47,8 @@ public class TrasferableWrapper implements Transferable ,Cloneable{
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-
-        TrasferableWrapper cloned = (TrasferableWrapper) super.clone();
-        return cloned;
+        TrasferableWrapper clone = (TrasferableWrapper)super.clone();
+        return clone;
     }
 
 

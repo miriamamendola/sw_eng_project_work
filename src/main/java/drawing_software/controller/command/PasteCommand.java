@@ -34,6 +34,7 @@ public class PasteCommand implements Command {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable tr = clipboard.getContents(this);
             Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
+            canvas.getDrawing().addDrawable((Drawable)copiedShape);
             copiedShape.setLocation(point);
             canvas.repaint();
 
