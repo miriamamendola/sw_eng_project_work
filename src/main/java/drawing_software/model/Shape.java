@@ -11,6 +11,10 @@ public interface Shape extends Drawable {
 
     void setLocation(Point2D point);
 
+    default void setLocation(double x, double y){
+        this.setLocation(new Point2D.Double(x,y));
+    }
+
     void setSize(Dimension size);
 
     Rectangle getBounds();
