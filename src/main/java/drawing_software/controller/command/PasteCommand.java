@@ -1,9 +1,6 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
-import drawing_software.model.DrawableEllipse;
-import drawing_software.model.DrawableLine;
-import drawing_software.model.DrawableRectangle;
 import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 
@@ -14,7 +11,6 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.geom.Point2D;
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 public class PasteCommand implements Command {
     private CanvasView canvas;
@@ -26,16 +22,15 @@ public class PasteCommand implements Command {
     }
     @Override
     public void execute() {
-        System.out.println("Sei nel command di paste");
-        DataFlavor dataFlavor = null;
         try {
-            dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType +
-                    ";class=\"" + Drawable.class.getName() + "\"");
+            DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable tr = clipboard.getContents(this);
             Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
-            canvas.getDrawing().addDrawable((Drawable)copiedShape);
+            String s = copiedShape.getClass().toString().substring(29);
             copiedShape.setLocation(point);
+            canvas.clearSelectedDrawable();
+            canvas.getDrawing().addDrawable(copiedShape);
             canvas.repaint();
 
         } catch (ClassNotFoundException e) {
