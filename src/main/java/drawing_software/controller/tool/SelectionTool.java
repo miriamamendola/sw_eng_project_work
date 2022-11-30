@@ -27,6 +27,7 @@ public class SelectionTool implements Tool {
             Drawable d = itr.next();
             Shape s = (Shape) d;
             if (s.contains(point)) {
+
                 canvas.setSelectionGrid(new SelectionGrid(d));
                 canvas.repaint();
                 found = true;

@@ -12,6 +12,10 @@ public class DrawableLine extends Line2D.Double implements Drawable {
     private Paint strokeColor;
     private static final int HIT_BOX_SIZE = 5;
 
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
     /**
      * Creates a line object whose properties will be set the input parameters' values.
      *

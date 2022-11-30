@@ -9,7 +9,16 @@ import java.util.Objects;
  */
 public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
     private Paint fillColor;
+
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
     private Paint strokeColor;
+
+    public Paint getFillColor() {
+        return fillColor;
+    }
 
     /**
      * Creates an ellipse in which the properties will be set to the input parameters' values.

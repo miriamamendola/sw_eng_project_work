@@ -78,5 +78,11 @@ public class DrawableRectangle extends Rectangle2D.Double implements Drawable {
         result = 31 * result + (strokeColor != null ? strokeColor.hashCode() : 0);
         return result;
     }
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+    public Paint getFillColor() {
+        return fillColor;
+    }
 }
 
