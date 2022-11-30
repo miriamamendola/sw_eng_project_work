@@ -37,7 +37,8 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                currentTool.mouseClicked(e);
+                currentTool.mouseLeftClicked(e);
+                ;
             }
 
             @Override

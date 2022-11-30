@@ -14,4 +14,6 @@ public interface Shape extends Drawable {
     void setSize(Dimension size);
 
     Rectangle getBounds();
+
+    Shape clone();
 }

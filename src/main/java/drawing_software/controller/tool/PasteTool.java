@@ -3,7 +3,6 @@ package drawing_software.controller.tool;
 
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.PasteCommand;
-import drawing_software.model.Drawable;
 import drawing_software.view.CanvasView;
 
 import java.awt.event.MouseEvent;
@@ -22,10 +21,10 @@ public class PasteTool implements Tool {
     }
 
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
+    public void mouseLeftClicked(MouseEvent mouseEvent) {
 
         Point2D p = mouseEvent.getPoint();
-        invoker.executeCommand(new PasteCommand(canvas,p));
+        invoker.executeCommand(new PasteCommand(canvas, p));
     }
 }
 

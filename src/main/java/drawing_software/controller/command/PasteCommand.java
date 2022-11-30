@@ -27,10 +27,11 @@ public class PasteCommand implements Command {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable tr = clipboard.getContents(this);
             Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
-            String s = copiedShape.getClass().toString().substring(29);
-            copiedShape.setLocation(point);
+            Shape copiedShape2 = copiedShape.clone();
+            System.out.println("wdfqwefwefg");
+            canvas.getDrawing().addDrawable(copiedShape2);
+            copiedShape2.setLocation(point);
             canvas.clearSelectedDrawable();
-            canvas.getDrawing().addDrawable(copiedShape);
             canvas.repaint();
 
         } catch (ClassNotFoundException e) {

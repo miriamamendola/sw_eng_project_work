@@ -104,5 +104,30 @@ public class DrawableRectangle extends Rectangle2D.Double implements Shape {
     public Rectangle getBounds() {
         return super.getBounds();
     }
+
+    @Override
+    public DrawableRectangle clone() {
+        DrawableRectangle clone = (DrawableRectangle) super.clone();
+        clone.setFillColor(this.fillColor);
+        clone.setStrokeColor(this.strokeColor);
+        clone.setFrame(this.getFrame());
+        return clone;
+    }
+
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(Paint strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public Paint getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(Paint fillColor) {
+        this.fillColor = fillColor;
+    }
 }
 

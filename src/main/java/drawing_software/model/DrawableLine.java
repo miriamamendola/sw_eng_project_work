@@ -112,4 +112,15 @@ public class DrawableLine extends Line2D.Double implements Shape {
         return super.getBounds();
     }
 
+    public void setStrokeColor(Paint strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    @Override
+    public DrawableLine clone() {
+        DrawableLine clone = (DrawableLine) super.clone();
+        clone.setStrokeColor(this.strokeColor);
+        clone.setLocation(this.getP1());
+        return clone;
+    }
 }

@@ -128,7 +128,7 @@ public class DrawableEllipse extends Ellipse2D.Double implements Shape,Cloneable
         DrawableEllipse clone = (DrawableEllipse) super.clone();
         clone.setFillColor(this.fillColor);
         clone.setStrokeColor(this.strokeColor);
-
+        clone.setFrame(this.getFrame());
         return clone;
     }
 }

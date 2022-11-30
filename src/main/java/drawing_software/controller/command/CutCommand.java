@@ -24,5 +24,4 @@ public class CutCommand implements Command {
         canvas.repaint();
     }
 
-
 }

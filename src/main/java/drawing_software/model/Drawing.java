@@ -40,8 +40,12 @@ public class Drawing implements Serializable, Iterable<Drawable> {
      * Allows to retrieve (and the remove) a Drawable object previously added to the data structure.
      * This DOES remove the Drawable shape from the structure.
      *
-     * @param d is the shape to be deleted from the drawing.
+     * @param s is the Shape to remove.
      */
+    public boolean removeDrawable(Shape s) {
+        return this.listDrawables.remove(s);
+    }
+
     public boolean removeDrawable(Drawable d) {
         return this.listDrawables.remove(d);
     }
@@ -49,6 +53,7 @@ public class Drawing implements Serializable, Iterable<Drawable> {
     /**
      * Allows to verify whether a Drawable shape is present inside the data structure
      * representing the drawing.
+     *
      * @param drawable is the shape which presence in the data structure is to be verified.
      */
     public boolean containsDrawable(Drawable drawable) {
