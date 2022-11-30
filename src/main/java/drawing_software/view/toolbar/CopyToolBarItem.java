@@ -16,7 +16,7 @@ public class CopyToolBarItem extends ToolbarItemFactory{
         super(canvasView,invoker);
     }
     public JButton itemCreate() {
-        URL url = getClass().getResource("/ellipse.png");
+        URL url = getClass().getResource("/copy.png");
         JButton copyButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         copyButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new CopyTool(canvasView, invoker)));
         copyButton.addActionListener(actionEven-> invoker.executeCommand(new CopyCommand(canvasView)));

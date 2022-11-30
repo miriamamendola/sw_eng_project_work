@@ -15,7 +15,7 @@ public class PasteToolBarItem extends ToolbarItemFactory{
         super(canvasView,invoker);
     }
     public JButton itemCreate() {
-        URL url = getClass().getResource("/rectangle.png");
+        URL url = getClass().getResource("/paste.png");
 
         JButton pasteButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         pasteButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new PasteTool(canvasView, invoker)));
