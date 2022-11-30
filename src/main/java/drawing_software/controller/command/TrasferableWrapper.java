@@ -38,12 +38,9 @@ public class TrasferableWrapper implements Transferable {
     @Override
     public Drawable getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
 
-        if (isDataFlavorSupported(flavor)) {
             System.out.println("seee");
             return this.selectedShape;
-        } else {
-            throw new UnsupportedFlavorException(dmselFlavor);
-        }
+
     }
 }
 

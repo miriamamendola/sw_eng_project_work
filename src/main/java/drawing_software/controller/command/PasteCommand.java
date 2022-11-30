@@ -39,10 +39,21 @@ public class PasteCommand implements Command {
         }*/
 
         //creare costruttore vuoto all'inizio
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        Object n = clipboard.getContents(this);
-        Drawable d = (Drawable) n;
-        System.out.println(d.toString());
+        try {
+            DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType +
+                            ";class=\"" + Drawable.class.getName() + "\"");
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            Transferable tr = clipboard.getContents(this);
+            System.out.println(tr.getTransferData(dataFlavor));
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedFlavorException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }
