@@ -46,32 +46,36 @@ public class SelectionTool implements Tool {
         if (!found) {
             canvas.clearSelectedDrawable();
             canvas.repaint();
+            selectedShape = null;
         }
 
     }
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        if(selectedShape==null) return;
-        oldShapeLocation = selectedShape.getBounds().getLocation();
-        prevMouse = mouseEvent.getPoint();
+        mouseClicked(mouseEvent);
+        if(selectedShape != null){
+            oldShapeLocation = selectedShape.getBounds().getLocation();
+            prevMouse = mouseEvent.getPoint();
+        }
     }
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
-        if(selectedShape==null) return;
+        if(selectedShape == null) return;
         int delta_x = (int) (mouseEvent.getX() - prevMouse.getX());
         int delta_y = (int) (mouseEvent.getY() - prevMouse.getY());
 
         selectedShape.setLocation(selectedShape.getBounds().getX() + delta_x, selectedShape.getBounds().getY() + delta_y);
-
+        canvas.clearSelectedDrawable();
+        canvas.setSelectionGrid(new SelectionGrid(selectedShape));
         prevMouse = mouseEvent.getPoint();
         canvas.repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if(selectedShape==null) return;
+        if(selectedShape == null) return;
         invoker.executeCommand(new MoveCommand(canvas, oldShapeLocation));
     }
 }
