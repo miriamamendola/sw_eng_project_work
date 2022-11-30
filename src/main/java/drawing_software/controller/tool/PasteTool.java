@@ -7,6 +7,7 @@ import drawing_software.model.Drawable;
 import drawing_software.view.CanvasView;
 
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 
 
 public class PasteTool implements Tool {
@@ -28,7 +29,8 @@ public class PasteTool implements Tool {
         Drawable cp = canvas.getCopiedShape();
         invoker.executeCommand(new PasteCommand(canvas, canvas.getCopiedShape()));
         canvas.repaint();*/
-        invoker.executeCommand(new PasteCommand(canvas));
+        Point2D p = mouseEvent.getPoint();
+        invoker.executeCommand(new PasteCommand(canvas,p));
     }
 }
 
