@@ -1,5 +1,6 @@
 package drawing_software.controller.tool;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -21,6 +22,10 @@ public interface Tool {
     }
 
     default void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    default void keyPressed(KeyEvent keyEvent) {
 
     }
 }

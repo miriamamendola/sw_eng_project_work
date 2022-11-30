@@ -1,19 +1,23 @@
 package drawing_software.controller.tool;
 
+import drawing_software.controller.command.Invoker;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.view.CanvasView;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
+    private Invoker invoker;
 
-    public SelectionTool(CanvasView canvas) {
+    public SelectionTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
+        this.invoker = invoker;
     }
 
     @Override
@@ -36,6 +40,20 @@ public class SelectionTool implements Tool {
             canvas.clearSelectedDrawable();
             canvas.repaint();
         }
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        System.out.println("a");
+        if (KeyEvent.VK_DELETE == keyEvent.getKeyChar() || KeyEvent.VK_DELETE == keyEvent.getKeyCode()) {
+            //canvas.getDrawing().removeDrawable(canvas.getSelectedDrawable());
+        }
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
 
     }
 }

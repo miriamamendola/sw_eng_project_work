@@ -9,6 +9,8 @@ import drawing_software.model.SelectionGrid;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -49,6 +51,13 @@ public class CanvasView extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 currentTool.mouseDragged(e);
+            }
+        });
+
+        this.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                currentTool.keyPressed(e);
             }
         });
     }

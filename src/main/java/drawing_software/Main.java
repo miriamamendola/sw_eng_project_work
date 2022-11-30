@@ -30,6 +30,7 @@ public class Main {
                 logger.setLevel(Level.ALL);
                 Context.getInstance().setSaved(true);
                 JFrame frame = FrameView.createView(appTitle);
+                frame.setFocusable(false);
                 frame.setSize(1280, 720);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 frame.setVisible(true);//making the frame visible

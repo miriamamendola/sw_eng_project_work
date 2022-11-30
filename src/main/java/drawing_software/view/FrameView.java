@@ -30,19 +30,24 @@ public class FrameView {
 
         String title = "untitled - " + appTitle;
         JFrame frame = new JFrame(title);
+        frame.setFocusable(false);
         frame.setBackground(new Color(whiteIntensity, whiteIntensity, whiteIntensity));
 
 
         CanvasView canvas = new CanvasView(invoker);
+        canvas.setFocusable(true);
         frame.add(canvas);
 
         JToolBar toolBar = createToolBar(canvas, invoker);
+        toolBar.setFocusable(false);
         frame.add(toolBar, BorderLayout.WEST);
 
         ColorPanel colorPanel = new ColorPanel(canvas);
+
         frame.add(colorPanel, BorderLayout.SOUTH);
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);
+        menuBar.setFocusable(false);
         frame.setJMenuBar(menuBar);
 
         URL url = FrameView.class.getResource("/icon.png");
@@ -90,17 +95,21 @@ public class FrameView {
 
     private static JMenuBar createMenuBar(CanvasView canvasView, Invoker invoker) {
         JMenuBar menuBar = new JMenuBar();
+        menuBar.setFocusable(false);
 
         JMenu fileMenu = new JMenu("File");
-
+        fileMenu.setFocusable(false);
 
         JMenuItem loadMenuItem = new LoadMenuItem(canvasView, invoker).createMenuItem();
+        loadMenuItem.setFocusable(false);
         fileMenu.add(loadMenuItem);
 
         JMenuItem saveMenuItem = new SaveMenuItem(canvasView, invoker).createMenuItem();
+        saveMenuItem.setFocusable(false);
         fileMenu.add(saveMenuItem);
 
         JMenuItem saveAsMenuItem = new SaveAsMenuItem(canvasView, invoker).createMenuItem();
+        saveAsMenuItem.setFocusable(false);
         fileMenu.add(saveAsMenuItem);
 
         menuBar.add(fileMenu);
@@ -111,18 +120,23 @@ public class FrameView {
 
     private static JToolBar createToolBar(CanvasView canvas, Invoker invoker) {
         JToolBar toolPanel = new JToolBar(JToolBar.VERTICAL);
+        toolPanel.setFocusable(false);
 
         BoxLayout layout = new BoxLayout(toolPanel, BoxLayout.PAGE_AXIS);
         toolPanel.setLayout(layout);
 
         toolPanel.setFloatable(false);
         JButton selectionButton = new SelectionToolbarItem(canvas, invoker).itemCreate();
+        selectionButton.setFocusable(false);
         toolPanel.add(selectionButton);
         JButton lineButton = new LineToolbarItem(canvas, invoker).itemCreate();
+        lineButton.setFocusable(false);
         toolPanel.add(lineButton);
         JButton rectangleButton = new RectangleToolbarItem(canvas, invoker).itemCreate();
+        rectangleButton.setFocusable(false);
         toolPanel.add(rectangleButton);
         JButton ellipseButton = new EllipseToolbarItem(canvas, invoker).itemCreate();
+        ellipseButton.setFocusable(false);
         toolPanel.add(ellipseButton);
 
         return toolPanel;
