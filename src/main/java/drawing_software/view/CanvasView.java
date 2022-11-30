@@ -33,7 +33,10 @@ public class CanvasView extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                currentTool.mouseClicked(e);
+                if (e.getButton() == MouseEvent.BUTTON1)
+                    currentTool.mouseLeftClicked(e);
+                else if (e.getButton() == MouseEvent.BUTTON3)
+                    currentTool.mouseRightClicked(e);
             }
 
             @Override

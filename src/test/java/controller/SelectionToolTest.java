@@ -34,7 +34,7 @@ public class SelectionToolTest {
         canvas.getDrawing().addDrawable(lineToTest);
         Point2D clickPoint = new Point2D.Double(0, 10);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mouseClicked(e);
+        selectionTool.mouseLeftClicked(e);
         DrawableLine s =  (DrawableLine) canvas.getSelectionGrid().getSelectedShape();
         assertEquals(s,lineToTest);
     }

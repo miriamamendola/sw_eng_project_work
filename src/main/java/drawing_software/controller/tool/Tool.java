@@ -21,7 +21,11 @@ public interface Tool {
 
     }
 
-    default void mouseClicked(MouseEvent mouseEvent) {
+    default void mouseLeftClicked(MouseEvent mouseEvent) {
+
+    }
+
+    default void mouseRightClicked(MouseEvent mouseEvent) {
 
     }
 
