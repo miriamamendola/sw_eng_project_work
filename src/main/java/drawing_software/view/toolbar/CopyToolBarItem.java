@@ -1,7 +1,6 @@
 package drawing_software.view.toolbar;
 
 
-import drawing_software.controller.command.CopyCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.CopyTool;
 import drawing_software.view.CanvasView;
@@ -19,8 +18,7 @@ public class CopyToolBarItem extends ToolbarItemFactory{
         URL url = getClass().getResource("/copy.png");
         JButton copyButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         copyButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new CopyTool(canvasView, invoker)));
-        copyButton.addActionListener(actionEven-> invoker.executeCommand(new CopyCommand(canvasView)));
-        copyButton.setEnabled(true);
+        //copyButton.addActionListener(actionEven-> invoker.executeCommand(new CopyCommand(canvasView)));
         return copyButton;
     }
 
