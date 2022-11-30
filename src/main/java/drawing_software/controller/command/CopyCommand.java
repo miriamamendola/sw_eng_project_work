@@ -26,7 +26,7 @@ public class CopyCommand implements Command ,ClipboardOwner{
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
         try {
-            TrasferableWrapper t2 = (TrasferableWrapper) tr.clone();
+            TrasferableWrapper t2 = (TrasferableWrapper) tr.getSelectedShape();
             clipboard.setContents(t2,canvas);
 
         } catch (CloneNotSupportedException e) {

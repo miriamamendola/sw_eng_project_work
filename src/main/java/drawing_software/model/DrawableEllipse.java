@@ -8,7 +8,15 @@ import java.util.Objects;
 /**
  * Defines the actual ellipse shape and it's properties.
  */
-public class DrawableEllipse extends Ellipse2D.Double implements Shape {
+public class DrawableEllipse extends Ellipse2D.Double implements Shape,Cloneable {
+    public void setFillColor(Paint fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public void setStrokeColor(Paint strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
     private Paint fillColor;
 
     public Paint getStrokeColor() {
@@ -113,5 +121,14 @@ public class DrawableEllipse extends Ellipse2D.Double implements Shape {
     @Override
     public Rectangle getBounds() {
         return super.getBounds();
+    }
+
+    @Override
+    public DrawableEllipse clone() {
+        DrawableEllipse clone = (DrawableEllipse) super.clone();
+        clone.setFillColor(this.fillColor);
+        clone.setStrokeColor(this.strokeColor);
+
+        return clone;
     }
 }
