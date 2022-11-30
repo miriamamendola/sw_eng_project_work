@@ -1,24 +1,26 @@
 package drawing_software.model;
 
 import java.awt.*;
+import drawing_software.model.Shape;
 
 /**
  * A shape per-se, allows to mark the selection of the selected shape.
  */
 public class SelectionGrid extends DrawableRectangle {
-    private Drawable selectedShape;
+    private Shape selectedShape;
     Stroke dashed = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
 
     /**
      * Allows to actually create the selection grid by calculating the dimensions of the selected shape and,
      * through them, define the width and height of the grid so that it just encompassed the selected shape.
      * When a fill color is not purposefully selected, the shape will be transparent on the inside.
-     * @param selectedDrawable is the selected shape that's intended to be highlighted.
+     *
+     * @param selectedShape is the selected shape that's intended to be highlighted.
      */
-    public SelectionGrid(Drawable selectedDrawable) {
-        super(null, Color.gray, ((Shape) selectedDrawable).getBounds().getX(), ((Shape) selectedDrawable).getBounds().getY());
-        this.setRect(((Shape) selectedDrawable).getBounds().getX() - 1, ((Shape) selectedDrawable).getBounds().getY() - 1, ((Shape) selectedDrawable).getBounds().getWidth() + 2, ((Shape) selectedDrawable).getBounds().getHeight() + 2);
-        this.selectedShape = selectedDrawable;
+    public SelectionGrid(Shape selectedShape) {
+        super(null, Color.gray, selectedShape.getBounds().getX(), selectedShape.getBounds().getY());
+        this.setRect(selectedShape.getBounds().getX() - 1, selectedShape.getBounds().getY() - 1, selectedShape.getBounds().getWidth() + 2, selectedShape.getBounds().getHeight() + 2);
+        this.selectedShape = selectedShape;
 
     }
 
@@ -41,11 +43,4 @@ public class SelectionGrid extends DrawableRectangle {
         return selectedShape;
     }
 
-    /**
-     * Setter method for the selectedShape property.
-     * @param selectedShape is the highlighted shape.
-     */
-    public void setSelectedShape(Drawable selectedShape) {
-        this.selectedShape = selectedShape;
-    }
 }

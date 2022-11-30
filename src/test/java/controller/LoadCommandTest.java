@@ -1,6 +1,7 @@
 package controller;
 
 import drawing_software.controller.command.Command;
+import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.LoadCommand;
 import drawing_software.controller.command.SaveCommand;
 import drawing_software.model.*;
@@ -28,10 +29,13 @@ public class LoadCommandTest {
 
     private Command loadCommand;
 
+    private Invoker invoker;
+
     @Before
     public void setUp() {
         JFrame frame = new JFrame();
-        canvas = new CanvasView();
+        invoker = new Invoker();
+        canvas = new CanvasView(invoker);
         frame.add(canvas);
 
         canvas.getDrawing().addDrawable(new DrawableRectangle(1, 1));
