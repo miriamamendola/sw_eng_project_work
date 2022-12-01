@@ -23,9 +23,9 @@ public class LineToolTest {
     @Before
     public void setUp() {
         JFrame frame = new JFrame();
-        canvas = new CanvasView();
-        frame.add(canvas);
         invoker = new Invoker();
+        canvas = new CanvasView(invoker);
+        frame.add(canvas);
         lineTool = new LineTool(canvas, invoker);
     }
 

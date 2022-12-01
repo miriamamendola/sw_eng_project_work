@@ -25,6 +25,7 @@ public class ColorPanel extends JPanel implements ActionListener {
         panel.setLayout(new FlowLayout());
         if (type == FILL) {
             fillButton = new ColorButton(null);
+            fillButton.setFocusable(false);
             panel.add(new JLabel("Fill: "));
             fillButton.setName("fill");
             fillButton.changeColor(canvas.getCurrentFillColor());
@@ -32,6 +33,7 @@ public class ColorPanel extends JPanel implements ActionListener {
             panel.add(fillButton);
         } else {
             strokeButton = new ColorButton(null);
+            strokeButton.setFocusable(false);
             panel.add(new JLabel("Stroke: "));
             strokeButton.setName("stroke");
             strokeButton.changeColor(canvas.getCurrentStrokeColor());

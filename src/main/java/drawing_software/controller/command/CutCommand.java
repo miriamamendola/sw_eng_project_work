@@ -5,15 +5,11 @@ import drawing_software.view.CanvasView;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.ClipboardOwner;
-import java.awt.datatransfer.Transferable;
 
-public class CopyCommand implements Command ,ClipboardOwner{
+public class CutCommand implements Command {
+    private CanvasView canvas;
 
-    private final CanvasView canvas;
-
-
-    public CopyCommand(CanvasView canvas) {
+    public CutCommand(CanvasView canvas) {
         this.canvas = canvas;
     }
 
@@ -22,14 +18,10 @@ public class CopyCommand implements Command ,ClipboardOwner{
         Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
+        canvas.getDrawing().removeDrawable(selectedShape);
         clipboard.setContents(tr, canvas);
-        canvas.getDrawing().addDrawable(selectedShape);
+        canvas.clearSelectedDrawable();
         canvas.repaint();
-
     }
 
-    @Override
-    public void lostOwnership(Clipboard clipboard, Transferable contents) {
-        System.out.println("ClipboardTest: Lost ownership");
-    }
 }

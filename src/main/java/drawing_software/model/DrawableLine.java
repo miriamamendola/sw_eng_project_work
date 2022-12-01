@@ -8,9 +8,13 @@ import java.util.Objects;
 /**
  * Defines the actual line shape and it's properties.
  */
-public class DrawableLine extends Line2D.Double implements Drawable {
+public class DrawableLine extends Line2D.Double implements Shape {
     private Paint strokeColor;
     private static final int HIT_BOX_SIZE = 5;
+
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
 
     /**
      * Creates a line object whose properties will be set the input parameters' values.
@@ -86,5 +90,37 @@ public class DrawableLine extends Line2D.Double implements Drawable {
         double boxY = point.getY() - HIT_BOX_SIZE / 2;
 
         return this.intersects(boxX, boxY, HIT_BOX_SIZE, HIT_BOX_SIZE);
+    }
+
+    @Override
+    public void setFrame(Point2D point, Dimension size) {
+        super.setLine(point, new Point2D.Double(point.getX()+size.getWidth(), point.getY() + size.getHeight()));
+    }
+
+    @Override
+    public void setLocation(Point2D point) {
+        this.setFrame(point, new Dimension((int) (getX2()-getX1()), (int)(getY2()-getY1())));
+    }
+
+    @Override
+    public void setSize(Dimension size) {
+        this.setFrame(this.getP1(), size);
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return super.getBounds();
+    }
+
+    public void setStrokeColor(Paint strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    @Override
+    public DrawableLine clone() {
+        DrawableLine clone = (DrawableLine) super.clone();
+        clone.setStrokeColor(this.strokeColor);
+        clone.setLocation(this.getP1());
+        return clone;
     }
 }

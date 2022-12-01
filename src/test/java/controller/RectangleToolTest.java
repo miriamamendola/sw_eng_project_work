@@ -23,9 +23,9 @@ public class RectangleToolTest {
     @Before
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
-        canvas = new CanvasView();
-        frame.add(canvas);
         invoker = new Invoker();
+        canvas = new CanvasView(invoker);
+        frame.add(canvas);
         rectangleTool = new RectangleTool(canvas, invoker);
     }
 

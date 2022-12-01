@@ -2,14 +2,32 @@ package drawing_software.model;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 import java.util.Objects;
 
 /**
  * Defines the actual ellipse shape and it's properties.
  */
-public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
+public class DrawableEllipse extends Ellipse2D.Double implements Shape,Cloneable {
+    public void setFillColor(Paint fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public void setStrokeColor(Paint strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
     private Paint fillColor;
+
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
     private Paint strokeColor;
+
+    public Paint getFillColor() {
+        return fillColor;
+    }
 
     /**
      * Creates an ellipse in which the properties will be set to the input parameters' values.
@@ -79,5 +97,38 @@ public class DrawableEllipse extends Ellipse2D.Double implements Drawable {
         result = 31 * result + (fillColor != null ? fillColor.hashCode() : 0);
         result = 31 * result + (strokeColor != null ? strokeColor.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public boolean contains(Point2D point) {
+        return super.contains(point);
+    }
+
+    @Override
+    public void setFrame(Point2D point, Dimension size) {
+        super.setFrame(point, size);
+    }
+
+    @Override
+    public void setLocation(Point2D point) {
+        this.setFrame(point, new Dimension((int) this.getWidth(), (int) this.getHeight()));
+    }
+
+    @Override
+    public void setSize(Dimension size) {
+        this.setFrame(new Point2D.Double(this.getX(), this.getY()), size);
+    }
+    @Override
+    public Rectangle getBounds() {
+        return super.getBounds();
+    }
+
+    @Override
+    public DrawableEllipse clone() {
+        DrawableEllipse clone = (DrawableEllipse) super.clone();
+        clone.setFillColor(this.fillColor);
+        clone.setStrokeColor(this.strokeColor);
+        clone.setFrame(this.getFrame());
+        return clone;
     }
 }

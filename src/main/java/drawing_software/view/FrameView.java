@@ -119,11 +119,19 @@ public class FrameView {
         toolPanel.add(rectangleButton);
         JButton ellipseButton = new EllipseToolbarItem(canvas, invoker).itemCreate();
         toolPanel.add(ellipseButton);
-        JButton copyButton =new CopyToolBarItem(canvas,invoker).itemCreate();
+        JButton copyButton = new CopyToolBarItem(canvas, invoker).itemCreate();
         toolPanel.add(copyButton);
-        JButton pasteButton= new PasteToolBarItem(canvas,invoker).itemCreate();
+        JButton pasteButton = new PasteToolBarItem(canvas, invoker).itemCreate();
         toolPanel.add(pasteButton);
+        JButton cutButton = new CutToolBarItem(canvas, invoker).itemCreate();
+        toolPanel.add(cutButton);
         return toolPanel;
     }
-
+    private static JPopupMenu createPopUpMenu (CanvasView canvas,Invoker invoker){
+        JPopupMenu popup = new JPopupMenu();
+        popup.add(new JMenuItem("Cut"));
+        popup.add(new JMenuItem("Copy"));
+        popup.add(new JMenuItem("Paste"));
+        return popup;
+    }
 }

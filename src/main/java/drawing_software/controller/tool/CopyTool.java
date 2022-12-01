@@ -2,14 +2,9 @@ package drawing_software.controller.tool;
 
 import drawing_software.controller.command.CopyCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.model.Drawable;
-import drawing_software.model.SelectionGrid;
 import drawing_software.view.CanvasView;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
-import java.util.Iterator;
 
 
 public class CopyTool implements Tool {
@@ -20,9 +15,11 @@ public class CopyTool implements Tool {
 
     public CopyTool(CanvasView canvasView, Invoker invoker) {
         this.canvasView = canvasView;
-        this.invoker= invoker;
+        this.invoker = invoker;
+        invoker.executeCommand(new CopyCommand(canvasView));
     }
-    @Override
+
+    /*@Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point2D point = mouseEvent.getPoint();
         boolean found = false;
@@ -49,5 +46,6 @@ public class CopyTool implements Tool {
             System.out.println("Nessuna figura selezionata");
             canvasView.repaint();
         }
-    }
+
+    }*/
 }

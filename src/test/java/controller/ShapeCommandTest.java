@@ -1,5 +1,6 @@
 package controller;
 
+import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.DrawableEllipse;
@@ -19,10 +20,13 @@ public class ShapeCommandTest {
     private Drawable shape;
     private CanvasView canvas;
 
+    private Invoker invoker;
+
     @Before
     public void setUp() {
         JFrame frame = new JFrame();
-        canvas = new CanvasView();
+        invoker = new Invoker();
+        canvas = new CanvasView(invoker);
         frame.add(canvas);
     }
 
