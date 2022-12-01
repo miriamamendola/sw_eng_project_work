@@ -39,7 +39,7 @@ public class SelectionGrid extends DrawableRectangle {
      * Getter method for the selectedShape property.
      * @return the actual selected shape.
      */
-    public Drawable getSelectedShape() {
+    public Shape getSelectedShape() {
         return selectedShape;
     }
 

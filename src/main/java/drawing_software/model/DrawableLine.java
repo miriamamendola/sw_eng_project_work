@@ -108,4 +108,14 @@ public class DrawableLine extends Line2D.Double implements Shape {
         return super.getBounds();
     }
 
+    @Override
+    public void setStrokeColor(Paint color) {
+        this.strokeColor = color;
+    }
+
+    @Override
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
 }

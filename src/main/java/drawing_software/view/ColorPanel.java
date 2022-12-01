@@ -1,5 +1,7 @@
 package drawing_software.view;
 
+import drawing_software.model.Shape;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,16 +66,30 @@ public class ColorPanel extends JPanel implements ActionListener {
         Color firstColor;
         if (source.getName().equals("fill")) {
             firstColor = canvas.getCurrentFillColor();
+            Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
+            if(canvas.getSelectionGrid() != null){
+                Shape s = canvas.getSelectionGrid().getSelectedShape();
+                source.changeColor((Color) s.getFillColor());
+                s.setFillColor(color);
+                canvas.repaint();
+            }else{
+                source.changeColor(color);
+                canvas.setCurrentFillColor(color);
+            }
         } else {
             firstColor = canvas.getCurrentStrokeColor();
-        }
-        Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
-        source.changeColor(color);
-        if (source.getName().equals("fill")) {
-            canvas.setCurrentFillColor(color);
-        } else {
-            canvas.setCurrentStrokeColor(color);
+            Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
+            if(canvas.getSelectionGrid() != null){
+                Shape s = canvas.getSelectionGrid().getSelectedShape();
+                source.changeColor((Color) s.getStrokeColor());
+                s.setStrokeColor(color);
+                canvas.repaint();
+            } else {
+                source.changeColor(color);
+                canvas.setCurrentStrokeColor(color);
+            }
         }
     }
+
 
 }

@@ -18,4 +18,13 @@ public interface Shape extends Drawable {
     void setSize(Dimension size);
 
     Rectangle getBounds();
+
+    void setStrokeColor(Paint color);
+
+    Paint getStrokeColor();
+
+    default void setFillColor(Paint color){}
+    default Paint getFillColor(){
+        return null;
+    }
 }
