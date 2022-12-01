@@ -31,7 +31,11 @@ public class SelectionTool implements Tool {
         while (itr.hasNext()) {
             Shape s = (Shape) itr.next();
             if (s.contains(point)) {
-                canvas.setSelectionGrid(new SelectionGrid(s));
+                SelectionGrid grid = new SelectionGrid(s);
+                canvas.setSelectionGrid(grid);
+                if (grid.getVertex().contains(point)) {
+                    System.out.println(grid.getVertex().getSelectedVertex());
+                }
                 canvas.repaint();
                 found = true;
                 break;
