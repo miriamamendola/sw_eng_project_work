@@ -17,12 +17,10 @@ public class PasteTool implements Tool {
     public PasteTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
-        canvas.repaint();
     }
 
     @Override
     public void mouseLeftClicked(MouseEvent mouseEvent) {
-
         Point2D p = mouseEvent.getPoint();
         invoker.executeCommand(new PasteCommand(canvas, p));
     }

@@ -158,6 +158,5 @@ public class CanvasView extends JPanel implements ClipboardOwner {
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         System.out.println("ClipboardTest: Lost ownership");
-        //may pass or not implemet
     }
 }

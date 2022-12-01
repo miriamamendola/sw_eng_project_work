@@ -16,7 +16,6 @@ public class CopyTool implements Tool {
     public CopyTool(CanvasView canvasView, Invoker invoker) {
         this.canvasView = canvasView;
         this.invoker = invoker;
-        System.out.println("Entrato in copyTool");
         invoker.executeCommand(new CopyCommand(canvasView));
     }
 

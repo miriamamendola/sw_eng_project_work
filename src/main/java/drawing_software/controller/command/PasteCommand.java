@@ -28,7 +28,6 @@ public class PasteCommand implements Command {
             Transferable tr = clipboard.getContents(this);
             Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
             Shape copiedShape2 = copiedShape.clone();
-            System.out.println("wdfqwefwefg");
             canvas.getDrawing().addDrawable(copiedShape2);
             copiedShape2.setLocation(point);
             canvas.clearSelectedDrawable();
