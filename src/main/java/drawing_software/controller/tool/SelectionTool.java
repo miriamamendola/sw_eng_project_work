@@ -87,7 +87,7 @@ public class SelectionTool implements Tool {
     }
 
     public void deleteShape() {
-        canvas.getDrawing().removeDrawable((Shape) canvas.getSelectionGrid().getSelectedShape());
+        canvas.getDrawing().removeDrawable(canvas.getSelectionGrid().getSelectedShape());
         canvas.clearSelectedDrawable();
         canvas.repaint();
     }
