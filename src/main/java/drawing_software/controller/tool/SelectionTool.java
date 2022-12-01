@@ -7,6 +7,7 @@ import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,9 +15,14 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.min;
+
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
     private Invoker invoker;
+
+
     public SelectionTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
@@ -25,28 +31,8 @@ public class SelectionTool implements Tool {
     @Override
     public void mouseLeftClicked(MouseEvent mouseEvent) {
 
-        Point2D point = mouseEvent.getPoint();
-        boolean found = false;
-        Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
-        while (itr.hasNext()) {
-            Shape s = (Shape) itr.next();
-            if (s.contains(point)) {
-                SelectionGrid grid = new SelectionGrid(s);
-                canvas.setSelectionGrid(grid);
-                if (grid.getVertex().contains(point)) {
-                    System.out.println(grid.getVertex().getSelectedVertex());
-                }
-                canvas.repaint();
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            canvas.clearSelectedDrawable();
-            canvas.repaint();
-        }
-
     }
+
 
     @Override
     public void mouseRightClicked(MouseEvent mouseEvent) {
@@ -80,6 +66,67 @@ public class SelectionTool implements Tool {
         popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
     }
 
+    @Override
+    public void mouseLeftPressed(MouseEvent mouseEvent) {
+
+        Point2D point = mouseEvent.getPoint();
+        boolean found = false;
+        Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
+        if (canvas.getSelectionGrid() == null) {
+            while (itr.hasNext()) {
+                Shape s = (Shape) itr.next();
+                if (s.contains(point)) {
+                    SelectionGrid grid = new SelectionGrid(s);
+                    canvas.setSelectionGrid(grid);
+
+                    canvas.repaint();
+                    found = true;
+                    break;
+                }
+
+            }
+            if (!found) {
+                canvas.clearSelectedDrawable();
+                canvas.repaint();
+            }
+        } else {
+            while (itr.hasNext()) {
+                Shape s = (Shape) itr.next();
+                if (s.contains(point) || canvas.getSelectionGrid().getVertex().contains(point)) {
+                    SelectionGrid grid = new SelectionGrid(s);
+                    canvas.setSelectionGrid(grid);
+                    if (canvas.getSelectionGrid().getVertex().contains(point)) {
+                        System.out.println(canvas.getSelectionGrid().getVertex().getSelectedVertex());
+                    }
+                    canvas.repaint();
+                    found = true;
+                    break;
+                }
+
+            }
+            if (!found) {
+                canvas.clearSelectedDrawable();
+                canvas.repaint();
+            }
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+        Shape s = canvas.getSelectionGrid().getVertex().getSelectedVertex();
+        if (s != null) {
+            Point2D startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY());
+            double x = min(startingPoint.getX(), mouseEvent.getX());
+            double y = min(startingPoint.getY(), mouseEvent.getY());
+            double width = abs(startingPoint.getX() - mouseEvent.getX());
+            double height = abs(startingPoint.getY() - mouseEvent.getY());
+
+            s.setFrame(startingPoint, new Dimension((int) width, (int) height));
+
+            canvas.repaint();
+        }
+
+    }
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {

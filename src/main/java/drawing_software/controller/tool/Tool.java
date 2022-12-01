@@ -9,7 +9,11 @@ import java.awt.event.MouseEvent;
  */
 public interface Tool {
 
-    default void mousePressed(MouseEvent mouseEvent) {
+    default void mouseLeftPressed(MouseEvent mouseEvent) {
+
+    }
+
+    default void mouseRightPressed(MouseEvent mouseEvent) {
 
     }
 
