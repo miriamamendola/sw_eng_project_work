@@ -6,7 +6,7 @@ import drawing_software.view.CanvasView;
 import java.awt.geom.Point2D;
 
 /**
- * Memorize the previous shape location.
+ * Memorize the previous shape location, modified in Selection tool.
  */
 public class MoveCommand implements Command {
 
