@@ -88,9 +88,11 @@ public class CopyCommandTest {
 
         DrawableEllipse ellipseToTest = new DrawableEllipse(0,0);       //create ellipse to test
         ellipseToTest.setFrame(0,0,10,10);
+        ellipseToTest.setFillColor(Color.white);
+        ellipseToTest.setStrokeColor(Color.black);
         canvas.getDrawing().addDrawable(ellipseToTest);                 //add ellipse into canvas
 
-        Point2D clickPoint = new Point2D.Double(0, 0);
+        Point2D clickPoint = new Point2D.Double(5, 5);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mouseLeftClicked(e);
         DrawableEllipse s =  (DrawableEllipse) canvas.getSelectionGrid().getSelectedShape();      //take selected figure
@@ -103,6 +105,8 @@ public class CopyCommandTest {
         DrawableEllipse copiedShape = (DrawableEllipse) tr.getTransferData(dataFlavor);
         assertEquals(s,copiedShape);
         assertEquals(s.getStrokeColor(),copiedShape.getStrokeColor());
-        assertEquals(s.getFillColor(),copiedShape.getFillColor());    }
+        assertEquals(s.getFillColor(),copiedShape.getFillColor());
+
+    }
 
 }
