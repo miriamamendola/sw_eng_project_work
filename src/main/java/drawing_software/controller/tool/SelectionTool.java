@@ -16,7 +16,15 @@ import java.util.Iterator;
 
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
-    private Invoker invoker;
+
+    private final Invoker invoker;
+
+    private Shape selectedShape;
+
+    private Point2D oldShapeLocation;
+
+    private Point2D prevMouse;
+
     public SelectionTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
@@ -31,7 +39,9 @@ public class SelectionTool implements Tool {
         while (itr.hasNext()) {
             Shape s = (Shape) itr.next();
             if (s.contains(point)) {
-                canvas.setSelectionGrid(new SelectionGrid(s));
+                this.selectedShape = s;
+                canvas.setSelectionGrid(new SelectionGrid(selectedShape));
+                prevMouse = mouseEvent.getPoint();
                 canvas.repaint();
                 found = true;
                 break;
@@ -40,8 +50,56 @@ public class SelectionTool implements Tool {
         if (!found) {
             canvas.clearSelectedDrawable();
             canvas.repaint();
+            selectedShape = null;
         }
 
+    }
+
+    /**
+     * When pressing the mouse, this method checks if the user is pressing a valid shape,
+     * then saves the current shape location and the  initial mouse position.
+     * @param mouseEvent the event to be processed
+     */
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+        mouseClicked(mouseEvent);
+        if(selectedShape != null){
+            oldShapeLocation = selectedShape.getBounds().getLocation();
+            prevMouse = mouseEvent.getPoint();
+        }
+    }
+
+    /**
+     * When dragging the mouse, this method checks if the user has pressed a valid shape,
+     * then moves the shape and the selection grid according to the movement of the user.
+     * The new position of the figure is given translating the location of the figure by a
+     * vector (delta_x, delta_y), which components are given by the difference between the
+     * coordinates between the current mouse position and the previous mouse position. The latter
+     * is updated at the end of the method.
+     * @param mouseEvent the event to be processed
+     */
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if(selectedShape == null) return;
+        int delta_x = (int) (mouseEvent.getX() - prevMouse.getX());
+        int delta_y = (int) (mouseEvent.getY() - prevMouse.getY());
+
+        selectedShape.setLocation(selectedShape.getBounds().getX() + delta_x, selectedShape.getBounds().getY() + delta_y);
+        canvas.clearSelectedDrawable();
+        canvas.setSelectionGrid(new SelectionGrid(selectedShape));
+        prevMouse = mouseEvent.getPoint();
+        canvas.repaint();
+    }
+
+    /**
+     * When releasing the mouse, this method actually executes the move command, a concrete command
+     * representing the update of the location of the figure.
+     * @param mouseEvent the event to be processed
+     */
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+        if(selectedShape == null) return;
+        invoker.executeCommand(new MoveCommand(canvas, oldShapeLocation));
     }
 
     @Override
