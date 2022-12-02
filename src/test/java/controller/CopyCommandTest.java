@@ -4,9 +4,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.controller.command.TrasferableWrapper;
 import drawing_software.controller.tool.SelectionTool;
-import drawing_software.model.Drawable;
-import drawing_software.model.DrawableLine;
-import drawing_software.model.DrawableRectangle;
+import drawing_software.model.*;
 import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 import org.junit.Before;
@@ -50,7 +48,7 @@ public class CopyCommandTest {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();             //get the clipboard
         TrasferableWrapper tr = new TrasferableWrapper(s);
         clipboard.setContents(tr, canvas);                                                  //add the figure to clipboard
-        //now i take value from clipboard and i check if the value insert is equals to value taken
+        //now i take value from clipboard and i check if the value inserted is equals to value taken
         DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
         Transferable taken = clipboard.getContents(this);
         //drawing_software.model.Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
@@ -63,42 +61,48 @@ public class CopyCommandTest {
 
     @Test
     public void testExecuteCopyRectangle() throws ClassNotFoundException {
-        Point2D start = new Point(0,0);
-        Point2D end = new Point(0,20);
-        DrawableRectangle rectangleToTest = new DrawableRectangle(start,end);       //create rectangle to test
-        canvas.getDrawing().addDrawable(lineToTest);                 //add rectangle into canvas
-        Point2D clickPoint = new Point2D.Double(0, 10);
+
+        DrawableRectangle rectangleToTest = new DrawableRectangle(50,50);       //create rectangle to test
+        rectangleToTest.setRect(50,50,50,50);
+        rectangleToTest.setFillColor(Color.white);
+        rectangleToTest.setStrokeColor(Color.black);
+        canvas.getDrawing().addDrawable(rectangleToTest);                 //add rectangle into canvas
+        Point2D clickPoint = new Point2D.Double(50, 50);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mouseLeftClicked(e);
-        DrawableLine s =  (DrawableLine) canvas.getSelectionGrid().getSelectedShape();      //take selected figure
+        DrawableRectangle s =  (DrawableRectangle) canvas.getSelectionGrid().getSelectedShape();      //take selected figure
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();             //get the clipboard
         TrasferableWrapper tr = new TrasferableWrapper(s);
         clipboard.setContents(tr, canvas);                                                  //add the figure to clipboard
-        //now i take value from clipboard and i check if the value insert is equals to value taken
+        //now i take value from clipboard and i check if the value inserted is equals to value taken
         DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
         Transferable taken = clipboard.getContents(this);
         //drawing_software.model.Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
-        DrawableLine copiedShape = (DrawableLine)tr.getTransferData(dataFlavor);
+        DrawableRectangle copiedShape = (DrawableRectangle) tr.getTransferData(dataFlavor);
         assertEquals(s,copiedShape);
         assertEquals(s.getStrokeColor(),copiedShape.getStrokeColor());
-    }  @Test
+        assertEquals(s.getFillColor(),copiedShape.getFillColor());
+    }
+    @Test
     public void testExecuteCopyELlipse() throws ClassNotFoundException {
-        Point2D start = new Point(0,0);
-        Point2D end = new Point(0,20);
-        DrawableLine lineToTest = new DrawableLine(start,end);       //create line to test
-        canvas.getDrawing().addDrawable(lineToTest);                 //add line into canvas
-        Point2D clickPoint = new Point2D.Double(0, 10);
+
+        DrawableEllipse ellipseToTest = new DrawableEllipse(0,0);       //create ellipse to test
+        ellipseToTest.setFrame(0,0,10,10);
+        canvas.getDrawing().addDrawable(ellipseToTest);                 //add ellipse into canvas
+
+        Point2D clickPoint = new Point2D.Double(0, 0);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mouseLeftClicked(e);
-        DrawableLine s =  (DrawableLine) canvas.getSelectionGrid().getSelectedShape();      //take selected figure
+        DrawableEllipse s =  (DrawableEllipse) canvas.getSelectionGrid().getSelectedShape();      //take selected figure
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();             //get the clipboard
         TrasferableWrapper tr = new TrasferableWrapper(s);
         clipboard.setContents(tr, canvas);                                                  //add the figure to clipboard
         //now i take value from clipboard and i check if the value insert is equals to value taken
         DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
         Transferable taken = clipboard.getContents(this);
-        drawing_software.model.Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
+        DrawableEllipse copiedShape = (DrawableEllipse) tr.getTransferData(dataFlavor);
         assertEquals(s,copiedShape);
-    }
+        assertEquals(s.getStrokeColor(),copiedShape.getStrokeColor());
+        assertEquals(s.getFillColor(),copiedShape.getFillColor());    }
 
 }
