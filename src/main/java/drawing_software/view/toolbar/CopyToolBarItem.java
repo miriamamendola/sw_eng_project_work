@@ -8,7 +8,9 @@ import drawing_software.view.CanvasView;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
-
+/**
+ * @return
+ */
 public class CopyToolBarItem extends ToolbarItemFactory{
 
     public  CopyToolBarItem(CanvasView canvasView, Invoker invoker){
