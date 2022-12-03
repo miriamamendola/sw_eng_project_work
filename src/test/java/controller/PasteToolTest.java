@@ -47,7 +47,7 @@ public class PasteToolTest {
     }
 
     @Test
-    public void testmouseLeftClicked() {
+    public void testMouseLeftClicked() {
         canvas.setSelectionGrid(sg);
         canvas.getSelectionGrid().setSelectedShape(dr);
         cc.execute();

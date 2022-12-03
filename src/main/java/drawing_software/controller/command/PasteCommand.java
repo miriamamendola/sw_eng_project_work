@@ -12,6 +12,10 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 
+/**
+ * Defines the Paste Command, which will ask the receiver (canvas) to paste the clipboard's Drawable at a point
+ * on the canvas defined by left click of the mouse (received as a parameter from the tool class).
+ */
 public class PasteCommand implements Command {
     private CanvasView canvas;
     private Point2D point;
@@ -20,6 +24,13 @@ public class PasteCommand implements Command {
         this.canvas = canvas;
         this.point = point;
     }
+
+    /**
+     * Allows to ask for the execution of the Paste Command: that means that the Drawable stored in the clipboard
+     * is obtained through the use of a new DataFlavor defined ON the Drawable class, then a copy of the Drawable is
+     * made so that the original Drawable is not moved from its position, and the copy is then asked to be drawn by the
+     * Canvas in a certain location received as a parameter.
+     */
     @Override
     public void execute() {
         try {
@@ -33,11 +44,7 @@ public class PasteCommand implements Command {
             canvas.clearSelectedDrawable();
             canvas.repaint();
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedFlavorException e) {
+        } catch (ClassNotFoundException | IOException | UnsupportedFlavorException e) {
             throw new RuntimeException(e);
         }
 
