@@ -1,6 +1,7 @@
 package drawing_software.controller.tool;
 
 import drawing_software.controller.command.Invoker;
+import drawing_software.controller.command.MoveCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
@@ -62,7 +63,7 @@ public class SelectionTool implements Tool {
      */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        mouseClicked(mouseEvent);
+        mouseLeftClicked(mouseEvent);
         if(selectedShape != null){
             oldShapeLocation = selectedShape.getBounds().getLocation();
             prevMouse = mouseEvent.getPoint();
