@@ -1,5 +1,6 @@
 package drawing_software.view.menu;
 
+import drawing_software.controller.command.CopyCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.view.CanvasView;
 
@@ -8,14 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 
-public class CopyMenuItem implements MenuItemFactory {
+public class CopyMenuItem extends MenuItemFactory {
 
-    private final CanvasView canvasView;
-    private final Invoker invoker;
-
-    public CopyMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public CopyMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -31,7 +28,7 @@ public class CopyMenuItem implements MenuItemFactory {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                invoker.executeCommand(new CopyCommand(canvas));
             }
         });
         return copyMenuItem;

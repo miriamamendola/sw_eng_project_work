@@ -1,5 +1,6 @@
 package drawing_software.view.menu;
 
+import drawing_software.controller.command.CutCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.view.CanvasView;
 
@@ -8,14 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 
-public class CutMenuItem implements MenuItemFactory {
+public class CutMenuItem extends MenuItemFactory {
 
-    private final CanvasView canvasView;
-    private final Invoker invoker;
-
-    public CutMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public CutMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -31,7 +28,7 @@ public class CutMenuItem implements MenuItemFactory {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                invoker.executeCommand(new CutCommand(canvas));
             }
         });
         return cutMenuItem;

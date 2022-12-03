@@ -5,6 +5,7 @@ import drawing_software.view.CanvasView;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
+import java.util.logging.Logger;
 
 /**
  * Defines the Cut Command, which will first store the selected Drawable in the clipboard and then will ask the
@@ -23,13 +24,17 @@ public class CutCommand implements Command {
      */
     @Override
     public void execute() {
-        Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
-        canvas.getDrawing().removeDrawable(selectedShape);
-        clipboard.setContents(tr, canvas);
-        canvas.clearSelectedDrawable();
-        canvas.repaint();
+        try {
+            Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
+            canvas.getDrawing().removeDrawable(selectedShape);
+            clipboard.setContents(tr, canvas);
+            canvas.clearSelectedDrawable();
+            canvas.repaint();
+        } catch (NullPointerException e) {
+            Logger.getLogger("root").warning("Cut command: no selected shape");
+        }
     }
 
 }

@@ -2,25 +2,17 @@ package drawing_software.view.menu;
 
 import drawing_software.controller.command.DeleteCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.controller.command.LoadCommand;
 import drawing_software.view.CanvasView;
-import drawing_software.view.FileDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.logging.Logger;
 
-public class DeleteMenuItem implements MenuItemFactory {
-    private final CanvasView canvasView;
-    private final Invoker invoker;
+public class DeleteMenuItem extends MenuItemFactory {
 
-    public DeleteMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public DeleteMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -36,7 +28,7 @@ public class DeleteMenuItem implements MenuItemFactory {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                invoker.executeCommand(new DeleteCommand(canvasView));
+                invoker.executeCommand(new DeleteCommand(canvas));
             }
         });
         return deleteMenuItem;

@@ -1,6 +1,7 @@
 package drawing_software.view.menu;
 
 import drawing_software.controller.command.Invoker;
+import drawing_software.controller.command.PasteCommand;
 import drawing_software.view.CanvasView;
 
 import javax.swing.*;
@@ -8,14 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 
-public class PasteMenuItem implements MenuItemFactory {
+public class PasteMenuItem extends MenuItemFactory {
 
-    private final CanvasView canvasView;
-    private final Invoker invoker;
-
-    public PasteMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public PasteMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -31,7 +28,7 @@ public class PasteMenuItem implements MenuItemFactory {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                invoker.executeCommand(new PasteCommand(canvas, canvas.getMousePosition()));
             }
         });
         return pasteMenuItem;

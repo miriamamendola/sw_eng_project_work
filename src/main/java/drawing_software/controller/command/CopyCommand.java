@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
+import java.util.logging.Logger;
 
 /**
  * Implements a ConcreteCommand class; in this case, the Command is the Copy command.
@@ -30,10 +31,15 @@ public class CopyCommand implements Command ,ClipboardOwner{
      */
     @Override
     public void execute() {
-        Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
-        clipboard.setContents(tr, canvas);
+        try {
+            Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
+            clipboard.setContents(tr, canvas);
+        } catch (NullPointerException e) {
+            Logger.getLogger("root").warning("Copy command: no selected shape");
+        }
+
     }
 
     /**

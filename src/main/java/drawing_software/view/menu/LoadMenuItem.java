@@ -12,14 +12,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
-public class LoadMenuItem implements MenuItemFactory {
+public class LoadMenuItem extends MenuItemFactory {
 
-    private final CanvasView canvasView;
-    private final Invoker invoker;
 
-    public LoadMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public LoadMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -38,12 +35,12 @@ public class LoadMenuItem implements MenuItemFactory {
                 File selectedFile = null;
 
                 try {
-                    selectedFile = fileDialog.show(canvasView, FileDialog.OPEN_DIALOG);
+                    selectedFile = fileDialog.show(canvas, FileDialog.OPEN_DIALOG);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger("root").info("No such file selected");
                 }
 
-                invoker.executeCommand(new LoadCommand(canvasView, selectedFile));
+                invoker.executeCommand(new LoadCommand(canvas, selectedFile));
             }
         });
         return loadMenuItem;

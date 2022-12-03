@@ -11,6 +11,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.geom.Point2D;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Defines the Paste Command, which will ask the receiver (canvas) to paste the clipboard's Drawable at a point
@@ -45,7 +46,10 @@ public class PasteCommand implements Command {
             canvas.repaint();
 
         } catch (ClassNotFoundException | IOException | UnsupportedFlavorException e) {
+            Logger.getLogger("root").warning("Clipboard error");
             throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            Logger.getLogger("root").warning("Paste command: no selected shape");
         }
 
     }

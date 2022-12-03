@@ -1,15 +1,17 @@
 package drawing_software.controller.tool;
 
 import drawing_software.controller.command.Invoker;
+import drawing_software.controller.command.MoveCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
+import drawing_software.view.menu.CopyMenuItem;
+import drawing_software.view.menu.CutMenuItem;
+import drawing_software.view.menu.DeleteMenuItem;
+import drawing_software.view.menu.PasteMenuItem;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
@@ -105,31 +107,20 @@ public class SelectionTool implements Tool {
     @Override
     public void mouseRightClicked(MouseEvent mouseEvent) {
         JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem cutMenuItem = new CutMenuItem(canvas, invoker).createMenuItem();
+        cutMenuItem.setFocusable(false);
+        popupMenu.add(cutMenuItem);
 
-
-        JMenuItem copyMenuItem = new JMenuItem("Copy");
-        copyMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        JMenuItem copyMenuItem = new CopyMenuItem(canvas, invoker).createMenuItem();
+        copyMenuItem.setFocusable(false);
         popupMenu.add(copyMenuItem);
-        JMenuItem pasteMenuItem = new JMenuItem("Paste");
-        pasteMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+        JMenuItem pasteMenuItem = new PasteMenuItem(canvas, invoker).createMenuItem();
+        pasteMenuItem.setFocusable(false);
         popupMenu.add(pasteMenuItem);
-        JMenuItem deleteMenuItem = new JMenuItem("Delete");
-        deleteMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invoker.executeCommand(new DeleteCommand(canvas));
-            }
-        });
+
+        JMenuItem deleteMenuItem = new DeleteMenuItem(canvas, invoker).createMenuItem();
+        deleteMenuItem.setFocusable(false);
         popupMenu.add(deleteMenuItem);
         popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
     }
