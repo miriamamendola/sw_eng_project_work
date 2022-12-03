@@ -11,7 +11,8 @@ import drawing_software.view.toolbar.SelectionToolbarItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -134,6 +135,7 @@ public class FrameView {
 
         return menuBar;
     }
+
 
     private static JToolBar createToolBar(CanvasView canvas, Invoker invoker) {
         JToolBar toolPanel = new JToolBar(JToolBar.VERTICAL);

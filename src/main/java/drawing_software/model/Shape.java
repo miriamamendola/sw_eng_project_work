@@ -44,4 +44,6 @@ public interface Shape extends Drawable {
      * @return the bounding rectangle of the shape
      */
     Rectangle getBounds();
+
+    Shape clone();
 }

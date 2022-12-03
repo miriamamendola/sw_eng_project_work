@@ -1,7 +1,6 @@
 package drawing_software.model;
 
 import java.awt.*;
-import drawing_software.model.Shape;
 
 /**
  * A shape per-se, allows to mark the selection of the selected shape.
@@ -37,10 +36,20 @@ public class SelectionGrid extends DrawableRectangle {
 
     /**
      * Getter method for the selectedShape property.
+     *
      * @return the actual selected shape.
      */
     public Drawable getSelectedShape() {
         return selectedShape;
+    }
+
+    /**
+     * Setter method for the selectedShape property.
+     *
+     * @param selectedShape is the shape to be set as selected on the canvas.
+     */
+    public void setSelectedShape(Shape selectedShape) {
+        this.selectedShape = selectedShape;
     }
 
 }

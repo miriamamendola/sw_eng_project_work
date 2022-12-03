@@ -13,11 +13,11 @@ public abstract class ToolbarItemFactory {
 
     protected final static int ICON_SIZE = 32;
 
-    protected final CanvasView canvasView;
+    protected final CanvasView canvas;
     protected final Invoker invoker;
 
-    public ToolbarItemFactory(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
+    public ToolbarItemFactory(CanvasView canvas, Invoker invoker) {
+        this.canvas = canvas;
         this.invoker = invoker;
     }
 

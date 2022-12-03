@@ -21,7 +21,7 @@ public class DrawingTest {
     @Test
     public void testAddDrawable() {
         d.addDrawable(dr);
-        DrawableRectangle d2 = (DrawableRectangle) d.removeDrawable(0);
+        DrawableRectangle d2 = (DrawableRectangle) d.getDrawable(0);
         assertEquals(d2, dr);
     }
 
@@ -30,6 +30,13 @@ public class DrawingTest {
         d.addDrawable(dr);
         DrawableRectangle d3 = (DrawableRectangle) d.getDrawable(0);
         assertEquals(d3, dr);
+    }
+
+    @Test
+    public void testRemoveDrawable() {
+        d.addDrawable(dr);
+        //DrawableLine dl = new DrawableLine(Color.black, new Point2D.Double(0,0), new Point2D.Double(30, 30));
+        assertTrue(d.removeDrawable(dr));
     }
 
     @Test

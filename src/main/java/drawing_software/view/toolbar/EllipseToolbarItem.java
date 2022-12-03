@@ -10,8 +10,8 @@ import java.net.URL;
 
 public class EllipseToolbarItem extends ToolbarItemFactory {
 
-    public EllipseToolbarItem(CanvasView canvasView, Invoker invoker) {
-        super(canvasView, invoker);
+    public EllipseToolbarItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     /**
@@ -21,7 +21,7 @@ public class EllipseToolbarItem extends ToolbarItemFactory {
     public JToggleButton itemCreate() {
         URL url = getClass().getResource("/ellipse.png");
         JToggleButton cursorButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
-        cursorButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new EllipseTool(canvasView, invoker)));
+        cursorButton.addActionListener(actionEvent -> canvas.setCurrentTool(new EllipseTool(canvas, invoker)));
         return cursorButton;
     }
 }

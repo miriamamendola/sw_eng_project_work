@@ -9,12 +9,13 @@ import drawing_software.model.SelectionGrid;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class CanvasView extends JPanel {
+public class CanvasView extends JPanel implements ClipboardOwner {
 
     private Drawing drawing;
     private Drawable dummyDrawable;
@@ -26,17 +27,18 @@ public class CanvasView extends JPanel {
 
     private SelectionGrid selectionGrid;
 
+    private Drawable copiedShape;
+
 
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
-        currentTool = new SelectionTool(this, invoker);
+        currentTool = new SelectionTool(this,invoker);
         this.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1)
-                    currentTool.mouseLeftClicked(e);
-                else if (e.getButton() == MouseEvent.BUTTON3)
-                    currentTool.mouseRightClicked(e);
+                currentTool.mouseLeftClicked(e);
+                ;
             }
 
             @Override
@@ -54,13 +56,6 @@ public class CanvasView extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 currentTool.mouseDragged(e);
-            }
-        });
-
-        this.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                currentTool.keyPressed(e);
             }
         });
     }
@@ -101,6 +96,10 @@ public class CanvasView extends JPanel {
         this.selectionGrid = null;
     }
 
+    public void clearCopiedShape() {
+        this.copiedShape = null;
+    }
+
     public Tool getCurrentTool() {
         return currentTool;
     }
@@ -136,6 +135,8 @@ public class CanvasView extends JPanel {
         g2d.setStroke(new BasicStroke(1));
 
         for (Drawable d : this.drawing) {
+            //System.out.println("TROVATO");
+            //System.out.println(d.toString());
             d.draw(g2d);
         }
 
@@ -148,4 +149,16 @@ public class CanvasView extends JPanel {
         }
     }
 
+    public Drawable getCopiedShape() {
+        return copiedShape;
+    }
+
+    public void setCopiedShape(Drawable copiedShape) {
+        this.copiedShape = copiedShape;
+    }
+
+    @Override
+    public void lostOwnership(Clipboard clipboard, Transferable contents) {
+        System.out.println("ClipboardTest: Lost ownership");
+    }
 }

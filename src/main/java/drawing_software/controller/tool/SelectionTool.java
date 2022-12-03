@@ -1,15 +1,12 @@
 package drawing_software.controller.tool;
 
-import drawing_software.controller.command.DeleteCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.controller.command.MoveCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
