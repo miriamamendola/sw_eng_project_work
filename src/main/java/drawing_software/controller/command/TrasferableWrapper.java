@@ -5,13 +5,16 @@ import drawing_software.model.Drawable;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
+/**
+ * Allows to wrap the Drawable intended to be cut or copied so that the setContents()
+ * method for the clipboard will accept it as an input parameter.
+ */
 public class TrasferableWrapper implements Transferable {
+    private Drawable selectedShape;
+
     public TrasferableWrapper(Drawable selectedShape) {
         this.selectedShape = selectedShape;
     }
-
-    private Drawable selectedShape;
-    private static DataFlavor dmselFlavor = new DataFlavor(TrasferableWrapper.class, "Test data flavor");
 
     @Override
     public DataFlavor[] getTransferDataFlavors() {

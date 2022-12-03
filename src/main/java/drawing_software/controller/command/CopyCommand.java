@@ -23,9 +23,6 @@ public class CopyCommand implements Command ,ClipboardOwner{
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
         clipboard.setContents(tr, canvas);
-        canvas.getDrawing().addDrawable(selectedShape);
-        canvas.repaint();
-
     }
 
     @Override
