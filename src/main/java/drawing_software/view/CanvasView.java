@@ -133,6 +133,8 @@ public class CanvasView extends JPanel {
 
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 
+        g2d.setStroke(new BasicStroke(1));
+
         for (Drawable d : this.drawing) {
             d.draw(g2d);
         }

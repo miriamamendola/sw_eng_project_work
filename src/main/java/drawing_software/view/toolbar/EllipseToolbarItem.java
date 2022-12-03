@@ -18,9 +18,9 @@ public class EllipseToolbarItem extends ToolbarItemFactory {
      * @return
      */
     @Override
-    public JButton itemCreate() {
+    public JToggleButton itemCreate() {
         URL url = getClass().getResource("/ellipse.png");
-        JButton cursorButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
+        JToggleButton cursorButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         cursorButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new EllipseTool(canvasView, invoker)));
         return cursorButton;
     }

@@ -44,7 +44,6 @@ public class DrawableLine extends Line2D.Double implements Shape {
     @Override
     public void draw(Graphics2D g2d) {
         g2d.setPaint(strokeColor);
-        g2d.setStroke(new BasicStroke(1));
         g2d.draw(this);
     }
 

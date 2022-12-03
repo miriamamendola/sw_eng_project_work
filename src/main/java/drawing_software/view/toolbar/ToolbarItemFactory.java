@@ -21,5 +21,5 @@ public abstract class ToolbarItemFactory {
         this.invoker = invoker;
     }
 
-    public abstract JButton itemCreate();
+    public abstract JToggleButton itemCreate();
 }

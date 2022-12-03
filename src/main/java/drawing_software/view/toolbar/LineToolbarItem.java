@@ -18,9 +18,9 @@ public class LineToolbarItem extends ToolbarItemFactory {
      * @return
      */
     @Override
-    public JButton itemCreate() {
+    public JToggleButton itemCreate() {
         URL url = getClass().getResource("/line.png");
-        JButton lineButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
+        JToggleButton lineButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         lineButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new LineTool(canvasView, invoker)));
         return lineButton;
     }

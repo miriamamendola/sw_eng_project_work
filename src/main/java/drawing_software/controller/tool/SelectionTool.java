@@ -1,5 +1,6 @@
 package drawing_software.controller.tool;
 
+import drawing_software.controller.command.DeleteCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.MoveCommand;
 import drawing_software.model.Drawable;
@@ -8,6 +9,7 @@ import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -128,26 +130,11 @@ public class SelectionTool implements Tool {
         deleteMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteShape();
+                invoker.executeCommand(new DeleteCommand(canvas));
             }
         });
         popupMenu.add(deleteMenuItem);
         popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
     }
 
-
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-        System.out.println("a");
-        if (KeyEvent.VK_DELETE == keyEvent.getKeyChar() || KeyEvent.VK_DELETE == keyEvent.getKeyCode()) {
-            deleteShape();
-        }
-
-    }
-
-    public void deleteShape() {
-        canvas.getDrawing().removeDrawable((Shape) canvas.getSelectionGrid().getSelectedShape());
-        canvas.clearSelectedDrawable();
-        canvas.repaint();
-    }
 }

@@ -18,9 +18,9 @@ public class RectangleToolbarItem extends ToolbarItemFactory {
      * @return
      */
     @Override
-    public JButton itemCreate() {
+    public JToggleButton itemCreate() {
         URL url = getClass().getResource("/rectangle.png");
-        JButton rectangleButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
+        JToggleButton rectangleButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
         rectangleButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new RectangleTool(canvasView, invoker)));
         return rectangleButton;
     }
