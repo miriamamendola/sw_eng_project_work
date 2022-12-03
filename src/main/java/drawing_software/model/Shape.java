@@ -46,4 +46,13 @@ public interface Shape extends Drawable {
     Rectangle getBounds();
 
     Shape clone();
+
+    void setStrokeColor(Paint color);
+
+    Paint getStrokeColor();
+
+    default void setFillColor(Paint color){}
+    default Paint getFillColor(){
+        return null;
+    }
 }

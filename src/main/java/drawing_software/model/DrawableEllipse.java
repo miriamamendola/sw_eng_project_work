@@ -8,26 +8,9 @@ import java.util.Objects;
 /**
  * Defines the actual ellipse shape and it's properties.
  */
-public class DrawableEllipse extends Ellipse2D.Double implements Shape,Cloneable {
-    public void setFillColor(Paint fillColor) {
-        this.fillColor = fillColor;
-    }
-
-    public void setStrokeColor(Paint strokeColor) {
-        this.strokeColor = strokeColor;
-    }
-
+public class DrawableEllipse extends Ellipse2D.Double implements Shape {
     private Paint fillColor;
-
-    public Paint getStrokeColor() {
-        return strokeColor;
-    }
-
     private Paint strokeColor;
-
-    public Paint getFillColor() {
-        return fillColor;
-    }
 
     /**
      * Creates an ellipse in which the properties will be set to the input parameters' values.
@@ -121,6 +104,27 @@ public class DrawableEllipse extends Ellipse2D.Double implements Shape,Cloneable
     @Override
     public Rectangle getBounds() {
         return super.getBounds();
+    }
+
+    @Override
+    public void setStrokeColor(Paint color) {
+        this.strokeColor = color;
+    }
+
+    @Override
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
+
+    @Override
+    public void setFillColor(Paint color) {
+        this.fillColor = color;
+    }
+
+    @Override
+    public Paint getFillColor() {
+        return fillColor;
     }
 
     @Override

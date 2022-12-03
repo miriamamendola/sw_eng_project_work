@@ -3,6 +3,8 @@ package drawing_software.view;
 import drawing_software.Context;
 import drawing_software.Main;
 import drawing_software.controller.command.Invoker;
+import drawing_software.view.colors.FillPanel;
+import drawing_software.view.colors.StrokePanel;
 import drawing_software.view.menu.*;
 import drawing_software.view.toolbar.EllipseToolbarItem;
 import drawing_software.view.toolbar.LineToolbarItem;
@@ -40,8 +42,9 @@ public class FrameView {
         toolBar.setFocusable(false);
         frame.add(toolBar, BorderLayout.WEST);
 
-        ColorPanel colorPanel = new ColorPanel(canvas);
-
+        JPanel colorPanel = new JPanel();
+        colorPanel.add(new FillPanel(canvas).createPanel());
+        colorPanel.add(new StrokePanel(canvas).createPanel());
         frame.add(colorPanel, BorderLayout.SOUTH);
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);

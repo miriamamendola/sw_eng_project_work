@@ -12,10 +12,6 @@ public class DrawableLine extends Line2D.Double implements Shape {
     private Paint strokeColor;
     private static final int HIT_BOX_SIZE = 5;
 
-    public Paint getStrokeColor() {
-        return strokeColor;
-    }
-
     /**
      * Creates a line object whose properties will be set the input parameters' values.
      *
@@ -111,10 +107,6 @@ public class DrawableLine extends Line2D.Double implements Shape {
         return super.getBounds();
     }
 
-    public void setStrokeColor(Paint strokeColor) {
-        this.strokeColor = strokeColor;
-    }
-
     @Override
     public DrawableLine clone() {
         DrawableLine clone = (DrawableLine) super.clone();
@@ -122,4 +114,14 @@ public class DrawableLine extends Line2D.Double implements Shape {
         clone.setLocation(this.getP1());
         return clone;
     }
+    @Override
+    public void setStrokeColor(Paint color) {
+        this.strokeColor = color;
+    }
+
+    @Override
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
 }
