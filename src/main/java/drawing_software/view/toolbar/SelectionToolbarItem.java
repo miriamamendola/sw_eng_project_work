@@ -20,8 +20,10 @@ public class SelectionToolbarItem extends ToolbarItemFactory {
     @Override
     public JToggleButton itemCreate() {
         URL url = getClass().getResource("/cursor.png");
-        JToggleButton cursorButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
-        cursorButton.addActionListener(actionEvent -> canvas.setCurrentTool(new SelectionTool(canvas, invoker)));
-        return cursorButton;
+        JToggleButton selectionButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
+        selectionButton.addActionListener(actionEvent -> {
+            canvas.setCurrentTool(new SelectionTool(canvas, invoker));
+        });
+        return selectionButton;
     }
 }

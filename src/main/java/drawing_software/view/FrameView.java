@@ -45,7 +45,13 @@ public class FrameView {
         JPanel colorPanel = new JPanel();
         colorPanel.add(new FillPanel(canvas).createPanel());
         colorPanel.add(new StrokePanel(canvas).createPanel());
+        colorPanel.add(Box.createHorizontalStrut(50));
+        JCheckBox scale = new JCheckBox("Scale");
+        scale.setVisible(false);
+        colorPanel.add(scale);
+
         frame.add(colorPanel, BorderLayout.SOUTH);
+
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);
         menuBar.setFocusable(false);
