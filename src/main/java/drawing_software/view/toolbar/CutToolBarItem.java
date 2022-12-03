@@ -9,12 +9,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
+/**
+ * Defines the behaviour of the Cut button that is present on the toolbar.
+ */
 public class CutToolBarItem extends ToolbarItemFactory {
 
     public CutToolBarItem(CanvasView canvasView, Invoker invoker) {
         super(canvasView, invoker);
     }
 
+    /**
+     * This method allows defines the button's behaviour: that is, a listener is set on the button which will, when
+     * prompted, set the state of the canvas to CutTool.
+     *
+     * @return is the button on which the listener has been added.
+     */
     public JButton itemCreate() {
         URL url = getClass().getResource("/scissors.png");
 
