@@ -10,18 +10,18 @@ import java.net.URL;
 
 public class LineToolbarItem extends ToolbarItemFactory {
 
-    public LineToolbarItem(CanvasView canvasView, Invoker invoker) {
-        super(canvasView, invoker);
+    public LineToolbarItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     /**
      * @return
      */
     @Override
-    public JButton itemCreate() {
+    public JToggleButton itemCreate() {
         URL url = getClass().getResource("/line.png");
-        JButton lineButton = new JButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
-        lineButton.addActionListener(actionEvent -> canvasView.setCurrentTool(new LineTool(canvasView, invoker)));
+        JToggleButton lineButton = new JToggleButton(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH)));
+        lineButton.addActionListener(actionEvent -> canvas.setCurrentTool(new LineTool(canvas, invoker)));
         return lineButton;
     }
 }

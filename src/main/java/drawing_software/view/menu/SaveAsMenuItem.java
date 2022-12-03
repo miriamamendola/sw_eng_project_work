@@ -13,14 +13,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
-public class SaveAsMenuItem implements MenuItemFactory {
+public class SaveAsMenuItem extends MenuItemFactory {
 
-    private final CanvasView canvasView;
-    private final Invoker invoker;
 
-    public SaveAsMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public SaveAsMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -41,14 +38,14 @@ public class SaveAsMenuItem implements MenuItemFactory {
                 File selectedFile;
 
                 try {
-                    selectedFile = fileDialog.show(canvasView, FileDialog.SAVE_DIALOG);
+                    selectedFile = fileDialog.show(canvas, FileDialog.SAVE_DIALOG);
                     if (selectedFile.exists()) {
                         String message = "Are you sure you want to overwrite " + selectedFile.getName() + " ? ";
 
                         int confirmed = JOptionPane.showConfirmDialog(null, message, Main.appTitle, JOptionPane.YES_NO_OPTION);
 
                         if (confirmed == JOptionPane.YES_OPTION) {
-                            invoker.executeCommand(new SaveCommand(canvasView, selectedFile));
+                            invoker.executeCommand(new SaveCommand(canvas, selectedFile));
                         }
                     }
                 } catch (FileNotFoundException ex) {

@@ -4,6 +4,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
+import drawing_software.model.Vertex;
 import drawing_software.view.CanvasView;
 
 import javax.swing.*;
@@ -72,6 +73,7 @@ public class SelectionTool implements Tool {
         Point2D point = mouseEvent.getPoint();
         boolean found = false;
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
+
         if (canvas.getSelectionGrid() == null) {
             while (itr.hasNext()) {
                 Shape s = (Shape) itr.next();
@@ -114,16 +116,28 @@ public class SelectionTool implements Tool {
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
         Shape s = canvas.getSelectionGrid().getVertex().getSelectedVertex();
+        Vertex v = canvas.getSelectionGrid().getVertex();
         if (s != null) {
-            Point2D startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY());
+            Point2D startingPoint = new Point2D.Double(0, 0);
+            if (v.getSelectedVertex() == v.getUpLeft()) {
+                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX() + canvas.getSelectionGrid().getWidth(), canvas.getSelectionGrid().getY() + canvas.getSelectionGrid().getHeight());
+            } else if (v.getSelectedVertex() == v.getUpRight()) {
+                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY() + canvas.getSelectionGrid().getHeight());
+            } else if (v.getSelectedVertex() == v.getBottomLeft()) {
+                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX() + canvas.getSelectionGrid().getWidth(), canvas.getSelectionGrid().getY());
+            } else if (v.getSelectedVertex() == v.getBottomRight()) {
+                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY());
+            }
             double x = min(startingPoint.getX(), mouseEvent.getX());
             double y = min(startingPoint.getY(), mouseEvent.getY());
             double width = abs(startingPoint.getX() - mouseEvent.getX());
             double height = abs(startingPoint.getY() - mouseEvent.getY());
-
-            s.setFrame(startingPoint, new Dimension((int) width, (int) height));
+            Shape shape = canvas.getSelectionGrid().getSelectedShape();
+            shape.setFrame(new Point2D.Double(x, y), new Dimension((int) width, (int) height));
+            canvas.getSelectionGrid().setFrame(new Point2D.Double(x, y), new Dimension((int) width, (int) height));
 
             canvas.repaint();
+
         }
 
     }

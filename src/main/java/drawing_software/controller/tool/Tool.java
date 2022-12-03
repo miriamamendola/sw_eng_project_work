@@ -36,4 +36,5 @@ public interface Tool {
     default void keyPressed(KeyEvent keyEvent) {
 
     }
+
 }

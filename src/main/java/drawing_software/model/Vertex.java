@@ -114,4 +114,6 @@ public class Vertex {
     public DrawableRectangle getSelectedVertex() {
         return selectedVertex;
     }
+
+
 }

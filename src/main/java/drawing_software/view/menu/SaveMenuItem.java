@@ -13,14 +13,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
-public class SaveMenuItem implements MenuItemFactory, ActionListener {
+public class SaveMenuItem extends MenuItemFactory implements ActionListener {
 
-    private final CanvasView canvasView;
-    private final Invoker invoker;
 
-    public SaveMenuItem(CanvasView canvasView, Invoker invoker) {
-        this.canvasView = canvasView;
-        this.invoker = invoker;
+    public SaveMenuItem(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -43,13 +40,13 @@ public class SaveMenuItem implements MenuItemFactory, ActionListener {
         if (selectedFile == null) {
             FileDialog fileDialog = new FileDialog();
             try {
-                selectedFile = fileDialog.show(canvasView, FileDialog.SAVE_DIALOG);
+                selectedFile = fileDialog.show(canvas, FileDialog.SAVE_DIALOG);
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger("root").info("No such file selected");
             }
         }
-        invoker.executeCommand(new SaveCommand(canvasView, selectedFile));
+        invoker.executeCommand(new SaveCommand(canvas, selectedFile));
 
     }
 }

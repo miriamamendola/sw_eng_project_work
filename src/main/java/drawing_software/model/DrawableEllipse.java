@@ -101,8 +101,39 @@ public class DrawableEllipse extends Ellipse2D.Double implements Shape {
     public void setSize(Dimension size) {
         this.setFrame(new Point2D.Double(this.getX(), this.getY()), size);
     }
+
     @Override
     public Rectangle getBounds() {
         return super.getBounds();
+    }
+
+    @Override
+    public void setStrokeColor(Paint color) {
+        this.strokeColor = color;
+    }
+
+    @Override
+    public Paint getStrokeColor() {
+        return strokeColor;
+    }
+
+
+    @Override
+    public void setFillColor(Paint color) {
+        this.fillColor = color;
+    }
+
+    @Override
+    public Paint getFillColor() {
+        return fillColor;
+    }
+
+    @Override
+    public DrawableEllipse clone() {
+        DrawableEllipse clone = (DrawableEllipse) super.clone();
+        clone.setFillColor(this.fillColor);
+        clone.setStrokeColor(this.strokeColor);
+        clone.setFrame(this.getFrame());
+        return clone;
     }
 }

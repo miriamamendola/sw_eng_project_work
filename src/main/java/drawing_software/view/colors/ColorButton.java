@@ -1,4 +1,4 @@
-package drawing_software.view;
+package drawing_software.view.colors;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;

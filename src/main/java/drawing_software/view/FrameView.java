@@ -3,9 +3,9 @@ package drawing_software.view;
 import drawing_software.Context;
 import drawing_software.Main;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.menu.LoadMenuItem;
-import drawing_software.view.menu.SaveAsMenuItem;
-import drawing_software.view.menu.SaveMenuItem;
+import drawing_software.view.colors.FillPanel;
+import drawing_software.view.colors.StrokePanel;
+import drawing_software.view.menu.*;
 import drawing_software.view.toolbar.EllipseToolbarItem;
 import drawing_software.view.toolbar.LineToolbarItem;
 import drawing_software.view.toolbar.RectangleToolbarItem;
@@ -42,8 +42,9 @@ public class FrameView {
         toolBar.setFocusable(false);
         frame.add(toolBar, BorderLayout.WEST);
 
-        ColorPanel colorPanel = new ColorPanel(canvas);
-
+        JPanel colorPanel = new JPanel();
+        colorPanel.add(new FillPanel(canvas).createPanel());
+        colorPanel.add(new StrokePanel(canvas).createPanel());
         frame.add(colorPanel, BorderLayout.SOUTH);
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);
@@ -114,6 +115,27 @@ public class FrameView {
 
         menuBar.add(fileMenu);
 
+        JMenu editMenu = new JMenu("Edit");
+        editMenu.setFocusable(false);
+
+        JMenuItem cutMenuItem = new CutMenuItem(canvasView, invoker).createMenuItem();
+        cutMenuItem.setFocusable(false);
+        editMenu.add(cutMenuItem);
+
+        JMenuItem copyMenuItem = new CopyMenuItem(canvasView, invoker).createMenuItem();
+        copyMenuItem.setFocusable(false);
+        editMenu.add(copyMenuItem);
+
+        JMenuItem pasteMenuItem = new PasteMenuItem(canvasView, invoker).createMenuItem();
+        pasteMenuItem.setFocusable(false);
+        editMenu.add(pasteMenuItem);
+
+        JMenuItem deleteMenuItem = new DeleteMenuItem(canvasView, invoker).createMenuItem();
+        deleteMenuItem.setFocusable(false);
+        editMenu.add(deleteMenuItem);
+
+        menuBar.add(editMenu);
+
         return menuBar;
     }
 
@@ -121,22 +143,31 @@ public class FrameView {
     private static JToolBar createToolBar(CanvasView canvas, Invoker invoker) {
         JToolBar toolPanel = new JToolBar(JToolBar.VERTICAL);
         toolPanel.setFocusable(false);
+        toolPanel.setFloatable(false);
 
         BoxLayout layout = new BoxLayout(toolPanel, BoxLayout.PAGE_AXIS);
         toolPanel.setLayout(layout);
 
-        toolPanel.setFloatable(false);
-        JButton selectionButton = new SelectionToolbarItem(canvas, invoker).itemCreate();
+        ButtonGroup group = new ButtonGroup();
+
+        JToggleButton selectionButton = new SelectionToolbarItem(canvas, invoker).itemCreate();
         selectionButton.setFocusable(false);
+        group.add(selectionButton);
         toolPanel.add(selectionButton);
-        JButton lineButton = new LineToolbarItem(canvas, invoker).itemCreate();
+
+        JToggleButton lineButton = new LineToolbarItem(canvas, invoker).itemCreate();
         lineButton.setFocusable(false);
+        group.add(lineButton);
         toolPanel.add(lineButton);
-        JButton rectangleButton = new RectangleToolbarItem(canvas, invoker).itemCreate();
+
+        JToggleButton rectangleButton = new RectangleToolbarItem(canvas, invoker).itemCreate();
         rectangleButton.setFocusable(false);
+        group.add(rectangleButton);
         toolPanel.add(rectangleButton);
-        JButton ellipseButton = new EllipseToolbarItem(canvas, invoker).itemCreate();
+
+        JToggleButton ellipseButton = new EllipseToolbarItem(canvas, invoker).itemCreate();
         ellipseButton.setFocusable(false);
+        group.add(ellipseButton);
         toolPanel.add(ellipseButton);
 
         return toolPanel;
