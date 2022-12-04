@@ -34,9 +34,9 @@ public class SelectionTool implements Tool {
 
     @Override
     public void mouseLeftClicked(MouseEvent mouseEvent) {
-
-        Point2D point = mouseEvent.getPoint();
         boolean found = false;
+        Point2D point = mouseEvent.getPoint();
+
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
         while (itr.hasNext()) {
             Shape s = (Shape) itr.next();
