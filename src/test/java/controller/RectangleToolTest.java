@@ -37,11 +37,11 @@ public class RectangleToolTest {
         testRectangle.setRect(0,0,50,50);
 
         Point2D clickPoint = new Point2D.Double(0, 0);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(50, 50);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
         assertEquals(rectangle.getX(), testRectangle.getX(), 0);
@@ -57,11 +57,11 @@ public class RectangleToolTest {
         testRectangle.setRect(0,0,50,50);
 
         Point2D clickPoint = new Point2D.Double(50, 0);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(0, 50);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
         assertEquals(rectangle.getX(), testRectangle.getX(), 0);
@@ -76,11 +76,11 @@ public class RectangleToolTest {
         testRectangle.setRect(0,0,50,50);
 
         Point2D clickPoint = new Point2D.Double(0, 50);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(50, 0);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
         assertEquals(rectangle.getX(), testRectangle.getX(), 0);
@@ -95,11 +95,11 @@ public class RectangleToolTest {
         testRectangle.setRect(0,0,50,50);
 
         Point2D clickPoint = new Point2D.Double(50, 50);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(0, 0);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
         assertEquals(rectangle.getX(), testRectangle.getX(), 0);
@@ -112,16 +112,16 @@ public class RectangleToolTest {
     public void testMouseReleased(){
         canvas.clearDummyDrawable();
         Point2D clickPoint = new Point2D.Double(0, 0);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(50, 50);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
 
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
 
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_RELEASED, 3, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseReleased(e);
 
         DrawableRectangle dummy = (DrawableRectangle) canvas.getDummyDrawable();
@@ -135,15 +135,15 @@ public class RectangleToolTest {
     @Test
     public void testMouseReleasedHorizontalBoundary(){
         Point2D clickPoint = new Point2D.Double(0, 0);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(50, 0);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
 
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_RELEASED, 3, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseReleased(e);
 
         boolean inserted = canvas.getDrawing().containsDrawable(rectangle);
@@ -154,15 +154,15 @@ public class RectangleToolTest {
     @Test
     public void testMouseReleasedVerticalBoundary(){
         Point2D clickPoint = new Point2D.Double(0, 0);
-        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mousePressed(e);
 
         clickPoint = new Point2D.Double(0, 50);
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseDragged(e);
         DrawableRectangle rectangle = (DrawableRectangle) canvas.getDummyDrawable();
 
-        e = new MouseEvent(canvas, MouseEvent.MOUSE_RELEASED, 3, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_RELEASED, System.currentTimeMillis(), InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         rectangleTool.mouseReleased(e);
 
         boolean inserted = canvas.getDrawing().containsDrawable(rectangle);

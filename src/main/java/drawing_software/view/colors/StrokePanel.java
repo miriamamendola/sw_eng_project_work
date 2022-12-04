@@ -1,17 +1,16 @@
 package drawing_software.view.colors;
 
-import drawing_software.model.Shape;
+import drawing_software.controller.command.Invoker;
+import drawing_software.controller.command.StrokeCommand;
 import drawing_software.view.CanvasView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StrokePanel extends ColorPanelFactory {
 
-    public StrokePanel(CanvasView canvas) {
-        super(canvas);
+    public StrokePanel(CanvasView canvas, Invoker invoker) {
+        super(canvas, invoker);
     }
 
     @Override
@@ -22,22 +21,9 @@ public class StrokePanel extends ColorPanelFactory {
         panel.add(new JLabel("Stroke: "));
         this.button.setName("stroke");
         this.button.changeColor(canvas.getCurrentStrokeColor());
-        this.button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                ColorButton source = (ColorButton) actionEvent.getSource();
-                Color firstColor = canvas.getCurrentStrokeColor();
-                Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
-                if(canvas.getSelectionGrid() != null){
-                    Shape s = (Shape) canvas.getSelectionGrid().getSelectedShape();
-                    source.changeColor((Color) s.getStrokeColor());
-                    s.setStrokeColor(color);
-                    canvas.repaint();
-                } else {
-                    source.changeColor(color);
-                    canvas.setCurrentStrokeColor(color);
-                }
-            }
+        this.button.addActionListener(actionEvent -> {
+            ColorButton source = (ColorButton) actionEvent.getSource();
+            invoker.executeCommand(new StrokeCommand(canvas, source));
         });
         panel.add(this.button);
         return panel;

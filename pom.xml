@@ -30,6 +30,8 @@
                 <configuration>
                     <archive>
                         <manifest>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <addClasspath>true</addClasspath>
                             <mainClass>drawing_software.Main</mainClass>
                         </manifest>
                     </archive>
