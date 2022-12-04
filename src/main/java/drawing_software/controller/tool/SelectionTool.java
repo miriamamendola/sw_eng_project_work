@@ -2,18 +2,20 @@ package drawing_software.controller.tool;
 
 import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
+import drawing_software.controller.command.MoveCommand;
 import drawing_software.controller.command.ResizeCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
 import drawing_software.model.Vertex;
 import drawing_software.view.CanvasView;
+import drawing_software.view.menu.CopyMenuItem;
+import drawing_software.view.menu.CutMenuItem;
+import drawing_software.view.menu.DeleteMenuItem;
+import drawing_software.view.menu.PasteMenuItem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
