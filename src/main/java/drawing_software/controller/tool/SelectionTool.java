@@ -42,6 +42,7 @@ public class SelectionTool implements Tool {
     /**
      * When pressing the mouse, this method checks if the user is pressing a valid shape,
      * then saves the current shape location and the  initial mouse position.
+     *
      * @param mouseEvent the event to be processed
      */
     @Override
@@ -123,6 +124,7 @@ public class SelectionTool implements Tool {
      * vector (delta_x, delta_y), which components are given by the difference between the
      * coordinates between the current mouse position and the previous mouse position. The latter
      * is updated at the end of the method.
+     *
      * @param mouseEvent the event to be processed
      */
     @Override
@@ -164,15 +166,24 @@ public class SelectionTool implements Tool {
     /**
      * When releasing the mouse, this method actually executes the move command, a concrete command
      * representing the update of the location of the figure.
+     *
      * @param mouseEvent the event to be processed
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if(selectedShape == null) return;
+        if (selectedShape == null) return;
+        Rectangle bounds = canvas.getSelectionGrid().getSelectedShape().getBounds();
+
         canvas.getSelectionGrid().clearSelectedVertex();
         ratio = canvas.getSelectionGrid().getWidth() / canvas.getSelectionGrid().getHeight();
-        invoker.executeCommand(new ResizeCommand(canvas, startingPoint, oldShapeSize));
-        invoker.executeCommand(new MoveCommand(canvas, oldShapeLocation));
+
+        if (oldShapeLocation != null && !bounds.getLocation().equals(oldShapeLocation)) {
+            invoker.executeCommand(new MoveCommand(canvas, oldShapeLocation));
+        }
+        if (oldShapeSize != null && !bounds.getSize().equals(oldShapeSize)) {
+            invoker.executeCommand(new ResizeCommand(canvas, startingPoint, oldShapeSize));
+        }
+
     }
 
     @Override

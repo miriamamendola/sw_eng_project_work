@@ -24,6 +24,7 @@ public class StrokeCommand implements Command {
 
     @Override
     public void execute() {
+        updateTitle(canvas);
         Color firstColor = canvas.getCurrentStrokeColor();
         Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
         if (canvas.getSelectionGrid() != null) {

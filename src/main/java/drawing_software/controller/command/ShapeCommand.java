@@ -1,12 +1,7 @@
 package drawing_software.controller.command;
 
-import drawing_software.Context;
-import drawing_software.Main;
 import drawing_software.model.Drawable;
 import drawing_software.view.CanvasView;
-
-import javax.swing.*;
-import java.io.File;
 
 /**
  * Allows to add a desired shape to the drawing, thus implementing a ConcreteCommand.
@@ -35,16 +30,9 @@ public class ShapeCommand implements Command {
      */
     @Override
     public void execute() {
-        Context.getInstance().setSaved(false);
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
-        File f = Context.getInstance().getCurrentFile();
-        if (f == null) {
-            frame.setTitle("untitled" + " * - " + Main.appTitle);
-        } else {
-            frame.setTitle(f.getName() + " * - " + Main.appTitle);
-        }
-
+        updateTitle(canvas);
         canvas.getDrawing().addDrawable(shape);
     }
+
 
 }

@@ -15,6 +15,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute() {
+        updateTitle(canvas);
         try {
             Shape selectedShape = (Shape) canvas.getSelectionGrid().getSelectedShape();
 

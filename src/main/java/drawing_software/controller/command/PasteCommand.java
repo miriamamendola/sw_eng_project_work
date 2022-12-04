@@ -34,6 +34,7 @@ public class PasteCommand implements Command {
      */
     @Override
     public void execute() {
+        updateTitle(canvas);
         try {
             DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

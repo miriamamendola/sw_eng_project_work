@@ -23,6 +23,7 @@ public class FillCommand implements Command {
 
     @Override
     public void execute() {
+        updateTitle(canvas);
         Color firstColor = canvas.getCurrentFillColor();
         Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
         if (canvas.getSelectionGrid() != null) {

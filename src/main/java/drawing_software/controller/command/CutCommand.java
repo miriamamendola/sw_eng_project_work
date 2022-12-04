@@ -24,6 +24,7 @@ public class CutCommand implements Command {
      */
     @Override
     public void execute() {
+        updateTitle(canvas);
         try {
             Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
