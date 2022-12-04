@@ -133,7 +133,7 @@ public class SelectionTool implements Tool {
             if (canvas.getSelectionGrid().getSelectedVertex() != -1) {                  //if a vertex is selected
                 double x = min(startingPoint.getX(), mouseEvent.getX());
                 double y = min(startingPoint.getY(), mouseEvent.getY());
-                double width = 0, height = 0;
+                double width, height;
                 if (Context.getInstance().isFixed()) {                                   //fixed proportions
                     height = abs(startingPoint.getY() - mouseEvent.getY());
                     width = height * ratio;
@@ -149,7 +149,6 @@ public class SelectionTool implements Tool {
                 canvas.repaint();
 
             } else {
-                System.out.println("a");
                 int delta_x = (int) (mouseEvent.getX() - prevMouse.getX());
                 int delta_y = (int) (mouseEvent.getY() - prevMouse.getY());
 
