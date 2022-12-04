@@ -37,7 +37,7 @@ public class SelectionToolTest {
         canvas.getDrawing().addDrawable(lineToTest);
         Point2D clickPoint = new Point2D.Double(0, 10);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mouseLeftClicked(e);
+        selectionTool.mouseLeftPressed(e);
         DrawableLine s = (DrawableLine) canvas.getSelectionGrid().getSelectedShape();
         assertEquals(s, lineToTest);
     }
@@ -49,7 +49,7 @@ public class SelectionToolTest {
         canvas.getDrawing().addDrawable(testRectangle);
         Point2D clickPoint = new Point2D.Double(60, 60);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mousePressed(e);
+        selectionTool.mouseLeftPressed(e);
         SelectionGrid s = canvas.getSelectionGrid();
         assertNull(s);
     }
@@ -67,7 +67,7 @@ public class SelectionToolTest {
         // Pressing inside the shape
         Point2D clickPoint = new Point2D.Double(20, 20);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mousePressed(e);
+        selectionTool.mouseLeftPressed(e);
         // Dragging the shape (20,0) to the right
         Point2D draggingPoint = new Point2D.Double(40, 20);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) draggingPoint.getX(), (int) draggingPoint.getY(), 1, false);

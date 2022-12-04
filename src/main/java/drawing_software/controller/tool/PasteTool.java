@@ -35,7 +35,7 @@ public class PasteTool extends JPanel implements Tool {
      * @param mouseEvent is the event from which the point of click is extracted.
      */
     @Override
-    public void mouseLeftClicked(MouseEvent mouseEvent) {
+    public void mouseLeftPressed(MouseEvent mouseEvent) {
         Point2D p = mouseEvent.getPoint();
         invoker.executeCommand(new PasteCommand(canvas, p));
     }

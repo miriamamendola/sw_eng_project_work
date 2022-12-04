@@ -47,16 +47,15 @@ public class PasteToolTest {
     }
 
     @Test
-    public void testMouseLeftClicked() {
-        canvas.setSelectionGrid(sg);
-        canvas.getSelectionGrid().setSelectedShape(dr);
+    public void testMouseLeftPressed() {
+        canvas.setSelectionGrid(new SelectionGrid(dr));
         cc.execute();
 
         Point2D clickPoint = new Point2D.Double(82, 88);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        pt.mouseLeftClicked(e);
+        pt.mouseLeftPressed(e);
 
-        selectionTool.mouseLeftClicked(e);
+        selectionTool.mouseLeftPressed(e);
         Drawable dr2 = canvas.getSelectionGrid().getSelectedShape();
         Drawable dr3 = canvas.getDrawing().getDrawable(0);
         assertEquals(dr3, dr2);
@@ -64,8 +63,7 @@ public class PasteToolTest {
 
     @Test
     public void testMouseDragged() {
-        canvas.setSelectionGrid(sg);
-        canvas.getSelectionGrid().setSelectedShape(dr);
+        canvas.setSelectionGrid(new SelectionGrid(dr));
         cc.execute();
 
         Point2D clickPoint = new Point2D.Double(82, 88);
@@ -74,7 +72,7 @@ public class PasteToolTest {
 
         Point2D clickPoint2 = new Point2D.Double(82, 88);
         MouseEvent e2 = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint2.getX(), (int) clickPoint2.getY(), 1, false);
-        selectionTool.mouseLeftClicked(e2);
+        selectionTool.mouseLeftPressed(e2);
         Drawable dr2 = canvas.getSelectionGrid().getSelectedShape();
         Drawable dr3 = canvas.getDrawing().getDrawable(0);
         assertEquals(dr3, dr2);

@@ -45,8 +45,8 @@ public class FrameView {
         frame.add(toolBar, BorderLayout.WEST);
 
         JPanel colorPanel = new JPanel();
-        colorPanel.add(new FillPanel(canvas).createPanel());
-        colorPanel.add(new StrokePanel(canvas).createPanel());
+        colorPanel.add(new FillPanel(canvas, invoker).createPanel());
+        colorPanel.add(new StrokePanel(canvas, invoker).createPanel());
         colorPanel.add(Box.createHorizontalStrut(50));
         JCheckBox scale = new JCheckBox("Fixed proportions");
         scale.addItemListener(new ItemListener() {

@@ -44,13 +44,12 @@ public class PasteCommandTest {
 
     @Test
     public void textExecute() {
-        canvas.setSelectionGrid(sg);
-        canvas.getSelectionGrid().setSelectedShape(dr);
+        canvas.setSelectionGrid(new SelectionGrid(dr));
         cc.execute();
         pc.execute();
         Point2D clickPoint = new Point2D.Double(82, 88);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mouseLeftClicked(e);
+        selectionTool.mouseLeftPressed(e);
         Drawable dr2 = canvas.getSelectionGrid().getSelectedShape();
         Drawable dr3 = canvas.getDrawing().getDrawable(0);
         assertEquals(dr3, dr2);

@@ -50,7 +50,7 @@ public class CopyCommandTest {
         //simulate click on figure
         Point2D clickPoint = new Point2D.Double(0, 10);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mouseLeftClicked(e);
+        selectionTool.mouseLeftPressed(e);
         //execute copy
         copyCommand.execute();
         //take clipboard contents
@@ -75,7 +75,7 @@ public class CopyCommandTest {
         //simulate click on figure
         Point2D clickPoint = new Point2D.Double(50, 50);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mouseLeftClicked(e);
+        selectionTool.mouseLeftPressed(e);
         //execute copy
         copyCommand.execute();
         //take clipboard contents
@@ -100,7 +100,7 @@ public class CopyCommandTest {
         //simulate click on figure
         Point2D clickPoint = new Point2D.Double(5, 5);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        selectionTool.mouseLeftClicked(e);
+        selectionTool.mouseLeftPressed(e);
         //execute copy
         copyCommand.execute();
         //take clipboard contents

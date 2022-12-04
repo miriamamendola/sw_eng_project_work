@@ -41,7 +41,6 @@ public class CutCommandTest {
     @Test
     public void testExecute() throws IOException, UnsupportedFlavorException, ClassNotFoundException {
         canvas.setSelectionGrid(new SelectionGrid(dr));
-        canvas.getSelectionGrid().setSelectedShape(dr);
         ct.execute();
         DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
