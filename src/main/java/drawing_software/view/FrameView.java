@@ -21,20 +21,24 @@ import java.util.logging.Logger;
 
 public class FrameView {
 
+    private JFrame frame;
+    private CanvasView canvas;
+
+    private FillPanel fillPanel;
+
+    private JPanel strokePanel;
 
     private final static int whiteIntensity = 230;
 
-    public static JFrame createView(String appTitle) {
+    public JFrame createView(String appTitle) {
         Invoker invoker = new Invoker();
 
-
         String title = "untitled - " + appTitle;
-        JFrame frame = new JFrame(title);
+        frame = new JFrame(title);
         frame.setFocusable(false);
         frame.setBackground(new Color(whiteIntensity, whiteIntensity, whiteIntensity));
 
-
-        CanvasView canvas = new CanvasView(invoker);
+        canvas = new CanvasView(invoker);
         canvas.setFocusable(true);
         frame.add(canvas);
 
@@ -43,8 +47,10 @@ public class FrameView {
         frame.add(toolBar, BorderLayout.WEST);
 
         JPanel colorPanel = new JPanel();
-        colorPanel.add(new FillPanel(canvas).createPanel());
-        colorPanel.add(new StrokePanel(canvas).createPanel());
+        fillPanel = (FillPanel) new FillPanel(canvas, invoker).createPanel();
+        strokePanel = new StrokePanel(canvas, invoker).createPanel();
+        colorPanel.add(fillPanel);
+        colorPanel.add(strokePanel);
         frame.add(colorPanel, BorderLayout.SOUTH);
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);
@@ -173,4 +179,19 @@ public class FrameView {
         return toolPanel;
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public CanvasView getCanvas() {
+        return canvas;
+    }
+
+    public FillPanel getFillPanel() {
+        return fillPanel;
+    }
+
+    public JPanel getStrokePanel() {
+        return strokePanel;
+    }
 }

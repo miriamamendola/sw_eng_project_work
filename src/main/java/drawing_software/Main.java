@@ -29,7 +29,7 @@ public class Main {
                 Logger logger = Logger.getLogger("root");
                 logger.setLevel(Level.ALL);
                 Context.getInstance().setSaved(true);
-                JFrame frame = FrameView.createView(appTitle);
+                JFrame frame = new FrameView().createView(appTitle);
                 frame.setFocusable(false);
                 frame.setSize(1280, 720);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
