@@ -13,6 +13,8 @@ import drawing_software.view.toolbar.SelectionToolbarItem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
@@ -46,8 +48,18 @@ public class FrameView {
         colorPanel.add(new FillPanel(canvas).createPanel());
         colorPanel.add(new StrokePanel(canvas).createPanel());
         colorPanel.add(Box.createHorizontalStrut(50));
-        JCheckBox scale = new JCheckBox("Scale");
-        scale.setVisible(false);
+        JCheckBox scale = new JCheckBox("Fixed proportions");
+        scale.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Context.getInstance().setFixed(true);
+                } else {
+                    Context.getInstance().setFixed(false);
+                }
+                ;
+            }
+        });
         colorPanel.add(scale);
 
         frame.add(colorPanel, BorderLayout.SOUTH);

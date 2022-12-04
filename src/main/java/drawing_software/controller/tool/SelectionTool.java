@@ -1,5 +1,6 @@
 package drawing_software.controller.tool;
 
+import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
@@ -22,9 +23,8 @@ import static java.lang.Math.min;
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
     private Invoker invoker;
-
     private Point2D startingPoint;
-
+    private double ratio;
     public SelectionTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
@@ -75,11 +75,13 @@ public class SelectionTool implements Tool {
         boolean found = false;
         Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
         if (canvas.getSelectionGrid() == null) {
+
             while (itr.hasNext()) {
                 Shape s = (Shape) itr.next();
                 if (s.contains(point)) {
                     SelectionGrid grid = new SelectionGrid(s);
                     canvas.setSelectionGrid(grid);
+                    ratio = grid.getWidth() / grid.getHeight();
                     canvas.repaint();
                     found = true;
                     break;
@@ -122,11 +124,18 @@ public class SelectionTool implements Tool {
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
         if (canvas.getSelectionGrid() != null) {
-            if (canvas.getSelectionGrid().getSelectedVertex() != -1) {
+            if (canvas.getSelectionGrid().getSelectedVertex() != -1) {                  //if a vertex is selected
                 double x = min(startingPoint.getX(), mouseEvent.getX());
                 double y = min(startingPoint.getY(), mouseEvent.getY());
-                double width = abs(startingPoint.getX() - mouseEvent.getX());
-                double height = abs(startingPoint.getY() - mouseEvent.getY());
+                double width = 0, height = 0;
+                if (Context.getInstance().isFixed()) {                                   //fixed proportions
+                    height = abs(startingPoint.getY() - mouseEvent.getY());
+                    width = height * ratio;
+                } else {                                                                   //stretch
+                    width = abs(startingPoint.getX() - mouseEvent.getX());
+                    height = abs(startingPoint.getY() - mouseEvent.getY());
+                }
+
 
                 Shape shape = canvas.getSelectionGrid().getSelectedShape();
                 shape.setFrame(new Point2D.Double(x, y), new Dimension((int) width, (int) height));
@@ -142,7 +151,6 @@ public class SelectionTool implements Tool {
         if (canvas.getSelectionGrid() != null) {
             canvas.getSelectionGrid().clearSelectedVertex();
         }
-
     }
 
 
