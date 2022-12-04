@@ -9,6 +9,7 @@ import drawing_software.view.CanvasView;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
@@ -25,8 +26,10 @@ public class SelectionToolTest {
 
     @Before
     public void setUp() throws Exception {
+        JFrame frame = new JFrame();
         invoker = new Invoker();
         canvas = new CanvasView(invoker);
+        frame.add(canvas);
         selectionTool = new SelectionTool(canvas, invoker);
     }
     @Test

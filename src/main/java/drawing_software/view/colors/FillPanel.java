@@ -6,8 +6,10 @@ import drawing_software.view.CanvasView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class FillPanel extends ColorPanelFactory {
+public class FillPanel extends ColorPanelFactory implements ActionListener {
 
     public FillPanel(CanvasView canvas, Invoker invoker) {
         super(canvas, invoker);
@@ -21,12 +23,25 @@ public class FillPanel extends ColorPanelFactory {
         this.add(new JLabel("Fill: "));
         this.button.setName("fill");
         this.button.changeColor(canvas.getCurrentFillColor());
-        this.button.addActionListener(actionEvent -> {
-            ColorButton source = (ColorButton) actionEvent.getSource();
-            invoker.executeCommand(new FillCommand(canvas, source));
-        });
+        this.button.addActionListener(this);
         this.add(this.button);
 
         return this;
+    }
+
+
+    /**
+     * Shows to the user the color chooser, executes FillCommand with the color selected by
+     * the user and updates the ColorButton accordingly.
+     *
+     * @param actionEvent the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        ColorButton source = (ColorButton) actionEvent.getSource();
+        Color firstColor = canvas.getCurrentFillColor();
+        Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
+        invoker.executeCommand(new FillCommand(canvas, color));
+        source.changeColor(color);
     }
 }
