@@ -80,14 +80,15 @@ public class SelectionTool implements Tool {
                     if (canvas.getSelectionGrid().isVertexClicked(point)) {
                         int v = canvas.getSelectionGrid().getSelectedVertex();
                         if (v != -1) {
+                            Rectangle r = canvas.getSelectionGrid().getSelectedShape().getBounds();
                             if (v == Vertex.UPLEFT) {
-                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX() + canvas.getSelectionGrid().getWidth(), canvas.getSelectionGrid().getY() + canvas.getSelectionGrid().getHeight());
+                                startingPoint = new Point2D.Double(r.getX() + r.getWidth(), r.getY() + r.getHeight());
                             } else if (v == Vertex.UPRIGHT) {
-                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY() + canvas.getSelectionGrid().getHeight());
+                                startingPoint = new Point2D.Double(r.getX(), r.getY() + r.getHeight());
                             } else if (v == Vertex.BOTTOMLEFT) {
-                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX() + canvas.getSelectionGrid().getWidth(), canvas.getSelectionGrid().getY());
+                                startingPoint = new Point2D.Double(r.getX() + r.getWidth(), r.getY());
                             } else if (v == Vertex.BOTTOMRIGHT) {
-                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY());
+                                startingPoint = new Point2D.Double(r.getX(), r.getY());
                             }
                         }
                     }
@@ -136,7 +137,7 @@ public class SelectionTool implements Tool {
                 double x = min(startingPoint.getX(), mouseEvent.getX());
                 double y = min(startingPoint.getY(), mouseEvent.getY());
                 double width, height;
-                if (Context.getInstance().isFixed()) {                                   //fixed proportions
+                if (Context.getInstance().isFixed()) {                                   //fixed proportions - resize
                     height = abs(startingPoint.getY() - mouseEvent.getY());
                     width = height * ratio;
                 } else {                                                                   //stretch

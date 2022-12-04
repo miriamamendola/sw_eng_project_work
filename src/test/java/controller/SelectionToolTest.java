@@ -1,5 +1,6 @@
 package controller;
 
+import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
 import drawing_software.model.DrawableLine;
@@ -20,7 +21,6 @@ import static org.junit.Assert.assertNull;
 public class SelectionToolTest {
     private CanvasView canvas;
     private SelectionTool selectionTool;
-
     private Invoker invoker;
 
     @Before
@@ -28,6 +28,7 @@ public class SelectionToolTest {
         invoker = new Invoker();
         canvas = new CanvasView(invoker);
         selectionTool = new SelectionTool(canvas, invoker);
+
     }
     @Test
     public void testMouseClickOnFigure() {
@@ -75,4 +76,52 @@ public class SelectionToolTest {
         Point2D rectLocation = new Point2D.Double(testRectangle.getBounds().getLocation().getX(), testRectangle.getBounds().getLocation().getY());
         assertEquals(new Point2D.Double(20, 0), rectLocation);
     }
+
+    @Test
+    public void testStretchingShape() {
+        DrawableRectangle testRectangle = new DrawableRectangle(0, 0);
+        testRectangle.setSize(new Dimension(50, 50));
+        canvas.getDrawing().addDrawable(testRectangle);
+        // Pressing inside the shape
+        Point2D clickPoint = new Point2D.Double(20, 20);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        selectionTool.mouseLeftPressed(e);
+
+        // Pressing in the vertex
+        clickPoint = new Point2D.Double(50, 50);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        selectionTool.mouseLeftPressed(e);
+        // Dragging the shape (20,20) to the right
+        Point2D draggingPoint = new Point2D.Double(60, 60);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) draggingPoint.getX(), (int) draggingPoint.getY(), 1, false);
+        selectionTool.mouseDragged(e);
+        Dimension rectSize = testRectangle.getBounds().getSize();
+        assertEquals(new Dimension(60, 60), rectSize);
+    }
+
+    @Test
+    public void testResizingShape() {
+        Context.getInstance().setFixed(true);
+        DrawableRectangle testRectangle = new DrawableRectangle(0, 0);
+        testRectangle.setSize(new Dimension(30, 50));
+        canvas.getDrawing().addDrawable(testRectangle);
+        // Pressing inside the shape
+        Point2D clickPoint = new Point2D.Double(20, 20);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        selectionTool.mouseLeftPressed(e);
+
+
+        // Pressing in the vertex
+        clickPoint = new Point2D.Double(30, 50);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        selectionTool.mouseLeftPressed(e);
+        // Dragging the shape (20,0) to the right
+        Point2D draggingPoint = new Point2D.Double(60, 60);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) draggingPoint.getX(), (int) draggingPoint.getY(), 1, false);
+        selectionTool.mouseDragged(e);
+
+        Dimension rectSize = testRectangle.getBounds().getSize();
+        assertEquals(new Dimension(36, 60), rectSize);
+    }
+
 }
