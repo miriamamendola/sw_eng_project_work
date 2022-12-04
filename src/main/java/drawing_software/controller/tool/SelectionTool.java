@@ -2,6 +2,7 @@ package drawing_software.controller.tool;
 
 import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
+import drawing_software.controller.command.ResizeCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
@@ -24,6 +25,7 @@ public class SelectionTool implements Tool {
     private final CanvasView canvas;
     private Invoker invoker;
     private Point2D startingPoint;
+    private Dimension oldShapeSize;
     private double ratio;
     public SelectionTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
@@ -79,6 +81,7 @@ public class SelectionTool implements Tool {
             while (itr.hasNext()) {
                 Shape s = (Shape) itr.next();
                 if (s.contains(point)) {
+                    oldShapeSize = s.getBounds().getSize();
                     SelectionGrid grid = new SelectionGrid(s);
                     canvas.setSelectionGrid(grid);
                     ratio = grid.getWidth() / grid.getHeight();
@@ -150,6 +153,8 @@ public class SelectionTool implements Tool {
     public void mouseReleased(MouseEvent mouseEvent) {
         if (canvas.getSelectionGrid() != null) {
             canvas.getSelectionGrid().clearSelectedVertex();
+            ratio = canvas.getSelectionGrid().getWidth() / canvas.getSelectionGrid().getHeight();
+            invoker.executeCommand(new ResizeCommand(canvas, startingPoint, oldShapeSize));
         }
     }
 
