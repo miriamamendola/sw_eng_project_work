@@ -11,6 +11,7 @@ import drawing_software.view.CanvasView;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -31,8 +32,10 @@ public class CutCommandTest {
 
     @Before
     public void setUp() throws Exception {
+        JFrame frame = new JFrame();
         invoker = new Invoker();
         canvas = new CanvasView(invoker);
+        frame.add(canvas);
         st = new SelectionTool(canvas, invoker);
         ct = new CutCommand(canvas);
         dr = new DrawableEllipse(Color.cyan, Color.gray, 40, 40);

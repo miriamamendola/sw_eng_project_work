@@ -12,6 +12,7 @@ import drawing_software.view.CanvasView;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.InputEvent;
@@ -34,8 +35,10 @@ public class PasteToolTest {
 
     @Before
     public void setUp() throws ClassNotFoundException {
+        JFrame frame = new JFrame();
         invoker = new Invoker();
         canvas = new CanvasView(invoker);
+        frame.add(canvas);
         pc = new PasteCommand(canvas, new Point2D.Double(42, 69));
         df = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
         dr = new DrawableRectangle(Color.white, Color.cyan, 10, 10);
