@@ -32,7 +32,7 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
-        currentTool = new SelectionTool(this,invoker);
+        currentTool = new SelectionTool(this, invoker);
         this.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -46,7 +46,12 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                currentTool.mousePressed(e);
+
+                if (e.getButton() == MouseEvent.BUTTON1)
+                    currentTool.mouseLeftPressed(e);
+                else if (e.getButton() == MouseEvent.BUTTON3)
+                    currentTool.mouseRightPressed(e);
+                ;
             }
 
             @Override

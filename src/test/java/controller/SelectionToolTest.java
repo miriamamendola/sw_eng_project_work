@@ -31,26 +31,26 @@ public class SelectionToolTest {
     }
     @Test
     public void testMouseClickOnFigure() {
-        Point2D start = new Point(0,0);
-        Point2D end = new Point(0,20);
-        DrawableLine lineToTest = new DrawableLine(start,end);       //create line to test
+        Point2D start = new Point(0, 0);
+        Point2D end = new Point(0, 20);
+        DrawableLine lineToTest = new DrawableLine(start, end);       //create line to test
         canvas.getDrawing().addDrawable(lineToTest);
         Point2D clickPoint = new Point2D.Double(0, 10);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mouseLeftClicked(e);
-        DrawableLine s =  (DrawableLine) canvas.getSelectionGrid().getSelectedShape();
-        assertEquals(s,lineToTest);
+        DrawableLine s = (DrawableLine) canvas.getSelectionGrid().getSelectedShape();
+        assertEquals(s, lineToTest);
     }
 
     @Test
-    public void testPressingMouseOutOfShape(){
-        DrawableRectangle testRectangle = new DrawableRectangle(0,0);
-        testRectangle.setSize(new Dimension(50,50));
+    public void testPressingMouseOutOfShape() {
+        DrawableRectangle testRectangle = new DrawableRectangle(0, 0);
+        testRectangle.setSize(new Dimension(50, 50));
         canvas.getDrawing().addDrawable(testRectangle);
         Point2D clickPoint = new Point2D.Double(60, 60);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mousePressed(e);
-        SelectionGrid s =  canvas.getSelectionGrid();
+        SelectionGrid s = canvas.getSelectionGrid();
         assertNull(s);
     }
 
@@ -60,19 +60,19 @@ public class SelectionToolTest {
      * interaction with the drawing.
      */
     @Test
-    public void testMovingShape(){
-        DrawableRectangle testRectangle = new DrawableRectangle(0,0);
-        testRectangle.setSize(new Dimension(50,50));
+    public void testMovingShape() {
+        DrawableRectangle testRectangle = new DrawableRectangle(0, 0);
+        testRectangle.setSize(new Dimension(50, 50));
         canvas.getDrawing().addDrawable(testRectangle);
         // Pressing inside the shape
-        Point2D clickPoint = new Point2D.Double(20,20);
+        Point2D clickPoint = new Point2D.Double(20, 20);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mousePressed(e);
         // Dragging the shape (20,0) to the right
-        Point2D draggingPoint = new Point2D.Double(40,20);
-        e =  new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) draggingPoint.getX(), (int) draggingPoint.getY(), 1, false);
+        Point2D draggingPoint = new Point2D.Double(40, 20);
+        e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) draggingPoint.getX(), (int) draggingPoint.getY(), 1, false);
         selectionTool.mouseDragged(e);
         Point2D rectLocation = new Point2D.Double(testRectangle.getBounds().getLocation().getX(), testRectangle.getBounds().getLocation().getY());
-        assertEquals(new Point2D.Double(20,0), rectLocation);
+        assertEquals(new Point2D.Double(20, 0), rectLocation);
     }
 }

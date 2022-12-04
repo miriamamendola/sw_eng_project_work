@@ -1,6 +1,5 @@
 package drawing_software.controller.command;
 
-import drawing_software.model.Drawable;
 import drawing_software.view.CanvasView;
 
 import java.awt.geom.Point2D;
@@ -17,6 +16,7 @@ public class MoveCommand implements Command {
         this.canvas = canvas;
         this.oldShapeLocation = oldShapeLocation;
     }
+
     @Override
     public void execute() {
 

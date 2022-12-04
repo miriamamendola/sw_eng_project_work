@@ -9,6 +9,8 @@ public class Context {
 
     private boolean saved;
 
+    private boolean fixed;
+
     public static Context getInstance() {
         if (instance == null) {
             instance = new Context();
@@ -33,4 +35,11 @@ public class Context {
         return saved;
     }
 
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
+    }
 }

@@ -32,7 +32,7 @@ public class LineTool implements Tool {
      * @param mouseEvent the event to be processed
      */
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
+    public void mouseLeftPressed(MouseEvent mouseEvent) {
         line = new DrawableLine(canvas.getCurrentStrokeColor(), mouseEvent.getPoint(), mouseEvent.getPoint());
         canvas.setDummyDrawable(line);
     }

@@ -29,7 +29,7 @@ public class FillPanel extends ColorPanelFactory {
                 Color firstColor = canvas.getCurrentFillColor();
                 Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
                 if (canvas.getSelectionGrid() != null) {
-                    Shape s = canvas.getSelectionGrid().getSelectedShape();
+                    Shape s = (Shape) canvas.getSelectionGrid().getSelectedShape();
                     source.changeColor((Color) s.getFillColor());
                     s.setFillColor(color);
                     canvas.repaint();

@@ -28,7 +28,7 @@ public class StrokePanel extends ColorPanelFactory {
                 ColorButton source = (ColorButton) actionEvent.getSource();
                 Color firstColor = canvas.getCurrentStrokeColor();
                 Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
-                if(canvas.getSelectionGrid() != null){
+                if (canvas.getSelectionGrid() != null) {
                     Shape s = (Shape) canvas.getSelectionGrid().getSelectedShape();
                     source.changeColor((Color) s.getStrokeColor());
                     s.setStrokeColor(color);

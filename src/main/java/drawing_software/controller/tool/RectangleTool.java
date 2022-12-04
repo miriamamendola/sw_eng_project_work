@@ -38,7 +38,7 @@ public class RectangleTool implements Tool {
      * @param mouseEvent the event to be processed
      */
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
+    public void mouseLeftPressed(MouseEvent mouseEvent) {
         this.rect = new DrawableRectangle(canvas.getCurrentFillColor(), canvas.getCurrentStrokeColor(), mouseEvent.getX(), mouseEvent.getY());
         this.startingPoint = mouseEvent.getPoint();
     }
@@ -75,4 +75,8 @@ public class RectangleTool implements Tool {
         canvas.clearDummyDrawable();
     }
 
+
+    public Point2D getStartingPoint() {
+        return startingPoint;
+    }
 }
