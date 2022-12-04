@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Implements a ConcreteCommand class; in this case, the Command is the Copy command.
  */
-public class CopyCommand implements Command ,ClipboardOwner{
+public class CopyCommand implements Command, ClipboardOwner {
 
     private final CanvasView canvas;
 
@@ -27,7 +27,6 @@ public class CopyCommand implements Command ,ClipboardOwner{
     /**
      * First,it takes the selected figure to copy, and then it creates a clipboard where save the figure.
      * The operation is completed by adding the shapes in the canvas and repaint the canvas in order to can paste easily .
-     *
      */
     @Override
     public void execute() {

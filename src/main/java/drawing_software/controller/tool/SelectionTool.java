@@ -1,10 +1,13 @@
 package drawing_software.controller.tool;
 
+import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.MoveCommand;
+import drawing_software.controller.command.ResizeCommand;
 import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
+import drawing_software.model.Vertex;
 import drawing_software.view.CanvasView;
 import drawing_software.view.menu.CopyMenuItem;
 import drawing_software.view.menu.CutMenuItem;
@@ -12,49 +15,28 @@ import drawing_software.view.menu.DeleteMenuItem;
 import drawing_software.view.menu.PasteMenuItem;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.min;
+
 public class SelectionTool implements Tool {
     private final CanvasView canvas;
-
     private final Invoker invoker;
-
     private Shape selectedShape;
-
     private Point2D oldShapeLocation;
-
+    private Dimension oldShapeSize;
     private Point2D prevMouse;
+    private Point2D startingPoint;
+    private double ratio;
 
     public SelectionTool(CanvasView canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
-    }
-
-    @Override
-    public void mouseLeftClicked(MouseEvent mouseEvent) {
-
-        Point2D point = mouseEvent.getPoint();
-        boolean found = false;
-        Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
-        while (itr.hasNext()) {
-            Shape s = (Shape) itr.next();
-            if (s.contains(point)) {
-                this.selectedShape = s;
-                canvas.setSelectionGrid(new SelectionGrid(selectedShape));
-                prevMouse = mouseEvent.getPoint();
-                canvas.repaint();
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            canvas.clearSelectedDrawable();
-            canvas.repaint();
-            selectedShape = null;
-        }
-
+        startingPoint = new Point2D.Double(0, 0);
     }
 
     /**
@@ -63,11 +45,74 @@ public class SelectionTool implements Tool {
      * @param mouseEvent the event to be processed
      */
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        mouseLeftClicked(mouseEvent);
-        if(selectedShape != null){
-            oldShapeLocation = selectedShape.getBounds().getLocation();
-            prevMouse = mouseEvent.getPoint();
+    public void mouseLeftPressed(MouseEvent mouseEvent) {
+        Point2D point = mouseEvent.getPoint();
+        boolean found = false;
+        Iterator<Drawable> itr = canvas.getDrawing().descendingIterator();
+
+        while (itr.hasNext()) {
+            Shape s = (Shape) itr.next();
+            if (canvas.getSelectionGrid() == null) {                                                                     //se non ho selezionato nulla in precedenza
+
+                if (s.contains(point)) {                                                                                 //se il punto è contenuto in una shape
+                    this.selectedShape = s;
+                    oldShapeSize = s.getBounds().getSize();
+                    SelectionGrid grid = new SelectionGrid(s);
+                    canvas.setSelectionGrid(grid);
+                    ratio = grid.getWidth() / grid.getHeight();
+                    prevMouse = mouseEvent.getPoint();
+                    canvas.repaint();
+                    found = true;
+                    break;
+                }
+
+            } else {                                                                                                    //se in precedenza avevo già selezionato una shape
+                oldShapeLocation = selectedShape.getBounds().getLocation();
+                prevMouse = mouseEvent.getPoint();
+
+
+                if (canvas.getSelectionGrid().getSelectedShape().equals(s) && canvas.getSelectionGrid().isVertexClicked(point)) {               //se ho selezionato un vertice
+
+
+                    SelectionGrid grid = new SelectionGrid(s);
+                    canvas.setSelectionGrid(grid);
+                    if (canvas.getSelectionGrid().isVertexClicked(point)) {
+                        int v = canvas.getSelectionGrid().getSelectedVertex();
+                        if (v != -1) {
+                            if (v == Vertex.UPLEFT) {
+                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX() + canvas.getSelectionGrid().getWidth(), canvas.getSelectionGrid().getY() + canvas.getSelectionGrid().getHeight());
+                            } else if (v == Vertex.UPRIGHT) {
+                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY() + canvas.getSelectionGrid().getHeight());
+                            } else if (v == Vertex.BOTTOMLEFT) {
+                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX() + canvas.getSelectionGrid().getWidth(), canvas.getSelectionGrid().getY());
+                            } else if (v == Vertex.BOTTOMRIGHT) {
+                                startingPoint = new Point2D.Double(canvas.getSelectionGrid().getX(), canvas.getSelectionGrid().getY());
+                            }
+                        }
+                    }
+                    canvas.repaint();
+                    found = true;
+                    break;
+
+
+                } else if (s.contains(point)) {                                                                         //se ho selezionato una nuova shape
+                    this.selectedShape = s;
+                    oldShapeSize = s.getBounds().getSize();
+                    SelectionGrid grid = new SelectionGrid(s);
+                    canvas.setSelectionGrid(grid);
+                    ratio = grid.getWidth() / grid.getHeight();
+                    prevMouse = mouseEvent.getPoint();
+                    canvas.repaint();
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
+            canvas.clearSelectedDrawable();
+            canvas.repaint();
+            selectedShape = null;
         }
     }
 
@@ -82,15 +127,38 @@ public class SelectionTool implements Tool {
      */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
-        if(selectedShape == null) return;
-        int delta_x = (int) (mouseEvent.getX() - prevMouse.getX());
-        int delta_y = (int) (mouseEvent.getY() - prevMouse.getY());
 
-        selectedShape.setLocation(selectedShape.getBounds().getX() + delta_x, selectedShape.getBounds().getY() + delta_y);
-        canvas.clearSelectedDrawable();
-        canvas.setSelectionGrid(new SelectionGrid(selectedShape));
-        prevMouse = mouseEvent.getPoint();
-        canvas.repaint();
+
+        if (canvas.getSelectionGrid() != null) {
+            if (canvas.getSelectionGrid().getSelectedVertex() != -1) {                  //if a vertex is selected
+                double x = min(startingPoint.getX(), mouseEvent.getX());
+                double y = min(startingPoint.getY(), mouseEvent.getY());
+                double width, height;
+                if (Context.getInstance().isFixed()) {                                   //fixed proportions
+                    height = abs(startingPoint.getY() - mouseEvent.getY());
+                    width = height * ratio;
+                } else {                                                                   //stretch
+                    width = abs(startingPoint.getX() - mouseEvent.getX());
+                    height = abs(startingPoint.getY() - mouseEvent.getY());
+                }
+
+
+                Shape shape = canvas.getSelectionGrid().getSelectedShape();
+                shape.setFrame(new Point2D.Double(x, y), new Dimension((int) width, (int) height));
+                canvas.getSelectionGrid().setFrame(new Point2D.Double(x, y), new Dimension((int) width, (int) height));
+                canvas.repaint();
+
+            } else {
+                int delta_x = (int) (mouseEvent.getX() - prevMouse.getX());
+                int delta_y = (int) (mouseEvent.getY() - prevMouse.getY());
+
+                selectedShape.setLocation(selectedShape.getBounds().getX() + delta_x, selectedShape.getBounds().getY() + delta_y);
+                canvas.clearSelectedDrawable();
+                canvas.setSelectionGrid(new SelectionGrid(selectedShape));
+                prevMouse = mouseEvent.getPoint();
+                canvas.repaint();
+            }
+        }
     }
 
     /**
@@ -101,6 +169,9 @@ public class SelectionTool implements Tool {
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if(selectedShape == null) return;
+        canvas.getSelectionGrid().clearSelectedVertex();
+        ratio = canvas.getSelectionGrid().getWidth() / canvas.getSelectionGrid().getHeight();
+        invoker.executeCommand(new ResizeCommand(canvas, startingPoint, oldShapeSize));
         invoker.executeCommand(new MoveCommand(canvas, oldShapeLocation));
     }
 

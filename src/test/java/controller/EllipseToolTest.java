@@ -38,7 +38,7 @@ public class EllipseToolTest {
 
         Point2D clickPoint = new Point2D.Double(0, 0);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(50, 50);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
@@ -58,7 +58,7 @@ public class EllipseToolTest {
 
         Point2D clickPoint = new Point2D.Double(50, 0);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(0, 50);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
@@ -77,7 +77,7 @@ public class EllipseToolTest {
 
         Point2D clickPoint = new Point2D.Double(0, 50);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(50, 0);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
@@ -96,7 +96,7 @@ public class EllipseToolTest {
 
         Point2D clickPoint = new Point2D.Double(50, 50);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(0, 0);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
@@ -113,7 +113,7 @@ public class EllipseToolTest {
         canvas.clearDummyDrawable();
         Point2D clickPoint = new Point2D.Double(0, 0);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(50, 50);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
@@ -136,7 +136,7 @@ public class EllipseToolTest {
     public void testMouseReleasedHorizontalBoundary(){
         Point2D clickPoint = new Point2D.Double(0, 0);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(50, 0);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
@@ -155,7 +155,7 @@ public class EllipseToolTest {
     public void testMouseReleasedVerticalBoundary(){
         Point2D clickPoint = new Point2D.Double(0, 0);
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
-        ellipseTool.mousePressed(e);
+        ellipseTool.mouseLeftPressed(e);
 
         clickPoint = new Point2D.Double(0, 50);
         e = new MouseEvent(canvas, MouseEvent.MOUSE_DRAGGED, 2, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
