@@ -87,4 +87,9 @@ public class Drawing implements Serializable, Iterable<Drawable> {
     public void addDrawableFirst (Drawable d){
         listDrawables.addFirst(d);
     }
+    public void printDrawable(){
+        for (Drawable d: this){
+            System.out.println(d.toString());
+        }
+    }
 }
