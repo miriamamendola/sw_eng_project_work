@@ -8,15 +8,14 @@ public class ForwardCommand implements Command {
     private int oldIndex;
     public ForwardCommand(CanvasView canvas) {
         this.canvas = canvas;
-        this.oldIndex =  canvas.getDrawing().getDrawableIndex(canvas.getSelectionGrid().getSelectedShape());
+        this.oldIndex = canvas.getDrawing().getDrawableIndex(canvas.getSelectionGrid().getSelectedShape());
     }
 
     @Override
     public void execute() {
-        Drawable toLast= canvas.getSelectionGrid().getSelectedShape();
+        Drawable toLast = canvas.getSelectionGrid().getSelectedShape();
         canvas.getDrawing().removeDrawable(toLast);
         canvas.getDrawing().addDrawable(toLast);
         canvas.repaint();
-
     }
 }

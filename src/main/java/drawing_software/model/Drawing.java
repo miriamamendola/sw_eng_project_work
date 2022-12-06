@@ -47,6 +47,16 @@ public class Drawing implements Serializable, Iterable<Drawable> {
     }
 
     /**
+     * Allows to retrieve (and the remove) a Drawable object previously added to the data structure.
+     * This DOES remove the Drawable shape from the structure.
+     *
+     * @param index is the index at which remove the drawable.
+     */
+    public Drawable removeDrawable(int index) {
+        return this.listDrawables.remove(index);
+    }
+
+    /**
      * Allows to verify whether a Drawable shape is present inside the data structure
      * representing the drawing.
      *
@@ -74,9 +84,10 @@ public class Drawing implements Serializable, Iterable<Drawable> {
     public Iterator<Drawable> descendingIterator() {
         return listDrawables.descendingIterator();
     }
+
     public int getDrawableIndex (Drawable drawable) {
         int i =0;
-        for (Drawable d : this) {
+        for (Drawable d : this.listDrawables) {
             if (d.equals(drawable)) {
                 return i;
             }
@@ -84,12 +95,17 @@ public class Drawing implements Serializable, Iterable<Drawable> {
         }
         return -1;
     }
-    public void addDrawableFirst (Drawable d){
+
+    public void addDrawableFirst(Drawable d) {
         listDrawables.addFirst(d);
     }
-    public void printDrawable(){
-        for (Drawable d: this){
+
+    public void printDrawable() {
+        int i = 0;
+        for (Drawable d : this.listDrawables) {
+            System.out.println(i);
             System.out.println(d.toString());
+            i++;
         }
     }
 }

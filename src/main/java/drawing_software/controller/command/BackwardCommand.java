@@ -13,11 +13,9 @@ public class BackwardCommand implements Command{
 
     @Override
     public void execute() {
-    Drawable toFirst= canvas.getSelectionGrid().getSelectedShape();
-    canvas.getDrawing().removeDrawable(toFirst);
-    canvas.getDrawing().addDrawableFirst(toFirst);
-    canvas.getDrawing().printDrawable();
-    canvas.repaint();
-
+        Drawable toFirst = canvas.getSelectionGrid().getSelectedShape();
+        canvas.getDrawing().removeDrawable(toFirst);
+        canvas.getDrawing().addDrawableFirst(toFirst);
+        canvas.repaint();
     }
 }
