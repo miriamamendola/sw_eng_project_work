@@ -46,7 +46,6 @@ public class Drawing implements Serializable, Iterable<Drawable> {
         return this.listDrawables.remove(d);
     }
 
-
     /**
      * Allows to verify whether a Drawable shape is present inside the data structure
      * representing the drawing.
@@ -74,5 +73,18 @@ public class Drawing implements Serializable, Iterable<Drawable> {
      */
     public Iterator<Drawable> descendingIterator() {
         return listDrawables.descendingIterator();
+    }
+    public int getDrawableIndex (Drawable drawable) {
+        int i =0;
+        for (Drawable d : this) {
+            if (d.equals(drawable)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+    public void addDrawableFirst (Drawable d){
+        listDrawables.addFirst(d);
     }
 }

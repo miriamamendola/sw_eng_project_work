@@ -24,6 +24,7 @@ public class DrawableRectangle extends Rectangle2D.Double implements Shape {
         super(x, y, 0, 0);
         this.fillColor = fillColor;
         this.strokeColor = strokeColor;
+
     }
 
     /**
