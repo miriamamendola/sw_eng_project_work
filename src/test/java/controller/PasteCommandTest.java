@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class PasteCommandTest {
     private CanvasView canvas;
@@ -46,7 +47,7 @@ public class PasteCommandTest {
     }
 
     @Test
-    public void textExecute() {
+    public void testExecute() {
         canvas.setSelectionGrid(new SelectionGrid(dr));
         cc.execute();
         pc.execute();
@@ -57,4 +58,21 @@ public class PasteCommandTest {
         Drawable dr3 = canvas.getDrawing().getDrawable(0);
         assertEquals(dr3, dr2);
     }
+
+    @Test
+    public void testUndo() {
+        canvas.setSelectionGrid(new SelectionGrid(dr)); // select rectangle
+        cc.execute(); // copy rectangle
+        pc.execute(); // paste rectangle
+
+        Point2D clickPoint = new Point2D.Double(82, 88);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        selectionTool.mouseLeftPressed(e);
+        Drawable dr2 = canvas.getSelectionGrid().getSelectedShape(); // pasted rectangle
+
+        pc.undo();
+
+        assertFalse(canvas.getDrawing().containsDrawable(dr2));
+    }
+
 }

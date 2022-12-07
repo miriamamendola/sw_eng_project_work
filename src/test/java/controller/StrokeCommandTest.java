@@ -1,5 +1,6 @@
 package controller;
 
+import drawing_software.controller.command.Command;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.StrokeCommand;
 import drawing_software.model.DrawableRectangle;
@@ -36,9 +37,32 @@ public class StrokeCommandTest {
     }
 
     @Test
-    public void execute() {
+    public void testExecute() {
         StrokeCommand command = new StrokeCommand(canvas, Color.blue);
         command.execute();
         assertEquals(rectangle.getStrokeColor(), Color.blue);
     }
+
+    @Test
+    public void testUndoShape() {
+        rectangle = new DrawableRectangle(20, 20);
+        rectangle.setSize(new Dimension(30, 30));
+        canvas.getDrawing().addDrawable(rectangle);
+        canvas.setSelectionGrid(new SelectionGrid(rectangle));
+        Command command = new StrokeCommand(canvas, Color.red);
+        command.execute();
+        command.undo();
+        assertEquals(rectangle.getStrokeColor(), Color.black);
+    }
+
+    @Test
+    public void testUndoColor() {
+        canvas.clearSelectedDrawable();
+        Command command = new StrokeCommand(canvas, Color.blue);
+        command.execute();
+        command.undo();
+        assertEquals(Color.black, canvas.getCurrentStrokeColor());
+    }
+
+
 }

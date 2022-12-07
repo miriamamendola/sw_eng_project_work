@@ -1,5 +1,6 @@
 package controller;
 
+import drawing_software.controller.command.Command;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.model.Drawable;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import javax.swing.*;
 import java.awt.geom.Point2D;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ShapeCommandTest {
@@ -51,6 +53,15 @@ public class ShapeCommandTest {
         shape = new DrawableEllipse(10, 10);
         new ShapeCommand(canvas, shape).execute();
         assertTrue(canvas.getDrawing().containsDrawable(shape));
+    }
+
+    @Test
+    public void testUndo() {
+        shape = new DrawableEllipse(10, 10);
+        Command shapeCommand = new ShapeCommand(canvas, shape);
+        shapeCommand.execute();
+        shapeCommand.undo();
+        assertFalse(canvas.getDrawing().containsDrawable(shape));
     }
 
 }

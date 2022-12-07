@@ -51,7 +51,7 @@ public class CanvasView extends JPanel implements ClipboardOwner {
                     currentTool.mouseLeftPressed(e);
                 else if (e.getButton() == MouseEvent.BUTTON3)
                     currentTool.mouseRightPressed(e);
-                ;
+
             }
 
             @Override

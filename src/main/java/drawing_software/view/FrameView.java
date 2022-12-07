@@ -152,6 +152,10 @@ public class FrameView {
         deleteMenuItem.setFocusable(false);
         editMenu.add(deleteMenuItem);
 
+        JMenuItem undoMenuItem = new UndoMenuItem(canvasView, invoker).createMenuItem();
+        deleteMenuItem.setFocusable(false);
+        editMenu.add(undoMenuItem);
+
         menuBar.add(editMenu);
 
         return menuBar;

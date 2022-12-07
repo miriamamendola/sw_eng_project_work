@@ -12,7 +12,7 @@ public class FillCommand implements Command {
     private final CanvasView canvas;
     private final Color color;
 
-    private Color previousShapeColor;
+    private Color previousColor;
 
     private Shape modifiedShape;
 
@@ -33,11 +33,22 @@ public class FillCommand implements Command {
 
         if (canvas.getSelectionGrid() != null) {
             modifiedShape = canvas.getSelectionGrid().getSelectedShape();
-            previousShapeColor = (Color) modifiedShape.getFillColor();
+            previousColor = (Color) modifiedShape.getFillColor();
             modifiedShape.setFillColor(color);
             canvas.repaint();
         } else {
+            previousColor = canvas.getCurrentFillColor();
             canvas.setCurrentFillColor(color);
         }
+    }
+
+    @Override
+    public void undo() {
+        if (modifiedShape == null) {
+            canvas.setCurrentFillColor(previousColor);
+        } else {
+            modifiedShape.setFillColor(previousColor);
+        }
+        canvas.repaint();
     }
 }

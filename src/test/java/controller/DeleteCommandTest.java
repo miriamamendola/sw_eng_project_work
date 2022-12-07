@@ -1,5 +1,6 @@
 package controller;
 
+import drawing_software.controller.command.Command;
 import drawing_software.controller.command.DeleteCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
@@ -85,5 +86,27 @@ public class DeleteCommandTest {
         new DeleteCommand(canvas).execute();
 
         assertFalse(canvas.getDrawing().containsDrawable(shape));
+    }
+
+    /**
+     * Given a shape added to the drawing, we delete it, when we execute the
+     * undo method, the shape must be back inside the drawing.
+     */
+    @Test
+    public void testUndo() {
+        DrawableEllipse shape = new DrawableEllipse(10, 10);
+        shape.setSize(new Dimension(10, 10));
+        canvas.getDrawing().addDrawable(shape);
+
+        Point2D clickPoint = new Point2D.Double(15, 15);
+        MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
+        selectionTool.mouseLeftPressed(e);
+
+        Command deleteCommand = new DeleteCommand(canvas);
+        deleteCommand.execute();
+
+        deleteCommand.undo();
+
+        assertTrue(canvas.getDrawing().containsDrawable(shape));
     }
 }

@@ -19,8 +19,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 
 public class CutCommandTest {
@@ -51,5 +50,18 @@ public class CutCommandTest {
         drawing_software.model.Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
         assertFalse(canvas.getDrawing().removeDrawable(dr));
         assertEquals(dr, copiedShape);
+    }
+
+    /**
+     * Given a shape, we execute the cut command on it. When we execute the undo method,
+     * the shape must go back inside the drawing.
+     */
+    @Test
+    public void testUndo() {
+        canvas.getDrawing().addDrawable(dr);
+        canvas.setSelectionGrid(new SelectionGrid(dr));
+        ct.execute();
+        ct.undo();
+        assertTrue(canvas.getDrawing().containsDrawable(dr));
     }
 }

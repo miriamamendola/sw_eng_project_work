@@ -36,8 +36,20 @@ public class StrokeCommand implements Command {
             modifiedShape.setStrokeColor(color);
             canvas.repaint();
         } else {
+            previousStrokeColor = canvas.getCurrentStrokeColor();
             canvas.setCurrentStrokeColor(color);
         }
+    }
+
+    @Override
+    public void undo() {
+        if (modifiedShape == null) {
+            canvas.setCurrentStrokeColor(previousStrokeColor);
+        } else {
+            modifiedShape.setStrokeColor(previousStrokeColor);
+        }
+
+        canvas.repaint();
     }
 }
 

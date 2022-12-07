@@ -178,11 +178,10 @@ public class SelectionTool implements Tool {
         canvas.getSelectionGrid().clearSelectedVertex();
         ratio = canvas.getSelectionGrid().getWidth() / canvas.getSelectionGrid().getHeight();
 
-        if (oldShapeLocation != null && !bounds.getLocation().equals(oldShapeLocation)) {
-            invoker.executeCommand(new MoveCommand(canvas, oldShapeLocation));
-        }
         if (oldShapeSize != null && !bounds.getSize().equals(oldShapeSize)) {
-            invoker.executeCommand(new ResizeCommand(canvas, startingPoint, oldShapeSize));
+            invoker.executeCommand(new ResizeCommand(canvas, selectedShape, oldShapeLocation, oldShapeSize));
+        } else if (oldShapeLocation != null && !bounds.getLocation().equals(oldShapeLocation)) {
+            invoker.executeCommand(new MoveCommand(canvas, selectedShape, oldShapeLocation));
         }
 
     }

@@ -34,5 +34,13 @@ public class ShapeCommand implements Command {
         canvas.getDrawing().addDrawable(shape);
     }
 
+    @Override
+    public void undo() {
 
+        if (shape != null) {
+            canvas.getDrawing().removeDrawable(shape);
+            canvas.repaint();
+        }
+
+    }
 }
