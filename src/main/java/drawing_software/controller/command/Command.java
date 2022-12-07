@@ -33,4 +33,8 @@ public interface Command {
         }
     }
 
+    default void undo() {
+        throw new UnsupportedOperationException();
+    }
+
 }
