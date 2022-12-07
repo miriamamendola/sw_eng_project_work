@@ -6,10 +6,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.view.colors.FillPanel;
 import drawing_software.view.colors.StrokePanel;
 import drawing_software.view.menu.*;
-import drawing_software.view.toolbar.EllipseToolbarItem;
-import drawing_software.view.toolbar.LineToolbarItem;
-import drawing_software.view.toolbar.RectangleToolbarItem;
-import drawing_software.view.toolbar.SelectionToolbarItem;
+import drawing_software.view.toolbar.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -187,6 +184,12 @@ public class FrameView {
         ellipseButton.setFocusable(false);
         group.add(ellipseButton);
         toolPanel.add(ellipseButton);
+
+        JToggleButton zoomInButton = new ZoomInToolbarItem(canvas, invoker).itemCreate();
+        zoomInButton.setFocusable(false);
+        group.add(zoomInButton);
+        toolPanel.add(zoomInButton);
+
 
         return toolPanel;
     }

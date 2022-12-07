@@ -14,8 +14,11 @@ import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.geom.Point2D;
 
-public class CanvasView extends JPanel implements ClipboardOwner {
+public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListener  {
 
     private Drawing drawing;
     private Drawable dummyDrawable;
@@ -29,12 +32,12 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
     private Drawable copiedShape;
 
-
+    private double scaleFactor = 1;
+    private Point2D scalePoint = new Point(0,0);
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
         currentTool = new SelectionTool(this, invoker);
         this.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
@@ -59,14 +62,17 @@ public class CanvasView extends JPanel implements ClipboardOwner {
                 currentTool.mouseReleased(e);
             }
         });
-
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 currentTool.mouseDragged(e);
             }
         });
+        this.addMouseWheelListener(this);
+
     }
+
+
 
     public Drawing getDrawing() {
         return drawing;
@@ -131,7 +137,7 @@ public class CanvasView extends JPanel implements ClipboardOwner {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d =(Graphics2D) g ;
 
         RenderingHints rh = new RenderingHints(
                 RenderingHints.KEY_ANTIALIASING,
@@ -141,10 +147,10 @@ public class CanvasView extends JPanel implements ClipboardOwner {
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 
         g2d.setStroke(new BasicStroke(1));
-
+        g2d.translate(scalePoint.getX(), scalePoint.getY());
+        g2d.scale(scaleFactor, scaleFactor);
+        g2d.translate(-scalePoint.getX(),- scalePoint.getY());
         for (Drawable d : this.drawing) {
-            //System.out.println("TROVATO");
-            //System.out.println(d.toString());
             d.draw(g2d);
         }
 
@@ -168,5 +174,14 @@ public class CanvasView extends JPanel implements ClipboardOwner {
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         System.out.println("ClipboardTest: Lost ownership");
+    }
+
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        this.scalePoint = e.getPoint();
+        System.out.println(scalePoint);
+        this.scaleFactor += (-e.getWheelRotation() * 0.2);
+        this.repaint();
     }
 }
