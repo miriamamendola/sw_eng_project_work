@@ -33,6 +33,11 @@ public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListe
     private Drawable copiedShape;
 
     private double scaleFactor = 1;
+
+    public void setScalePoint(Point2D scalePoint) {
+        this.scalePoint = scalePoint;
+    }
+
     private Point2D scalePoint = new Point(0,0);
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
@@ -150,6 +155,7 @@ public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListe
         g2d.translate(scalePoint.getX(), scalePoint.getY());
         g2d.scale(scaleFactor, scaleFactor);
         g2d.translate(-scalePoint.getX(),- scalePoint.getY());
+
         for (Drawable d : this.drawing) {
             d.draw(g2d);
         }
@@ -180,7 +186,6 @@ public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListe
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         this.scalePoint = e.getPoint();
-        System.out.println(scalePoint);
         this.scaleFactor += (-e.getWheelRotation() * 0.2);
         this.repaint();
     }

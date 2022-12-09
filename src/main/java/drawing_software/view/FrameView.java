@@ -10,10 +10,8 @@ import drawing_software.view.toolbar.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.awt.geom.Point2D;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -105,6 +103,28 @@ public class FrameView {
             }
         });
 
+        JScrollBar hbar=new JScrollBar(JScrollBar.HORIZONTAL, 30, 50, 0, 500);
+        JScrollBar vbar=new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 500);
+        class MyAdjustmentListener implements AdjustmentListener {
+            private int valueh =canvas.getX();
+            private int valuev=canvas.getY();
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                if(e.getSource().equals(hbar)){
+                    Point2D p = new Point(e.getValue(),valuev);
+                    canvas.setScalePoint(p);
+                }else{
+                    Point2D p = new Point(valueh,e.getValue());
+                    canvas.setScalePoint(p);
+                }
+                canvas.repaint();
+                frame.repaint();
+            }
+        }
+        MyAdjustmentListener list = new MyAdjustmentListener();
+        hbar.addAdjustmentListener(list);
+        vbar.addAdjustmentListener(list);
+        frame.getContentPane().add(hbar, BorderLayout.SOUTH);
+        frame.getContentPane().add(vbar, BorderLayout.EAST);
 
         return frame;
     }
