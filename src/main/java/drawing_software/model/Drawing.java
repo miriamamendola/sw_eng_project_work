@@ -79,14 +79,21 @@ public class Drawing implements Serializable, Iterable<Drawable> {
      * Allows to cycle BACKWARDS on every shape inside the data structure.
      * This means that the shapes will be cycled going from the last added to first
      * added one. This is useful when selecting overlapping shapes.
+     *
      * @return the iterator object.
      */
     public Iterator<Drawable> descendingIterator() {
         return listDrawables.descendingIterator();
     }
 
-    public int getDrawableIndex (Drawable drawable) {
-        int i =0;
+    /**
+     * Allows to obtain the index at which the drawable is located inside the structure (list).
+     *
+     * @param drawable is the drawable of which we want to find the position inside the list.
+     * @return the index.
+     */
+    public int getDrawableIndex(Drawable drawable) {
+        int i = 0;
         for (Drawable d : this.listDrawables) {
             if (d.equals(drawable)) {
                 return i;
@@ -96,10 +103,18 @@ public class Drawing implements Serializable, Iterable<Drawable> {
         return -1;
     }
 
+    /**
+     * Allows to add a Drawable to the first position of the list; other shapes will be shifted accordingly.
+     *
+     * @param d is the drawable to be placed first.
+     */
     public void addDrawableFirst(Drawable d) {
         listDrawables.addFirst(d);
     }
 
+    /**
+     * Allows to cycle through the drawing and print all the present Drawables.
+     */
     public void printDrawable() {
         int i = 0;
         for (Drawable d : this.listDrawables) {
