@@ -39,6 +39,7 @@ public class ShapeCommand implements Command {
 
         if (shape != null) {
             canvas.getDrawing().removeDrawable(shape);
+            canvas.clearSelectedDrawable();
             canvas.repaint();
         }
 

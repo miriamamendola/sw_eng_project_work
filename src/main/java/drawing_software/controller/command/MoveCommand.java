@@ -30,6 +30,7 @@ public class MoveCommand implements Command {
     public void undo() {
         if (selectedShape != null) {
             selectedShape.setLocation(oldShapeLocation);
+            canvas.clearSelectedDrawable();
             canvas.repaint();
         }
     }

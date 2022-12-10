@@ -32,6 +32,7 @@ public class DeleteCommand implements Command {
     public void undo() {
         if (selectedShape != null) {
             canvas.getDrawing().addDrawable(selectedShape);
+            canvas.clearSelectedDrawable();
             canvas.repaint();
         }
     }

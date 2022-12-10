@@ -61,6 +61,7 @@ public class PasteCommand implements Command {
     public void undo() {
         if (pastedShape != null) {
             canvas.getDrawing().removeDrawable(pastedShape);
+            canvas.clearSelectedDrawable();
             canvas.repaint();
         }
 

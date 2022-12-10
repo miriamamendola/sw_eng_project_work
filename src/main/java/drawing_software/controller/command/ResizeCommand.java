@@ -31,6 +31,7 @@ public class ResizeCommand implements Command {
     public void undo() {
         if (selectedShape != null) {
             selectedShape.setFrame(oldShapeLocation, oldShapeSize);
+            canvas.clearSelectedDrawable();
             canvas.repaint();
         }
     }
