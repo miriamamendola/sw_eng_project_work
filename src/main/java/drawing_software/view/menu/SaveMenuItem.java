@@ -9,6 +9,7 @@ import drawing_software.view.Window;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ public class SaveMenuItem extends MenuItemFactory implements ActionListener {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem saveMenuItem = new JMenuItem("Save");
+        saveMenuItem.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
         saveMenuItem.addActionListener(this);
         return saveMenuItem;
     }

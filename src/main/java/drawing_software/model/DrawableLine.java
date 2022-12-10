@@ -62,7 +62,7 @@ public class DrawableLine extends Line2D.Double implements Shape {
 
         DrawableLine that = (DrawableLine) o;
 
-        return Objects.equals(strokeColor, that.strokeColor);
+        return Objects.equals(strokeColor, that.strokeColor) && that.getP1().equals(this.getP1()) && that.getP2().equals(this.getP2());
     }
 
     @Override

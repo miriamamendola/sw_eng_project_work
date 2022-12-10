@@ -10,6 +10,7 @@ import drawing_software.view.Window;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
@@ -30,6 +31,8 @@ public class SaveAsMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem saveAsMenuItem = new JMenuItem("Save as...");
+
+        saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         saveAsMenuItem.addActionListener(new ActionListener() {
             /**
              * When the menu item is pressed, a new file dialog will show and the file
@@ -54,6 +57,8 @@ public class SaveAsMenuItem extends MenuItemFactory {
                         if (confirmed == JOptionPane.YES_OPTION) {
                             invoker.executeCommand(new SaveCommand(window, selectedFile));
                         }
+                    }else{
+                        invoker.executeCommand(new SaveCommand(window, selectedFile));
                     }
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger("root").info("No such file selected");

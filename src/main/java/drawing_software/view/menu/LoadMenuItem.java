@@ -9,6 +9,7 @@ import drawing_software.view.Window;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ public class LoadMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem loadMenuItem = new JMenuItem("Open...");
+        loadMenuItem.setAccelerator(KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
         loadMenuItem.addActionListener(new ActionListener() {
             /**
              * When the menu item is pressed, a new file dialog will show and the file
