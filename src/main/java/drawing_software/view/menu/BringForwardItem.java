@@ -8,20 +8,26 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BringForwardItem extends MenuItemFactory{
+/**
+ * Allows to create the apposite item in the "Edit" menu.
+ */
+public class BringForwardItem extends MenuItemFactory {
     public BringForwardItem(CanvasView canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 
+    /**
+     * Used to create the menu item to be pressed.
+     */
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem bringForwardMenuItem = new JMenuItem("Bring Forward");
         bringForwardMenuItem.addActionListener(new ActionListener() {
             /**
-             * When the menu item is pressed, a new file dialog will show and the file
-             * selected by the user will be used to load the drawing.
+             * When the menu item is pressed, the BringForward Command will be called and its actions
+             * will be executed.
              *
-             * @param e the event to be processed
+             * @param e the event to be processed.
              */
             @Override
             public void actionPerformed(ActionEvent e) {
