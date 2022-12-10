@@ -21,6 +21,8 @@ public class PasteCommand implements Command {
     private CanvasView canvas;
     private Point2D point;
 
+    private Shape pastedShape;
+
     public PasteCommand(CanvasView canvas, Point2D point) {
         this.canvas = canvas;
         this.point = point;
@@ -34,14 +36,15 @@ public class PasteCommand implements Command {
      */
     @Override
     public void execute() {
+        updateTitle(canvas);
         try {
             DataFlavor dataFlavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable tr = clipboard.getContents(this);
             Shape copiedShape = (Shape) tr.getTransferData(dataFlavor);
-            Shape copiedShape2 = copiedShape.clone();
-            canvas.getDrawing().addDrawable(copiedShape2);
-            copiedShape2.setLocation(point);
+            pastedShape = copiedShape.clone();
+            canvas.getDrawing().addDrawable(pastedShape);
+            pastedShape.setLocation(point);
             canvas.clearSelectedDrawable();
             canvas.repaint();
 
@@ -54,5 +57,13 @@ public class PasteCommand implements Command {
 
     }
 
+    @Override
+    public void undo() {
+        if (pastedShape != null) {
+            canvas.getDrawing().removeDrawable(pastedShape);
+            canvas.clearSelectedDrawable();
+            canvas.repaint();
+        }
 
+    }
 }

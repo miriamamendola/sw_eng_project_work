@@ -39,7 +39,7 @@ public class EllipseTool implements Tool {
      * @param mouseEvent the event to be processed
      */
     @Override
-    public void mousePressed(MouseEvent mouseEvent) {
+    public void mouseLeftPressed(MouseEvent mouseEvent) {
         this.startingPoint = mouseEvent.getPoint();
         ellipse = new DrawableEllipse(canvas.getCurrentFillColor(), canvas.getCurrentStrokeColor(), mouseEvent.getX(), mouseEvent.getY());
     }

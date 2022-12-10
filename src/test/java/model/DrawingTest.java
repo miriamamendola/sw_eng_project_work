@@ -5,6 +5,8 @@ import drawing_software.model.Drawing;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -43,5 +45,25 @@ public class DrawingTest {
     public void testContainsDrawable() {
         d.addDrawable(dr);
         assertTrue(d.containsDrawable(dr));
+    }
+
+    @Test
+    public void testGetDrawableIndex() {
+        DrawableRectangle dr2 = new DrawableRectangle(Color.cyan, Color.black, 30, 30);
+        DrawableRectangle dr3 = new DrawableRectangle(Color.cyan, Color.black, 30, 30);
+        d.addDrawable(dr);
+        d.addDrawable(dr2);
+        d.addDrawable(dr3);
+        assertEquals(1, d.getDrawableIndex(dr2)); //Should return index = 1
+    }
+
+    @Test
+    public void testAddDrawableFirst() {
+        DrawableRectangle dr2 = new DrawableRectangle(Color.cyan, Color.black, 30, 30);
+        DrawableRectangle dr3 = new DrawableRectangle(Color.cyan, Color.black, 40, 30);
+        d.addDrawable(dr2);
+        d.addDrawable(dr);
+        d.addDrawableFirst(dr3);
+        assertEquals(dr3, d.getDrawable(0));
     }
 }

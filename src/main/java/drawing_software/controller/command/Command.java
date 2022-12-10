@@ -1,5 +1,12 @@
 package drawing_software.controller.command;
 
+import drawing_software.Context;
+import drawing_software.Main;
+import drawing_software.view.CanvasView;
+
+import javax.swing.*;
+import java.io.File;
+
 /**
  * First step in implementing the Command design pattern; this interface is to
  * be then implemented by all the concrete commands that will then overwrite
@@ -14,4 +21,20 @@ public interface Command {
      * to be changed at runtime.
      */
     void execute();
+
+    default void updateTitle(CanvasView canvas) {
+        Context.getInstance().setSaved(false);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
+        File f = Context.getInstance().getCurrentFile();
+        if (f == null) {
+            frame.setTitle("untitled" + " * - " + Main.appTitle);
+        } else {
+            frame.setTitle(f.getName() + " * - " + Main.appTitle);
+        }
+    }
+
+    default void undo() {
+        throw new UnsupportedOperationException();
+    }
+
 }

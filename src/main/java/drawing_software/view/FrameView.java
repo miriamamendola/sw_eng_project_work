@@ -47,10 +47,23 @@ public class FrameView {
         frame.add(toolBar, BorderLayout.WEST);
 
         JPanel colorPanel = new JPanel();
-        fillPanel = (FillPanel) new FillPanel(canvas, invoker).createPanel();
-        strokePanel = new StrokePanel(canvas, invoker).createPanel();
-        colorPanel.add(fillPanel);
-        colorPanel.add(strokePanel);
+        colorPanel.add(new FillPanel(canvas, invoker).createPanel());
+        colorPanel.add(new StrokePanel(canvas, invoker).createPanel());
+        colorPanel.add(Box.createHorizontalStrut(50));
+        JCheckBox scale = new JCheckBox("Fixed proportions");
+        scale.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Context.getInstance().setFixed(true);
+                } else {
+                    Context.getInstance().setFixed(false);
+                }
+                ;
+            }
+        });
+        colorPanel.add(scale);
+
         frame.add(colorPanel, BorderLayout.SOUTH);
 
         JMenuBar menuBar = createMenuBar(canvas, invoker);
@@ -139,6 +152,10 @@ public class FrameView {
         JMenuItem deleteMenuItem = new DeleteMenuItem(canvasView, invoker).createMenuItem();
         deleteMenuItem.setFocusable(false);
         editMenu.add(deleteMenuItem);
+
+        JMenuItem undoMenuItem = new UndoMenuItem(canvasView, invoker).createMenuItem();
+        deleteMenuItem.setFocusable(false);
+        editMenu.add(undoMenuItem);
 
         menuBar.add(editMenu);
 

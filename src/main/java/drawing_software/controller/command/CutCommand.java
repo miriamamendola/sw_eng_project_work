@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 public class CutCommand implements Command {
     private CanvasView canvas;
 
+    private Drawable selectedShape;
+
     public CutCommand(CanvasView canvas) {
         this.canvas = canvas;
     }
@@ -24,8 +26,9 @@ public class CutCommand implements Command {
      */
     @Override
     public void execute() {
+        updateTitle(canvas);
         try {
-            Drawable selectedShape = canvas.getSelectionGrid().getSelectedShape();
+            selectedShape = canvas.getSelectionGrid().getSelectedShape();
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             TrasferableWrapper tr = new TrasferableWrapper(selectedShape);
             canvas.getDrawing().removeDrawable(selectedShape);
@@ -34,6 +37,15 @@ public class CutCommand implements Command {
             canvas.repaint();
         } catch (NullPointerException e) {
             Logger.getLogger("root").warning("Cut command: no selected shape");
+        }
+    }
+
+    @Override
+    public void undo() {
+        if (selectedShape != null) {
+            canvas.getDrawing().addDrawable(selectedShape);
+            canvas.clearSelectedDrawable();
+            canvas.repaint();
         }
     }
 

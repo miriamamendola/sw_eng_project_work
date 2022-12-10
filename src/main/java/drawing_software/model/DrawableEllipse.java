@@ -101,6 +101,7 @@ public class DrawableEllipse extends Ellipse2D.Double implements Shape {
     public void setSize(Dimension size) {
         this.setFrame(new Point2D.Double(this.getX(), this.getY()), size);
     }
+
     @Override
     public Rectangle getBounds() {
         return super.getBounds();

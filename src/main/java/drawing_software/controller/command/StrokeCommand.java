@@ -2,40 +2,54 @@ package drawing_software.controller.command;
 
 import drawing_software.model.Shape;
 import drawing_software.view.CanvasView;
-import drawing_software.view.colors.ColorButton;
 
-import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Implements a ConcreteCommand class; in this case, the Command is the Stroke command.
+ */
 public class StrokeCommand implements Command {
 
     private final CanvasView canvas;
 
-    private final ColorButton source;
+    private final Color color;
 
     private Color previousStrokeColor;
 
     private Shape modifiedShape;
 
-    public StrokeCommand(CanvasView canvas, ColorButton source) {
+    public StrokeCommand(CanvasView canvas, Color color) {
         this.canvas = canvas;
-        this.source = source;
+        this.color = color;
     }
 
+    /**
+     * Updates the title of the window. Then, if the user has selected a shape, changes the shape color
+     * its color accordingly to the color chosen. If no shape is selected, it changes the
+     * canvas stroke color for new shapes.
+     */
     @Override
     public void execute() {
-        Color firstColor = canvas.getCurrentStrokeColor();
-        Color color = JColorChooser.showDialog(canvas, "Select color", firstColor);
+        updateTitle(canvas);
         if (canvas.getSelectionGrid() != null) {
             modifiedShape = canvas.getSelectionGrid().getSelectedShape();
             previousStrokeColor = (Color) modifiedShape.getStrokeColor();
             modifiedShape.setStrokeColor(color);
-            source.changeColor((Color) modifiedShape.getStrokeColor());
             canvas.repaint();
         } else {
-            source.changeColor(color);
+            previousStrokeColor = canvas.getCurrentStrokeColor();
             canvas.setCurrentStrokeColor(color);
         }
+    }
+
+    @Override
+    public void undo() {
+        if (modifiedShape == null) {
+            canvas.setCurrentStrokeColor(previousStrokeColor);
+        } else {
+            modifiedShape.setStrokeColor(previousStrokeColor);
+        }
+
+        canvas.repaint();
     }
 }
 

@@ -9,20 +9,31 @@ public class DeleteCommand implements Command {
 
     private final CanvasView canvas;
 
+    private Shape selectedShape;
+
     public DeleteCommand(CanvasView canvas) {
         this.canvas = canvas;
     }
 
     @Override
     public void execute() {
+        updateTitle(canvas);
         try {
-            Shape selectedShape = (Shape) canvas.getSelectionGrid().getSelectedShape();
-
+            selectedShape = (Shape) canvas.getSelectionGrid().getSelectedShape();
             canvas.getDrawing().removeDrawable(selectedShape);
             canvas.clearSelectedDrawable();
             canvas.repaint();
         } catch (NullPointerException e) {
             Logger.getLogger("root").warning("Delete command: no selected shape");
+        }
+    }
+
+    @Override
+    public void undo() {
+        if (selectedShape != null) {
+            canvas.getDrawing().addDrawable(selectedShape);
+            canvas.clearSelectedDrawable();
+            canvas.repaint();
         }
     }
 }
