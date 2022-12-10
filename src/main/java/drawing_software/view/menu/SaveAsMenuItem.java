@@ -5,6 +5,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.SaveCommand;
 import drawing_software.view.Canvas;
 import drawing_software.view.FileDialog;
+import drawing_software.view.Window;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,9 +16,15 @@ import java.util.logging.Logger;
 
 public class SaveAsMenuItem extends MenuItemFactory {
 
+    private Window window;
 
     public SaveAsMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
+    }
+
+    public SaveAsMenuItem(Window window, Invoker invoker) {
+        super(window.getCanvas(), invoker);
+        this.window = window;
     }
 
     @Override
@@ -45,7 +52,7 @@ public class SaveAsMenuItem extends MenuItemFactory {
                         int confirmed = JOptionPane.showConfirmDialog(null, message, Main.appTitle, JOptionPane.YES_NO_OPTION);
 
                         if (confirmed == JOptionPane.YES_OPTION) {
-                            invoker.executeCommand(new SaveCommand(canvas, selectedFile));
+                            invoker.executeCommand(new SaveCommand(window, selectedFile));
                         }
                     }
                 } catch (FileNotFoundException ex) {

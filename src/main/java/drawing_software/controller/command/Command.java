@@ -1,11 +1,6 @@
 package drawing_software.controller.command;
 
-import drawing_software.Context;
-import drawing_software.Main;
 import drawing_software.view.Canvas;
-
-import javax.swing.*;
-import java.io.File;
 
 /**
  * First step in implementing the Command design pattern; this interface is to
@@ -23,14 +18,7 @@ public interface Command {
     void execute();
 
     default void updateTitle(Canvas canvas) {
-        Context.getInstance().setSaved(false);
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
-        File f = Context.getInstance().getCurrentFile();
-        if (f == null) {
-            frame.setTitle("untitled" + " * - " + Main.appTitle);
-        } else {
-            frame.setTitle(f.getName() + " * - " + Main.appTitle);
-        }
+        canvas.firePropertyChange("MODIFIED", false, true);
     }
 
     default void undo() {

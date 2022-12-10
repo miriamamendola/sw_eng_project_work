@@ -1,10 +1,7 @@
 package drawing_software.controller.command;
 
-import drawing_software.Context;
-import drawing_software.Main;
-import drawing_software.view.Canvas;
+import drawing_software.view.Window;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,18 +12,18 @@ import java.io.ObjectOutputStream;
  */
 public class SaveCommand implements Command {
 
-    private final Canvas canvas;
+    private final Window window;
     private final File file;
 
     /**
      * Allows the ConcreteCommand object to have a reference to the
      * receiver.
      *
-     * @param canvas is the reference to the receiver which will perform the required action.
+     * @param window is the reference to the receiver which will perform the required action.
      * @param file   is the file to be saved.
      */
-    public SaveCommand(Canvas canvas, File file) {
-        this.canvas = canvas;
+    public SaveCommand(Window window, File file) {
+        this.window = window;
         this.file = file;
     }
 
@@ -41,11 +38,9 @@ public class SaveCommand implements Command {
     @Override
     public void execute() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            Context.getInstance().setCurrentFile(file);
-            Context.getInstance().setSaved(true);
-            oos.writeObject(canvas.getDrawing());
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
-            frame.setTitle(file.getName() + " - " + Main.appTitle);
+            window.setCurrentFile(file);
+            window.getCanvas().firePropertyChange("MODIFIED", true, false);
+            oos.writeObject(window.getCanvas().getDrawing());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

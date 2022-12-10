@@ -1,6 +1,5 @@
 package drawing_software.view;
 
-import drawing_software.Context;
 import drawing_software.controller.CanvasController;
 import drawing_software.controller.command.Invoker;
 import drawing_software.view.colors.FillPanel;
@@ -14,6 +13,7 @@ import drawing_software.view.toolbar.SelectionToolbarItem;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.io.File;
 import java.net.URL;
 
 
@@ -32,6 +32,7 @@ public class Window extends JFrame {
 
     private final static int whiteIntensity = 230;
 
+    private File currentFile;
 
     public Window(String appTitle) {
         super("untitled - " + appTitle);
@@ -66,9 +67,9 @@ public class Window extends JFrame {
         checkBoxScale = new JCheckBox("Fixed proportions");
         checkBoxScale.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                Context.getInstance().setFixed(true);
+                canvas.setFixedResize(true);
             } else {
-                Context.getInstance().setFixed(false);
+                canvas.setFixedResize(false);
             }
         });
         bottomPanel.add(checkBoxScale);
@@ -103,15 +104,15 @@ public class Window extends JFrame {
         JMenu fileMenu = new JMenu("File");
         fileMenu.setFocusable(false);
 
-        JMenuItem loadMenuItem = new LoadMenuItem(canvas, invoker).createMenuItem();
+        JMenuItem loadMenuItem = new LoadMenuItem(this, invoker).createMenuItem();
         loadMenuItem.setFocusable(false);
         fileMenu.add(loadMenuItem);
 
-        JMenuItem saveMenuItem = new SaveMenuItem(canvas, invoker).createMenuItem();
+        JMenuItem saveMenuItem = new SaveMenuItem(this, invoker).createMenuItem();
         saveMenuItem.setFocusable(false);
         fileMenu.add(saveMenuItem);
 
-        JMenuItem saveAsMenuItem = new SaveAsMenuItem(canvas, invoker).createMenuItem();
+        JMenuItem saveAsMenuItem = new SaveAsMenuItem(this, invoker).createMenuItem();
         saveAsMenuItem.setFocusable(false);
         fileMenu.add(saveAsMenuItem);
 
@@ -222,5 +223,13 @@ public class Window extends JFrame {
 
     public JMenuItem getUndoMenuItem() {
         return undoMenuItem;
+    }
+
+    public File getCurrentFile() {
+        return currentFile;
+    }
+
+    public void setCurrentFile(File currentFile) {
+        this.currentFile = currentFile;
     }
 }

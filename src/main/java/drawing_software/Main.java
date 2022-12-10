@@ -24,13 +24,10 @@ public class Main {
             System.setProperty("apple.awt.application.appearance", "system");
         }
         FlatDarkLaf.setup();
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Logger logger = Logger.getLogger("root");
-                logger.setLevel(Level.ALL);
-                Context.getInstance().setSaved(true);
-                WindowController windowController = new WindowController(appTitle);
-            }
+        SwingUtilities.invokeLater(() -> {
+            Logger logger = Logger.getLogger("root");
+            logger.setLevel(Level.ALL);
+            WindowController windowController = new WindowController(appTitle);
         });
     }
 }

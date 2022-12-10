@@ -17,7 +17,9 @@ import java.util.logging.Logger;
 public class Canvas extends JPanel implements ClipboardOwner {
 
     private Drawing drawing;
+
     private Drawable dummyDrawable;
+
     private Tool currentTool;
 
     private Color currentFillColor;
@@ -28,6 +30,7 @@ public class Canvas extends JPanel implements ClipboardOwner {
 
     private Drawable copiedShape;
 
+    private boolean fixedResize;
     public Canvas(Invoker invoker) {
         this.drawing = new Drawing();
         currentTool = new SelectionTool(this, invoker);
@@ -136,5 +139,13 @@ public class Canvas extends JPanel implements ClipboardOwner {
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         Logger.getLogger("root").info("ClipboardTest: Lost ownership");
+    }
+
+    public boolean isFixedResize() {
+        return fixedResize;
+    }
+
+    public void setFixedResize(boolean fixedResize) {
+        this.fixedResize = fixedResize;
     }
 }

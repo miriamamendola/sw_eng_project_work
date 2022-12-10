@@ -112,15 +112,5 @@ public class Drawing implements Serializable, Iterable<Drawable> {
         listDrawables.addFirst(d);
     }
 
-    /**
-     * Allows to cycle through the drawing and print all the present Drawables.
-     */
-    public void printDrawable() {
-        int i = 0;
-        for (Drawable d : this.listDrawables) {
-            System.out.println(i);
-            System.out.println(d.toString());
-            i++;
-        }
-    }
+
 }

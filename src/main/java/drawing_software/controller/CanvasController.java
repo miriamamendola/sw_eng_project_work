@@ -17,7 +17,6 @@ public class CanvasController implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(canvas.getCurrentTool());
         if (e.getButton() == MouseEvent.BUTTON1) {
             canvas.getCurrentTool().mouseLeftClicked(e);
         } else if (e.getButton() == MouseEvent.BUTTON3) {

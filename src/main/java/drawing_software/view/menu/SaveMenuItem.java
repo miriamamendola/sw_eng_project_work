@@ -1,10 +1,10 @@
 package drawing_software.view.menu;
 
-import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.SaveCommand;
 import drawing_software.view.Canvas;
 import drawing_software.view.FileDialog;
+import drawing_software.view.Window;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,9 +15,15 @@ import java.util.logging.Logger;
 
 public class SaveMenuItem extends MenuItemFactory implements ActionListener {
 
+    private Window window;
 
     public SaveMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
+    }
+
+    public SaveMenuItem(Window window, Invoker invoker) {
+        super(window.getCanvas(), invoker);
+        this.window = window;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class SaveMenuItem extends MenuItemFactory implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        File selectedFile = Context.getInstance().getCurrentFile();
+        File selectedFile = window.getCurrentFile();
         if (selectedFile == null) {
             FileDialog fileDialog = new FileDialog();
             try {
@@ -46,7 +52,7 @@ public class SaveMenuItem extends MenuItemFactory implements ActionListener {
                 Logger.getLogger("root").info("No such file selected");
             }
         }
-        invoker.executeCommand(new SaveCommand(canvas, selectedFile));
+        invoker.executeCommand(new SaveCommand(window, selectedFile));
 
     }
 }

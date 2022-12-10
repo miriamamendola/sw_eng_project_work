@@ -46,6 +46,6 @@ public class CopyCommand implements Command, ClipboardOwner {
      */
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
-        System.out.println("ClipboardTest: Lost ownership");
+        Logger.getLogger("root").info("ClipboardTest: Lost ownership");
     }
 }

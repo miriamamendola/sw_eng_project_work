@@ -1,6 +1,5 @@
 package controller;
 
-import drawing_software.Context;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
 import drawing_software.model.DrawableLine;
@@ -104,7 +103,7 @@ public class SelectionToolTest {
 
     @Test
     public void testResizingShape() {
-        Context.getInstance().setFixed(true);
+        canvas.setFixedResize(true);
         DrawableRectangle testRectangle = new DrawableRectangle(0, 0);
         testRectangle.setSize(new Dimension(30, 50));
         canvas.getDrawing().addDrawable(testRectangle);

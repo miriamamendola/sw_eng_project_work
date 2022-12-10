@@ -1,6 +1,5 @@
 package drawing_software.controller.tool.handler;
 
-import drawing_software.Context;
 import drawing_software.controller.tool.MouseRequest;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
@@ -55,7 +54,7 @@ public class ResizeHandler extends Handler {
         double x = min(startingPoint.getX(), mouseEvent.getX());
         double y = min(startingPoint.getY(), mouseEvent.getY());
         double width, height;
-        if (Context.getInstance().isFixed()) {                                   //fixed proportions - resize
+        if (canvas.isFixedResize()) {                                   //fixed proportions - resize
             height = abs(startingPoint.getY() - mouseEvent.getY());
             width = height * request.getRatio();
         } else {                                                                   //stretch

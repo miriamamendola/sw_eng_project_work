@@ -1,11 +1,8 @@
 package drawing_software.controller.command;
 
-import drawing_software.Context;
-import drawing_software.Main;
 import drawing_software.model.Drawing;
-import drawing_software.view.Canvas;
+import drawing_software.view.Window;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,18 +13,18 @@ import java.io.ObjectInputStream;
  */
 public class LoadCommand implements Command {
 
-    private final Canvas canvas;
+    private final Window window;
     private final File file;
 
     /**
      * Allows the ConcreteCommand object to have a reference to the
      * receiver.
      *
-     * @param canvas is the reference to the receiver which will perform the required action.
+     * @param window is the reference to the receiver which will perform the required action.
      * @param file   is the file to be loaded.
      */
-    public LoadCommand(Canvas canvas, File file) {
-        this.canvas = canvas;
+    public LoadCommand(Window window, File file) {
+        this.window = window;
         this.file = file;
     }
 
@@ -40,15 +37,10 @@ public class LoadCommand implements Command {
     @Override
     public void execute() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            canvas.setDrawing((Drawing) ois.readObject());
-            Context.getInstance().setSaved(true);
-
-            Context.getInstance().setCurrentFile(file);
-
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
-            frame.setTitle(file.getName() + " - " + Main.appTitle);
-
-            canvas.repaint();
+            window.getCanvas().setDrawing((Drawing) ois.readObject());
+            window.setCurrentFile(file);
+            window.getCanvas().firePropertyChange("MODIFIED", true, false);
+            window.getCanvas().repaint();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -6,11 +6,11 @@ import drawing_software.controller.command.LoadCommand;
 import drawing_software.controller.command.SaveCommand;
 import drawing_software.model.*;
 import drawing_software.view.Canvas;
+import drawing_software.view.Window;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,21 +31,22 @@ public class LoadCommandTest {
 
     private Invoker invoker;
 
+
     @Before
     public void setUp() {
-        JFrame frame = new JFrame();
+        Window window = new Window("title");
         invoker = new Invoker();
         canvas = new Canvas(invoker);
-        frame.add(canvas);
+        window.add(canvas);
 
         canvas.getDrawing().addDrawable(new DrawableRectangle(1, 1));
         canvas.getDrawing().addDrawable(new DrawableEllipse(4, 3));
         canvas.getDrawing().addDrawable(new DrawableLine(new Point2D.Double(10, 4), new Point2D.Double(20, 8)));
 
         file = new File("./testfile.draw");
-        new SaveCommand(canvas, file).execute();
+        new SaveCommand(window, file).execute();
 
-        loadCommand = new LoadCommand(canvas, file);
+        loadCommand = new LoadCommand(window, file);
     }
 
     @Test

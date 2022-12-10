@@ -1,6 +1,5 @@
 package drawing_software.controller;
 
-import drawing_software.Context;
 import drawing_software.Main;
 import drawing_software.controller.tool.LineTool;
 import drawing_software.controller.tool.SelectionTool;
@@ -19,6 +18,7 @@ import java.util.logging.Logger;
 
 public class WindowController {
     private final Window window;
+    private boolean modified = false;
 
     public WindowController(String appTitle) {
         window = new Window(appTitle);
@@ -29,14 +29,14 @@ public class WindowController {
             public void windowClosing(WindowEvent windowEvent) {
                 //check if modified
                 Logger.getLogger("root").info("Closing...");
-                if (Context.getInstance().isSaved()) {
+                if (!modified) {
                     window.dispose();
                 } else {
                     String title;
-                    if (Context.getInstance().getCurrentFile() == null) {
+                    if (window.getCurrentFile() == null) {
                         title = "untitled";
                     } else {
-                        title = Context.getInstance().getCurrentFile().getName();
+                        title = window.getCurrentFile().getName();
                     }
                     String message = "Do you want to save changes to " + title + " ? ";
 
@@ -45,7 +45,7 @@ public class WindowController {
                             JOptionPane.YES_NO_CANCEL_OPTION);
 
                     if (confirmed == JOptionPane.YES_OPTION) {
-                        new SaveMenuItem(window.getCanvas(), window.getInvoker()).actionPerformed(null);
+                        new SaveMenuItem(window, window.getInvoker()).actionPerformed(null);
                         window.dispose();
                     } else if (confirmed == JOptionPane.NO_OPTION) {
                         window.dispose();
@@ -99,6 +99,22 @@ public class WindowController {
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                 setCheckBoxScaleVisible(propertyChangeEvent.getNewValue() instanceof SelectionTool);
                 setFillPanelEnabled(!(propertyChangeEvent.getNewValue() instanceof LineTool));
+            }
+        });
+
+        window.getCanvas().addPropertyChangeListener("MODIFIED", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                modified = (boolean) propertyChangeEvent.getNewValue();
+                if (modified) {
+                    if (window.getCurrentFile() == null) {
+                        window.setTitle("untitled" + " * - " + Main.appTitle);
+                    } else {
+                        window.setTitle(window.getCurrentFile().getName() + " * - " + Main.appTitle);
+                    }
+                } else {
+                    window.setTitle(window.getCurrentFile().getName() + " - " + Main.appTitle);
+                }
             }
         });
 

@@ -4,6 +4,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.LoadCommand;
 import drawing_software.view.Canvas;
 import drawing_software.view.FileDialog;
+import drawing_software.view.Window;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +15,15 @@ import java.util.logging.Logger;
 
 public class LoadMenuItem extends MenuItemFactory {
 
+    private Window window;
 
     public LoadMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
+    }
+
+    public LoadMenuItem(Window window, Invoker invoker) {
+        super(window.getCanvas(), invoker);
+        this.window = window;
     }
 
     @Override
@@ -40,7 +47,7 @@ public class LoadMenuItem extends MenuItemFactory {
                     Logger.getLogger("root").info("No such file selected");
                 }
 
-                invoker.executeCommand(new LoadCommand(canvas, selectedFile));
+                invoker.executeCommand(new LoadCommand(window, selectedFile));
             }
         });
         return loadMenuItem;
