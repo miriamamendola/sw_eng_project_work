@@ -39,6 +39,8 @@ public class RectangleTool implements Tool {
      */
     @Override
     public void mouseLeftPressed(MouseEvent mouseEvent) {
+        mouseEvent.translatePoint((int) canvas.getScalePoint().getX(), (int) canvas.getScalePoint().getY());
+
         this.rect = new DrawableRectangle(canvas.getCurrentFillColor(), canvas.getCurrentStrokeColor(), mouseEvent.getX(), mouseEvent.getY());
         this.startingPoint = mouseEvent.getPoint();
     }
@@ -51,6 +53,8 @@ public class RectangleTool implements Tool {
      */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
+        mouseEvent.translatePoint((int) canvas.getScalePoint().getX(), (int) canvas.getScalePoint().getY());
+
         double x = min(startingPoint.getX(), mouseEvent.getX());
         double y = min(startingPoint.getY(), mouseEvent.getY());
         double width = abs(startingPoint.getX() - mouseEvent.getX());
@@ -69,6 +73,8 @@ public class RectangleTool implements Tool {
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        mouseEvent.translatePoint((int) canvas.getScalePoint().getX(), (int) canvas.getScalePoint().getY());
+
         if (rect.getWidth() > 0 && rect.getHeight() > 0) {
             invoker.executeCommand(new ShapeCommand(canvas, rect));
         }

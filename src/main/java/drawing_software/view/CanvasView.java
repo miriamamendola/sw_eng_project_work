@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListener  {
@@ -32,13 +33,35 @@ public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListe
 
     private Drawable copiedShape;
 
+    public AffineTransform getAt() {
+        return at;
+    }
+
+    public void setAt(AffineTransform at) {
+        this.at = at;
+    }
+
+    private AffineTransform at = new AffineTransform();
     private double scaleFactor = 1;
 
+    public double getScaleFactor() {
+        return scaleFactor;
+    }
+
+    public void setScaleFactor(double scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
+
+
+
+    private Point2D scalePoint = new Point(0,0);
     public void setScalePoint(Point2D scalePoint) {
         this.scalePoint = scalePoint;
     }
 
-    private Point2D scalePoint = new Point(0,0);
+    public Point2D getScalePoint() {
+        return scalePoint;
+    }
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
         currentTool = new SelectionTool(this, invoker);
@@ -74,9 +97,11 @@ public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListe
             }
         });
         this.addMouseWheelListener(this);
-
     }
-
+    @Override
+    public Dimension getPreferredSize(){
+        return new Dimension(800,600);
+    }
 
 
     public Drawing getDrawing() {
@@ -150,11 +175,11 @@ public class CanvasView extends JPanel implements ClipboardOwner,MouseWheelListe
         g2d.setRenderingHints(rh);
 
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
-
         g2d.setStroke(new BasicStroke(1));
-        g2d.translate(scalePoint.getX(), scalePoint.getY());
+        /*g2d.translate(scalePoint.getX(), scalePoint.getY());
         g2d.scale(scaleFactor, scaleFactor);
-        g2d.translate(-scalePoint.getX(),- scalePoint.getY());
+        g2d.translate(-scalePoint.getX(),- scalePoint.getY());*/
+        g2d.transform(at);
 
         for (Drawable d : this.drawing) {
             d.draw(g2d);

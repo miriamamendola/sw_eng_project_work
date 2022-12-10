@@ -33,7 +33,21 @@ public class FrameView {
 
         CanvasView canvas = new CanvasView(invoker);
         canvas.setFocusable(true);
-        frame.add(canvas);
+        JPanel p= new JPanel();
+        p.add(canvas);
+        p.setBackground(Color.LIGHT_GRAY);
+        p.setOpaque(true);
+        p.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                canvas.setScalePoint(e.getPoint());
+                double n = canvas.getScaleFactor();
+                n= n+(-e.getWheelRotation()*0.2);
+                canvas.setScaleFactor(n);
+            }
+        });
+
+        frame.add(p);
 
         JToolBar toolBar = createToolBar(canvas, invoker);
         toolBar.setFocusable(false);
@@ -103,19 +117,28 @@ public class FrameView {
             }
         });
 
-        JScrollBar hbar=new JScrollBar(JScrollBar.HORIZONTAL, 30, 50, 0, 500);
-        JScrollBar vbar=new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 500);
+        JScrollBar hbar=new JScrollBar(JScrollBar.HORIZONTAL, 0, 50, 0, 500);
+        JScrollBar vbar=new JScrollBar(JScrollBar.VERTICAL, 0, 40, 0, 500);
         class MyAdjustmentListener implements AdjustmentListener {
-            private int valueh =canvas.getX();
-            private int valuev=canvas.getY();
+            private int valueh;
+            private int valuev;
+            public MyAdjustmentListener(){
+                valueh =canvas.getX();
+                valuev=canvas.getY();
+            }
             public void adjustmentValueChanged(AdjustmentEvent e) {
                 if(e.getSource().equals(hbar)){
-                    Point2D p = new Point(e.getValue(),valuev);
+                    Point2D p = new Point(-e.getValue(),-valuev);
+                    valueh= e.getValue();
+                    System.out.println("horizontal");
                     canvas.setScalePoint(p);
                 }else{
-                    Point2D p = new Point(valueh,e.getValue());
+                    Point2D p = new Point(-valueh,-e.getValue());
+                    valuev=e.getValue();
+                    System.out.println("vertical");
                     canvas.setScalePoint(p);
                 }
+                System.out.println("repaint");
                 canvas.repaint();
                 frame.repaint();
             }
@@ -123,7 +146,7 @@ public class FrameView {
         MyAdjustmentListener list = new MyAdjustmentListener();
         hbar.addAdjustmentListener(list);
         vbar.addAdjustmentListener(list);
-        frame.getContentPane().add(hbar, BorderLayout.SOUTH);
+        //frame.getContentPane().add(hbar, BorderLayout.SOUTH);
         frame.getContentPane().add(vbar, BorderLayout.EAST);
 
         return frame;
