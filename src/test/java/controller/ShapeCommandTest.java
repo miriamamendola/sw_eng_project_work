@@ -64,4 +64,5 @@ public class ShapeCommandTest {
         assertFalse(canvas.getDrawing().containsDrawable(shape));
     }
 
+
 }

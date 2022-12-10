@@ -46,6 +46,15 @@ public class Drawing implements Serializable, Iterable<Drawable> {
         return this.listDrawables.remove(d);
     }
 
+    /**
+     * Allows to retrieve (and the remove) a Drawable object previously added to the data structure.
+     * This DOES remove the Drawable shape from the structure.
+     *
+     * @param index is the index at which remove the drawable.
+     */
+    public Drawable removeDrawable(int index) {
+        return this.listDrawables.remove(index);
+    }
 
     /**
      * Allows to verify whether a Drawable shape is present inside the data structure
@@ -70,9 +79,48 @@ public class Drawing implements Serializable, Iterable<Drawable> {
      * Allows to cycle BACKWARDS on every shape inside the data structure.
      * This means that the shapes will be cycled going from the last added to first
      * added one. This is useful when selecting overlapping shapes.
+     *
      * @return the iterator object.
      */
     public Iterator<Drawable> descendingIterator() {
         return listDrawables.descendingIterator();
+    }
+
+    /**
+     * Allows to obtain the index at which the drawable is located inside the structure (list).
+     *
+     * @param drawable is the drawable of which we want to find the position inside the list.
+     * @return the index.
+     */
+    public int getDrawableIndex(Drawable drawable) {
+        int i = 0;
+        for (Drawable d : this.listDrawables) {
+            if (d.equals(drawable)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    /**
+     * Allows to add a Drawable to the first position of the list; other shapes will be shifted accordingly.
+     *
+     * @param d is the drawable to be placed first.
+     */
+    public void addDrawableFirst(Drawable d) {
+        listDrawables.addFirst(d);
+    }
+
+    /**
+     * Allows to cycle through the drawing and print all the present Drawables.
+     */
+    public void printDrawable() {
+        int i = 0;
+        for (Drawable d : this.listDrawables) {
+            System.out.println(i);
+            System.out.println(d.toString());
+            i++;
+        }
     }
 }

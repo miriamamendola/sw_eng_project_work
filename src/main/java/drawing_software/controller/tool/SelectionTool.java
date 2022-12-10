@@ -9,10 +9,7 @@ import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
 import drawing_software.model.Vertex;
 import drawing_software.view.CanvasView;
-import drawing_software.view.menu.CopyMenuItem;
-import drawing_software.view.menu.CutMenuItem;
-import drawing_software.view.menu.DeleteMenuItem;
-import drawing_software.view.menu.PasteMenuItem;
+import drawing_software.view.menu.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -205,6 +202,15 @@ public class SelectionTool implements Tool {
         deleteMenuItem.setFocusable(false);
         popupMenu.add(deleteMenuItem);
         popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
+
+        JMenuItem bringForward = new BringForwardItem(canvas, invoker).createMenuItem();
+        bringForward.setFocusable(false);
+        popupMenu.add(bringForward);
+
+        JMenuItem bringBackward = new BringBackwardItem(canvas, invoker).createMenuItem();
+        bringBackward.setFocusable(false);
+        popupMenu.add(bringBackward);
+
     }
 
 }
