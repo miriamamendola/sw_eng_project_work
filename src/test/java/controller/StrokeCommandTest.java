@@ -5,7 +5,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.StrokeCommand;
 import drawing_software.model.DrawableRectangle;
 import drawing_software.model.SelectionGrid;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import drawing_software.view.colors.ColorButton;
 import drawing_software.view.colors.FillPanel;
 import org.junit.Before;
@@ -17,7 +17,7 @@ import java.awt.*;
 import static org.junit.Assert.assertEquals;
 
 public class StrokeCommandTest {
-    private CanvasView canvas;
+    private Canvas canvas;
 
     private ColorButton strokeButton;
     private DrawableRectangle rectangle;
@@ -26,7 +26,7 @@ public class StrokeCommandTest {
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
         Invoker invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
         FillPanel panel = (FillPanel) new FillPanel(canvas, invoker).createPanel();
         strokeButton = panel.getButton();

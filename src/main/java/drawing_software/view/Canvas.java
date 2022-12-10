@@ -12,10 +12,9 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.logging.Logger;
 
-public class CanvasView extends JPanel implements ClipboardOwner {
+public class Canvas extends JPanel implements ClipboardOwner {
 
     private Drawing drawing;
     private Drawable dummyDrawable;
@@ -30,42 +29,10 @@ public class CanvasView extends JPanel implements ClipboardOwner {
     private Drawable copiedShape;
 
 
-    public CanvasView(Invoker invoker) {
+    public Canvas(Invoker invoker) {
         this.drawing = new Drawing();
         currentTool = new SelectionTool(this, invoker);
-        this.addMouseListener(new MouseAdapter() {
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    currentTool.mouseLeftClicked(e);
-                } else if (e.getButton() == MouseEvent.BUTTON3) {
-                    currentTool.mouseRightClicked(e);
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-                if (e.getButton() == MouseEvent.BUTTON1)
-                    currentTool.mouseLeftPressed(e);
-                else if (e.getButton() == MouseEvent.BUTTON3)
-                    currentTool.mouseRightPressed(e);
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                currentTool.mouseReleased(e);
-            }
-        });
-
-        this.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                currentTool.mouseDragged(e);
-            }
-        });
     }
 
     public Drawing getDrawing() {
@@ -143,8 +110,6 @@ public class CanvasView extends JPanel implements ClipboardOwner {
         g2d.setStroke(new BasicStroke(1));
 
         for (Drawable d : this.drawing) {
-            //System.out.println("TROVATO");
-            //System.out.println(d.toString());
             d.draw(g2d);
         }
 
@@ -167,6 +132,6 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
-        System.out.println("ClipboardTest: Lost ownership");
+        Logger.getLogger("root").info("ClipboardTest: Lost ownership");
     }
 }

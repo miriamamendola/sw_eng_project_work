@@ -8,7 +8,7 @@ import drawing_software.model.Drawable;
 import drawing_software.model.SelectionGrid;
 import drawing_software.model.Shape;
 import drawing_software.model.Vertex;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import drawing_software.view.menu.*;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 public class SelectionTool implements Tool {
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final Invoker invoker;
     private Shape selectedShape;
     private Point2D oldShapeLocation;
@@ -30,7 +30,7 @@ public class SelectionTool implements Tool {
     private Point2D startingPoint;
     private double ratio;
 
-    public SelectionTool(CanvasView canvas, Invoker invoker) {
+    public SelectionTool(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         startingPoint = new Point2D.Double(0, 0);

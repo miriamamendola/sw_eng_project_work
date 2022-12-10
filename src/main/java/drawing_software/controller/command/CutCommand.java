@@ -1,7 +1,7 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -12,11 +12,11 @@ import java.util.logging.Logger;
  * receiver (canvas) to remove it in order to avoid duplicates, being this a CUT command.
  */
 public class CutCommand implements Command {
-    private CanvasView canvas;
+    private Canvas canvas;
 
     private Drawable selectedShape;
 
-    public CutCommand(CanvasView canvas) {
+    public CutCommand(Canvas canvas) {
         this.canvas = canvas;
     }
 

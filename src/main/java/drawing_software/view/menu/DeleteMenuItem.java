@@ -2,7 +2,7 @@ package drawing_software.view.menu;
 
 import drawing_software.controller.command.DeleteCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 
 public class DeleteMenuItem extends MenuItemFactory {
 
-    public DeleteMenuItem(CanvasView canvas, Invoker invoker) {
+    public DeleteMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

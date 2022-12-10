@@ -2,7 +2,7 @@ package drawing_software;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.util.SystemInfo;
-import drawing_software.view.FrameView;
+import drawing_software.controller.WindowController;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -29,11 +29,7 @@ public class Main {
                 Logger logger = Logger.getLogger("root");
                 logger.setLevel(Level.ALL);
                 Context.getInstance().setSaved(true);
-                JFrame frame = new FrameView().createView(appTitle);
-                frame.setFocusable(false);
-                frame.setSize(1280, 720);
-                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                frame.setVisible(true);//making the frame visible
+                WindowController windowController = new WindowController(appTitle);
             }
         });
     }

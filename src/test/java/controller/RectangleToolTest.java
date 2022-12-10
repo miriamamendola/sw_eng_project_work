@@ -3,7 +3,7 @@ package controller;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.RectangleTool;
 import drawing_software.model.DrawableRectangle;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class RectangleToolTest {
 
-    private CanvasView canvas;
+    private Canvas canvas;
     private Invoker invoker;
     private RectangleTool rectangleTool;
 
@@ -24,7 +24,7 @@ public class RectangleToolTest {
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
         rectangleTool = new RectangleTool(canvas, invoker);
     }

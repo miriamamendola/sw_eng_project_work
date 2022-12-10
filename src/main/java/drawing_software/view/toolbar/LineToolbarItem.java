@@ -2,7 +2,7 @@ package drawing_software.view.toolbar;
 
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.LineTool;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class LineToolbarItem extends ToolbarItemFactory {
 
-    public LineToolbarItem(CanvasView canvas, Invoker invoker) {
+    public LineToolbarItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

@@ -3,7 +3,7 @@ package drawing_software.controller.command;
 import drawing_software.Context;
 import drawing_software.Main;
 import drawing_software.model.Drawing;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.io.ObjectInputStream;
  */
 public class LoadCommand implements Command {
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final File file;
 
     /**
@@ -26,7 +26,7 @@ public class LoadCommand implements Command {
      * @param canvas is the reference to the receiver which will perform the required action.
      * @param file   is the file to be loaded.
      */
-    public LoadCommand(CanvasView canvas, File file) {
+    public LoadCommand(Canvas canvas, File file) {
         this.canvas = canvas;
         this.file = file;
     }

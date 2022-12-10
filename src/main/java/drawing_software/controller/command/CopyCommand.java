@@ -1,7 +1,7 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -14,13 +14,13 @@ import java.util.logging.Logger;
  */
 public class CopyCommand implements Command, ClipboardOwner {
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
 
     /**
      * @param canvas is the reference to the receiver which will perform the required action.
      */
 
-    public CopyCommand(CanvasView canvas) {
+    public CopyCommand(Canvas canvas) {
         this.canvas = canvas;
     }
 

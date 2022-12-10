@@ -8,7 +8,7 @@ import drawing_software.model.Drawable;
 import drawing_software.model.DrawableEllipse;
 import drawing_software.model.DrawableLine;
 import drawing_software.model.DrawableRectangle;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class CopyCommandTest {
-    private CanvasView canvas;
+    private Canvas canvas;
     private Invoker invoker;
     private SelectionTool selectionTool;
     private Command copyCommand;
@@ -33,7 +33,7 @@ public class CopyCommandTest {
     @Before
     public void setUp() {
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         selectionTool = new SelectionTool(canvas, invoker);
         copyCommand = new CopyCommand(canvas);
 

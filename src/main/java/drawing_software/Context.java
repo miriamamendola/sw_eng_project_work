@@ -6,9 +6,7 @@ public class Context {
 
     private static Context instance = null;
     private File currentFile;
-
     private boolean saved;
-
     private boolean fixed;
 
     public static Context getInstance() {

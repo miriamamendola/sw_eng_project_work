@@ -2,7 +2,7 @@ package drawing_software.controller.command;
 
 import drawing_software.Context;
 import drawing_software.Main;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.io.File;
@@ -22,7 +22,7 @@ public interface Command {
      */
     void execute();
 
-    default void updateTitle(CanvasView canvas) {
+    default void updateTitle(Canvas canvas) {
         Context.getInstance().setSaved(false);
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(canvas);
         File f = Context.getInstance().getCurrentFile();

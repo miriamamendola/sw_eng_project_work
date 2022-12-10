@@ -3,7 +3,7 @@ package drawing_software.view.menu;
 import drawing_software.Main;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.SaveCommand;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import drawing_software.view.FileDialog;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class SaveAsMenuItem extends MenuItemFactory {
 
 
-    public SaveAsMenuItem(CanvasView canvas, Invoker invoker) {
+    public SaveAsMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

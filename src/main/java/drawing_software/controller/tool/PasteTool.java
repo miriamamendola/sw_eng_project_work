@@ -2,7 +2,7 @@ package drawing_software.controller.tool;
 
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.PasteCommand;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -19,11 +19,11 @@ import static java.lang.Thread.sleep;
  * command to the Canvas (alias the Receiver).
  */
 public class PasteTool extends JPanel implements Tool {
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final Invoker invoker;
 
 
-    public PasteTool(CanvasView canvas, Invoker invoker) {
+    public PasteTool(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
     }

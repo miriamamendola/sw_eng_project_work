@@ -2,7 +2,7 @@ package drawing_software.view.menu;
 
 import drawing_software.controller.command.CutCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import java.awt.event.InputEvent;
 
 public class CutMenuItem extends MenuItemFactory {
 
-    public CutMenuItem(CanvasView canvas, Invoker invoker) {
+    public CutMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

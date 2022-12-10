@@ -1,7 +1,8 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
+
 /**
  * Allows to move forward a selected shape on the Z axis. This is achieved by altering the order of the elements
  * in the lis and thus changing the shapes' drawing order.
@@ -9,10 +10,10 @@ import drawing_software.view.CanvasView;
  * inside the list, that was previously occupied by the shape.
  */
 public class ForwardCommand implements Command {
-    private CanvasView canvas;
+    private Canvas canvas;
     private int oldIndex;
 
-    public ForwardCommand(CanvasView canvas) {
+    public ForwardCommand(Canvas canvas) {
         this.canvas = canvas;
         this.oldIndex = canvas.getDrawing().getDrawableIndex(canvas.getSelectionGrid().getSelectedShape());
     }

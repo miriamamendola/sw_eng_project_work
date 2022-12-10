@@ -7,7 +7,7 @@ import drawing_software.model.Drawable;
 import drawing_software.model.DrawableEllipse;
 import drawing_software.model.DrawableLine;
 import drawing_software.model.DrawableRectangle;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class ShapeCommandTest {
 
     private Drawable shape;
-    private CanvasView canvas;
+    private Canvas canvas;
 
     private Invoker invoker;
 
@@ -28,7 +28,7 @@ public class ShapeCommandTest {
     public void setUp() {
         JFrame frame = new JFrame();
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
     }
 

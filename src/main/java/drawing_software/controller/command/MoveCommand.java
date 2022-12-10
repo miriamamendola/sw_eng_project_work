@@ -1,7 +1,7 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Shape;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.geom.Point2D;
 
@@ -10,12 +10,12 @@ import java.awt.geom.Point2D;
  */
 public class MoveCommand implements Command {
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final Point2D oldShapeLocation;
 
     private final Shape selectedShape;
 
-    public MoveCommand(CanvasView canvas, Shape selectedShape, Point2D oldShapeLocation) {
+    public MoveCommand(Canvas canvas, Shape selectedShape, Point2D oldShapeLocation) {
         this.canvas = canvas;
         this.selectedShape = selectedShape;
         this.oldShapeLocation = oldShapeLocation;

@@ -7,7 +7,7 @@ import drawing_software.controller.tool.SelectionTool;
 import drawing_software.model.Drawable;
 import drawing_software.model.DrawableRectangle;
 import drawing_software.model.SelectionGrid;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class PasteCommandTest {
-    private CanvasView canvas;
+    private Canvas canvas;
     private Invoker invoker;
     private DataFlavor df;
     private PasteCommand pc;
@@ -35,7 +35,7 @@ public class PasteCommandTest {
     public void setUp() throws ClassNotFoundException {
         JFrame frame = new JFrame();
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
         pc = new PasteCommand(canvas, new Point2D.Double(42, 69));
         df = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + Drawable.class.getName() + "\"");

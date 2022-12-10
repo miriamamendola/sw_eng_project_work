@@ -2,7 +2,7 @@ package drawing_software.view.colors;
 
 import drawing_software.controller.command.FillCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +11,8 @@ import java.awt.event.ActionListener;
 
 public class FillPanel extends ColorPanelFactory implements ActionListener {
 
-    public FillPanel(CanvasView canvas, Invoker invoker) {
+    public FillPanel(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
-    }
-
-    @Override
-    public JPanel createPanel() {
-
         this.setLayout(new FlowLayout());
         this.button = new ColorButton(null);
         this.add(new JLabel("Fill: "));
@@ -25,8 +20,6 @@ public class FillPanel extends ColorPanelFactory implements ActionListener {
         this.button.changeColor(canvas.getCurrentFillColor());
         this.button.addActionListener(this);
         this.add(this.button);
-
-        return this;
     }
 
 

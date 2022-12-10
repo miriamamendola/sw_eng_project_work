@@ -5,7 +5,7 @@ import drawing_software.controller.command.FillCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.model.DrawableRectangle;
 import drawing_software.model.SelectionGrid;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import drawing_software.view.colors.ColorButton;
 import drawing_software.view.colors.FillPanel;
 import org.junit.Before;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNull;
 
 public class FillCommandTest {
 
-    private CanvasView canvas;
+    private Canvas canvas;
 
     private ColorButton fillButton;
     private DrawableRectangle rectangle;
@@ -28,7 +28,7 @@ public class FillCommandTest {
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
         Invoker invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
         FillPanel panel = (FillPanel) new FillPanel(canvas, invoker).createPanel();
         fillButton = panel.getButton();

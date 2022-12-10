@@ -1,7 +1,7 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Shape;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ import java.awt.*;
  * Implements a ConcreteCommand class; in this case, the Command is the Fill command.
  */
 public class FillCommand implements Command {
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final Color color;
 
     private Color previousColor;
@@ -17,7 +17,7 @@ public class FillCommand implements Command {
     private Shape modifiedShape;
 
 
-    public FillCommand(CanvasView canvas, Color color) {
+    public FillCommand(Canvas canvas, Color color) {
         this.canvas = canvas;
         this.color = color;
     }

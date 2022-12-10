@@ -1,7 +1,7 @@
 package drawing_software.view.toolbar;
 
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 
@@ -13,10 +13,10 @@ public abstract class ToolbarItemFactory {
 
     protected final static int ICON_SIZE = 32;
 
-    protected final CanvasView canvas;
+    protected final Canvas canvas;
     protected final Invoker invoker;
 
-    public ToolbarItemFactory(CanvasView canvas, Invoker invoker) {
+    public ToolbarItemFactory(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
     }

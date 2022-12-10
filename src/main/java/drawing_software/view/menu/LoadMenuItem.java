@@ -2,7 +2,7 @@ package drawing_software.view.menu;
 
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.LoadCommand;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import drawing_software.view.FileDialog;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class LoadMenuItem extends MenuItemFactory {
 
 
-    public LoadMenuItem(CanvasView canvas, Invoker invoker) {
+    public LoadMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

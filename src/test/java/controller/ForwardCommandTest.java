@@ -4,7 +4,7 @@ import drawing_software.controller.command.ForwardCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
 import drawing_software.model.DrawableRectangle;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ import java.awt.geom.Point2D;
 import static org.junit.Assert.assertEquals;
 
 public class ForwardCommandTest {
-    private CanvasView canvas;
+    private Canvas canvas;
     private Invoker invoker;
     private SelectionTool selectionTool;
     private ForwardCommand forwardCommand;
@@ -24,7 +24,7 @@ public class ForwardCommandTest {
     @Before
     public void setUp() {
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         selectionTool = new SelectionTool(canvas, invoker);
     }
 

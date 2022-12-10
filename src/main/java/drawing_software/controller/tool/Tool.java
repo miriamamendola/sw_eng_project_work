@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
- * This interface defines the behaviour of the CanvasView.
+ * This interface defines the behaviour of the Canvas.
  * It corresponds to the "State" Interface of the State Pattern.
  */
 public interface Tool {

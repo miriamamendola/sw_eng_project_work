@@ -2,7 +2,7 @@ package drawing_software.view.colors;
 
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.StrokeCommand;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,21 +11,15 @@ import java.awt.event.ActionListener;
 
 public class StrokePanel extends ColorPanelFactory implements ActionListener {
 
-    public StrokePanel(CanvasView canvas, Invoker invoker) {
+    public StrokePanel(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
-    }
-
-    @Override
-    public JPanel createPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout());
         this.button = new ColorButton(null);
-        panel.add(new JLabel("Stroke: "));
+        this.add(new JLabel("Stroke: "));
         this.button.setName("stroke");
         this.button.changeColor(canvas.getCurrentStrokeColor());
         this.button.addActionListener(this);
-        panel.add(this.button);
-        return panel;
+        this.add(this.button);
     }
 
     /**

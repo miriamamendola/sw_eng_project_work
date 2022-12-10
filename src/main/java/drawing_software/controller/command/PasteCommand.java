@@ -2,7 +2,7 @@ package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
 import drawing_software.model.Shape;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -18,12 +18,12 @@ import java.util.logging.Logger;
  * on the canvas defined by left click of the mouse (received as a parameter from the tool class).
  */
 public class PasteCommand implements Command {
-    private CanvasView canvas;
+    private Canvas canvas;
     private Point2D point;
 
     private Shape pastedShape;
 
-    public PasteCommand(CanvasView canvas, Point2D point) {
+    public PasteCommand(Canvas canvas, Point2D point) {
         this.canvas = canvas;
         this.point = point;
     }

@@ -3,7 +3,7 @@ package drawing_software.controller.tool;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.model.DrawableEllipse;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -19,13 +19,13 @@ public class EllipseTool implements Tool {
 
     private DrawableEllipse ellipse;
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
 
     private final Invoker invoker;
 
     private Point2D startingPoint;
 
-    public EllipseTool(CanvasView canvas, Invoker invoker) {
+    public EllipseTool(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         canvas.clearSelectedDrawable();

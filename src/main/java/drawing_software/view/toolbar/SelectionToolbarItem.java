@@ -2,7 +2,7 @@ package drawing_software.view.toolbar;
 
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class SelectionToolbarItem extends ToolbarItemFactory {
 
-    public SelectionToolbarItem(CanvasView canvas, Invoker invoker) {
+    public SelectionToolbarItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

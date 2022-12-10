@@ -6,7 +6,7 @@ import drawing_software.controller.tool.SelectionTool;
 import drawing_software.model.DrawableLine;
 import drawing_software.model.DrawableRectangle;
 import drawing_software.model.SelectionGrid;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 public class SelectionToolTest {
-    private CanvasView canvas;
+    private Canvas canvas;
     private SelectionTool selectionTool;
     private Invoker invoker;
 
@@ -28,7 +28,7 @@ public class SelectionToolTest {
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
         selectionTool = new SelectionTool(canvas, invoker);
 

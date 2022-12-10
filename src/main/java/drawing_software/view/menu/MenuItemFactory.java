@@ -1,7 +1,7 @@
 package drawing_software.view.menu;
 
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 
@@ -10,10 +10,10 @@ import javax.swing.*;
  * placed inside the JMenuBar.
  */
 public abstract class MenuItemFactory {
-    protected final CanvasView canvas;
+    protected final Canvas canvas;
     protected final Invoker invoker;
 
-    protected MenuItemFactory(CanvasView canvas, Invoker invoker) {
+    protected MenuItemFactory(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
     }

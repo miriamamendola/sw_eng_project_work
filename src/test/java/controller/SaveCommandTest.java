@@ -4,7 +4,7 @@ import drawing_software.controller.command.Command;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.SaveCommand;
 import drawing_software.model.*;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SaveCommandTest {
 
-    private CanvasView canvas;
+    private Canvas canvas;
 
     private File file;
 
@@ -34,7 +34,7 @@ public class SaveCommandTest {
     public void setUp() throws Exception {
         JFrame frame = new JFrame();
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         frame.add(canvas);
 
         canvas.getDrawing().addDrawable(new DrawableRectangle(1, 1));

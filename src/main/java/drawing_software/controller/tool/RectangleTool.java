@@ -3,7 +3,7 @@ package drawing_software.controller.tool;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.model.DrawableRectangle;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -18,13 +18,13 @@ public class RectangleTool implements Tool {
 
     private DrawableRectangle rect;
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
 
     private final Invoker invoker;
 
     private Point2D startingPoint;
 
-    public RectangleTool(CanvasView canvas, Invoker invoker) {
+    public RectangleTool(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         canvas.clearSelectedDrawable();

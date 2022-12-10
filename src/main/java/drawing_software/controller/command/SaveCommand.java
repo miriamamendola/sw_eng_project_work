@@ -2,7 +2,7 @@ package drawing_software.controller.command;
 
 import drawing_software.Context;
 import drawing_software.Main;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.io.File;
@@ -15,7 +15,7 @@ import java.io.ObjectOutputStream;
  */
 public class SaveCommand implements Command {
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final File file;
 
     /**
@@ -25,7 +25,7 @@ public class SaveCommand implements Command {
      * @param canvas is the reference to the receiver which will perform the required action.
      * @param file   is the file to be saved.
      */
-    public SaveCommand(CanvasView canvas, File file) {
+    public SaveCommand(Canvas canvas, File file) {
         this.canvas = canvas;
         this.file = file;
     }

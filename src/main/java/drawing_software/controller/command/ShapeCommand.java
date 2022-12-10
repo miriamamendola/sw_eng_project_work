@@ -1,14 +1,14 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Drawable;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 /**
  * Allows to add a desired shape to the drawing, thus implementing a ConcreteCommand.
  */
 public class ShapeCommand implements Command {
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private final Drawable shape;
 
     /**
@@ -18,7 +18,7 @@ public class ShapeCommand implements Command {
      * @param canvas is the reference to the receiver which will perform the required action.
      * @param shape  is the shape to be added to the drawing.
      */
-    public ShapeCommand(CanvasView canvas, Drawable shape) {
+    public ShapeCommand(Canvas canvas, Drawable shape) {
         this.canvas = canvas;
         this.shape = shape;
     }

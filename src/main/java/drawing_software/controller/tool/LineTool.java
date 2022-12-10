@@ -3,7 +3,7 @@ package drawing_software.controller.tool;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.model.DrawableLine;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.event.MouseEvent;
 /**
@@ -14,11 +14,11 @@ public class LineTool implements Tool {
 
     private DrawableLine line;
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
 
     private final Invoker invoker;
 
-    public LineTool(CanvasView canvas, Invoker invoker) {
+    public LineTool(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         canvas.clearSelectedDrawable();

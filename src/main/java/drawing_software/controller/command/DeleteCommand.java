@@ -1,17 +1,17 @@
 package drawing_software.controller.command;
 
 import drawing_software.model.Shape;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.util.logging.Logger;
 
 public class DeleteCommand implements Command {
 
-    private final CanvasView canvas;
+    private final Canvas canvas;
 
     private Shape selectedShape;
 
-    public DeleteCommand(CanvasView canvas) {
+    public DeleteCommand(Canvas canvas) {
         this.canvas = canvas;
     }
 

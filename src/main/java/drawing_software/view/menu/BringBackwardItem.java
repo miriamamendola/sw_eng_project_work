@@ -2,7 +2,7 @@ package drawing_software.view.menu;
 
 import drawing_software.controller.command.BackwardCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class BringBackwardItem extends MenuItemFactory {
 
 
-    public BringBackwardItem(CanvasView canvas, Invoker invoker) {
+    public BringBackwardItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 
