@@ -28,11 +28,9 @@ public class Canvas extends JPanel implements ClipboardOwner {
 
     private Drawable copiedShape;
 
-
     public Canvas(Invoker invoker) {
         this.drawing = new Drawing();
         currentTool = new SelectionTool(this, invoker);
-
     }
 
     public Drawing getDrawing() {
@@ -56,7 +54,9 @@ public class Canvas extends JPanel implements ClipboardOwner {
     }
 
     public void setCurrentTool(Tool currentTool) {
+        Tool oldTool = this.currentTool;
         this.currentTool = currentTool;
+        firePropertyChange("CURRENT_TOOL", oldTool, currentTool);
     }
 
     public SelectionGrid getSelectionGrid() {
@@ -64,10 +64,12 @@ public class Canvas extends JPanel implements ClipboardOwner {
     }
 
     public void setSelectionGrid(SelectionGrid selectionGrid) {
+        firePropertyChange("SELECTION", this.selectionGrid, selectionGrid);
         this.selectionGrid = selectionGrid;
     }
 
     public void clearSelectedDrawable() {
+        firePropertyChange("SELECTION", this.selectionGrid, null);
         this.selectionGrid = null;
     }
 
@@ -94,6 +96,7 @@ public class Canvas extends JPanel implements ClipboardOwner {
     public void setCurrentStrokeColor(Color currentStrokeColor) {
         this.currentStrokeColor = currentStrokeColor;
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {

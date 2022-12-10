@@ -1,5 +1,7 @@
 package drawing_software.controller.command;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -11,7 +13,9 @@ import java.util.Deque;
  */
 public class Invoker {
 
-    private Deque<Command> commands = new ArrayDeque<>();
+    private final Deque<Command> commands = new ArrayDeque<>();
+
+    private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
 
     /**
      * Allows the invoker to call for the execution of a command given as
@@ -23,6 +27,7 @@ public class Invoker {
     public void executeCommand(Command command) {
         commands.offerLast(command);
         command.execute();
+        changes.firePropertyChange("IS_INVOKER_EMPTY", true, false);
     }
 
     public void undoLastCommand() {
@@ -30,6 +35,18 @@ public class Invoker {
         if (last != null) {
             last.undo();
         }
+        if (commands.isEmpty()) {
+            changes.firePropertyChange("IS_INVOKER_EMPTY", false, true);
+        }
 
     }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changes.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changes.removePropertyChangeListener(listener);
+    }
+
 }

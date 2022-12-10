@@ -2,16 +2,23 @@ package drawing_software.controller;
 
 import drawing_software.Context;
 import drawing_software.Main;
+import drawing_software.controller.tool.LineTool;
+import drawing_software.controller.tool.SelectionTool;
+import drawing_software.model.SelectionGrid;
+import drawing_software.model.Shape;
 import drawing_software.view.Window;
 import drawing_software.view.menu.SaveMenuItem;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.logging.Logger;
 
 public class WindowController {
-    private Window window;
+    private final Window window;
 
     public WindowController(String appTitle) {
         window = new Window(appTitle);
@@ -59,7 +66,41 @@ public class WindowController {
             setDeleteMenuItemEnabled(false);
             setUndoItemEnabled(false);
         }
+        window.getInvoker().addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                // se è vuoto
+                setUndoItemEnabled(!((boolean) propertyChangeEvent.getNewValue()));
+            }
+        });
+        window.getCanvas().addPropertyChangeListener("SELECTION", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                // c'è un oggetto selezionato
+                if (propertyChangeEvent.getNewValue() != null) {
+                    Shape selected = ((SelectionGrid) propertyChangeEvent.getNewValue()).getSelectedShape();
+                    setCutMenuItemEnabled(true);
+                    setCopyMenuItemEnabled(true);
+                    setDeleteMenuItemEnabled(true);
+                    setFillPanelColor((Color) selected.getFillColor());
+                    setStrokePanelColor((Color) selected.getStrokeColor());
+                } else {
+                    setCutMenuItemEnabled(false);
+                    setCopyMenuItemEnabled(false);
+                    setDeleteMenuItemEnabled(false);
+                    setFillPanelColor(window.getCanvas().getCurrentFillColor());
+                    setStrokePanelColor(window.getCanvas().getCurrentStrokeColor());
+                }
+            }
+        });
 
+        window.getCanvas().addPropertyChangeListener("CURRENT_TOOL", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                setCheckBoxScaleVisible(propertyChangeEvent.getNewValue() instanceof SelectionTool);
+                setFillPanelEnabled(!(propertyChangeEvent.getNewValue() instanceof LineTool));
+            }
+        });
 
     }
 
@@ -99,4 +140,13 @@ public class WindowController {
         window.getUndoMenuItem().setEnabled(state);
     }
 
+    public void setFillPanelColor(Color color) {
+        window.getFillPanel().getButton().changeColor(color);
+    }
+
+    public void setStrokePanelColor(Color color) {
+        window.getStrokePanel().getButton().changeColor(color);
+    }
+
 }
+
