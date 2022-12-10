@@ -7,7 +7,7 @@ import drawing_software.model.DrawableRectangle;
 import drawing_software.model.SelectionGrid;
 import drawing_software.view.Canvas;
 import drawing_software.view.colors.ColorButton;
-import drawing_software.view.colors.FillPanel;
+import drawing_software.view.colors.StrokePanel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class StrokeCommandTest {
         Invoker invoker = new Invoker();
         canvas = new Canvas(invoker);
         frame.add(canvas);
-        FillPanel panel = (FillPanel) new FillPanel(canvas, invoker).createPanel();
+        StrokePanel panel = new StrokePanel(canvas, invoker);
         strokeButton = panel.getButton();
         rectangle = new DrawableRectangle(0, 0);
         rectangle.setSize(new Dimension(30, 30));

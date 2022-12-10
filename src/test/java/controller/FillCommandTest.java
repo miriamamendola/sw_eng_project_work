@@ -30,7 +30,7 @@ public class FillCommandTest {
         Invoker invoker = new Invoker();
         canvas = new Canvas(invoker);
         frame.add(canvas);
-        FillPanel panel = (FillPanel) new FillPanel(canvas, invoker).createPanel();
+        FillPanel panel = (FillPanel) new FillPanel(canvas, invoker);
         fillButton = panel.getButton();
 
     }
