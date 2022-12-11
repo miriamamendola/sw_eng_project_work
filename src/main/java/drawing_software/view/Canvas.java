@@ -34,10 +34,13 @@ public class Canvas extends JPanel implements ClipboardOwner {
     private Drawable copiedShape;
 
     private boolean fixedResize;
+
     public Canvas(Invoker invoker) {
         this.drawing = new Drawing();
         this.grid = new Grid(999999999, this);
         currentTool = new SelectionTool(this, invoker);
+        this.setBackground(Color.lightGray);
+        this.setOpaque(true);
     }
 
     public Drawing getDrawing() {
@@ -164,4 +167,12 @@ public class Canvas extends JPanel implements ClipboardOwner {
     public void setGrid(Grid grid) {
         this.grid = grid;
     }
+
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(1280, 720);
+    }
+
+
 }

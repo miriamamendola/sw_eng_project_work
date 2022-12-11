@@ -40,11 +40,12 @@ public class Window extends JFrame {
         invoker = new Invoker();
         this.setFocusable(false);
         this.setBackground(new Color(whiteIntensity, whiteIntensity, whiteIntensity));
-
         canvas = new Canvas(invoker);
         new CanvasController(canvas);
         canvas.setFocusable(true);
-        this.add(canvas);
+
+        JScrollPane scrollPane = new JScrollPane(canvas);
+
 
 
         /* ToolBar */
@@ -83,7 +84,7 @@ public class Window extends JFrame {
         this.setJMenuBar(menuBar);
 
 
-
+        this.add(scrollPane);
         /* Icon */
 
         URL url = Window.class.getResource("/icon.png");
