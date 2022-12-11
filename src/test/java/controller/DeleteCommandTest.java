@@ -1,6 +1,5 @@
 package controller;
 
-import drawing_software.controller.command.Command;
 import drawing_software.controller.command.DeleteCommand;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.tool.SelectionTool;
@@ -102,7 +101,7 @@ public class DeleteCommandTest {
         MouseEvent e = new MouseEvent(canvas, MouseEvent.MOUSE_PRESSED, 1, InputEvent.BUTTON1_DOWN_MASK, (int) clickPoint.getX(), (int) clickPoint.getY(), 1, false);
         selectionTool.mouseLeftPressed(e);
 
-        Command deleteCommand = new DeleteCommand(canvas);
+        DeleteCommand deleteCommand = new DeleteCommand(canvas);
         deleteCommand.execute();
 
         deleteCommand.undo();

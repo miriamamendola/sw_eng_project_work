@@ -1,6 +1,5 @@
 package controller;
 
-import drawing_software.controller.command.Command;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.ShapeCommand;
 import drawing_software.model.Drawable;
@@ -58,7 +57,7 @@ public class ShapeCommandTest {
     @Test
     public void testUndo() {
         shape = new DrawableEllipse(10, 10);
-        Command shapeCommand = new ShapeCommand(canvas, shape);
+        ShapeCommand shapeCommand = new ShapeCommand(canvas, shape);
         shapeCommand.execute();
         shapeCommand.undo();
         assertFalse(canvas.getDrawing().containsDrawable(shape));

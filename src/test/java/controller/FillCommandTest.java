@@ -60,7 +60,7 @@ public class FillCommandTest {
         rectangle.setSize(new Dimension(30, 30));
         canvas.getDrawing().addDrawable(rectangle);
         canvas.setSelectionGrid(new SelectionGrid(rectangle));
-        Command command = new FillCommand(canvas, Color.red);
+        FillCommand command = new FillCommand(canvas, Color.red);
         command.execute();
         command.undo();
         assertNull(rectangle.getFillColor());
@@ -69,7 +69,7 @@ public class FillCommandTest {
     @Test
     public void testUndoColor() {
         canvas.clearSelectedDrawable();
-        Command command = new FillCommand(canvas, Color.blue);
+        FillCommand command = new FillCommand(canvas, Color.blue);
         command.execute();
         command.undo();
         assertNull(canvas.getCurrentFillColor());

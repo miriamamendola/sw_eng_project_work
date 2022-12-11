@@ -29,17 +29,17 @@ public class SaveCommandTest {
     private Command saveCommand;
 
     private Invoker invoker;
+    private Window window;
 
     @Before
     public void setUp() throws Exception {
-        Window window = new Window("title");
+        window = new Window("title");
         invoker = new Invoker();
-        canvas = new Canvas(invoker);
-        window.add(canvas);
 
-        canvas.getDrawing().addDrawable(new DrawableRectangle(1, 1));
-        canvas.getDrawing().addDrawable(new DrawableEllipse(4, 3));
-        canvas.getDrawing().addDrawable(new DrawableLine(new Point2D.Double(10, 4), new Point2D.Double(20, 8)));
+
+        window.getCanvas().getDrawing().addDrawable(new DrawableRectangle(1, 1));
+        window.getCanvas().getDrawing().addDrawable(new DrawableEllipse(4, 3));
+        window.getCanvas().getDrawing().addDrawable(new DrawableLine(new Point2D.Double(10, 4), new Point2D.Double(20, 8)));
 
         file = new File("./testfile.draw");
         saveCommand = new SaveCommand(window, file);
@@ -56,7 +56,7 @@ public class SaveCommandTest {
             }
 
             List<Drawable> current = new LinkedList<>();
-            for (Drawable d : canvas.getDrawing()) {
+            for (Drawable d : window.getCanvas().getDrawing()) {
                 current.add(d);
             }
 
@@ -69,6 +69,6 @@ public class SaveCommandTest {
 
     @After
     public void tearDown() {
-        file.delete();
+        //file.delete();
     }
 }

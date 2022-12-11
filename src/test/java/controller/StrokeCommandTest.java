@@ -1,6 +1,5 @@
 package controller;
 
-import drawing_software.controller.command.Command;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.StrokeCommand;
 import drawing_software.model.DrawableRectangle;
@@ -49,7 +48,7 @@ public class StrokeCommandTest {
         rectangle.setSize(new Dimension(30, 30));
         canvas.getDrawing().addDrawable(rectangle);
         canvas.setSelectionGrid(new SelectionGrid(rectangle));
-        Command command = new StrokeCommand(canvas, Color.red);
+        StrokeCommand command = new StrokeCommand(canvas, Color.red);
         command.execute();
         command.undo();
         assertEquals(rectangle.getStrokeColor(), Color.black);
@@ -58,7 +57,7 @@ public class StrokeCommandTest {
     @Test
     public void testUndoColor() {
         canvas.clearSelectedDrawable();
-        Command command = new StrokeCommand(canvas, Color.blue);
+        StrokeCommand command = new StrokeCommand(canvas, Color.blue);
         command.execute();
         command.undo();
         assertEquals(Color.black, canvas.getCurrentStrokeColor());
