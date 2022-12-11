@@ -5,9 +5,11 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.view.Canvas;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.net.URL;
 
 public class CopyMenuItem extends MenuItemFactory {
 
@@ -18,6 +20,8 @@ public class CopyMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem copyMenuItem = new JMenuItem("Copy");
+        URL url = getClass().getResource("/copy.png");
+        copyMenuItem.setIcon(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         copyMenuItem.setAccelerator(KeyStroke.getKeyStroke('C', InputEvent.CTRL_DOWN_MASK));
         copyMenuItem.addActionListener(new ActionListener() {
             /**

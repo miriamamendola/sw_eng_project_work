@@ -5,9 +5,11 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.view.Canvas;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.net.URL;
 
 public class CutMenuItem extends MenuItemFactory {
 
@@ -18,6 +20,8 @@ public class CutMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem cutMenuItem = new JMenuItem("Cut");
+        URL url = getClass().getResource("/cut.png");
+        cutMenuItem.setIcon(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         cutMenuItem.setAccelerator(KeyStroke.getKeyStroke('X', InputEvent.CTRL_DOWN_MASK));
         cutMenuItem.addActionListener(new ActionListener() {
             /**

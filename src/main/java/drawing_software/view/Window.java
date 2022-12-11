@@ -33,6 +33,7 @@ public class Window extends JFrame {
     private final static int whiteIntensity = 230;
 
     private File currentFile;
+    private boolean modified = false;
 
     public Window(String appTitle) {
         super("untitled - " + appTitle);
@@ -104,6 +105,10 @@ public class Window extends JFrame {
         JMenu fileMenu = new JMenu("File");
         fileMenu.setFocusable(false);
 
+        JMenuItem newMenuItem = new NewMenuItem(this, invoker).createMenuItem();
+        newMenuItem.setFocusable(false);
+        fileMenu.add(newMenuItem);
+
         JMenuItem loadMenuItem = new LoadMenuItem(this, invoker).createMenuItem();
         loadMenuItem.setFocusable(false);
         fileMenu.add(loadMenuItem);
@@ -115,6 +120,10 @@ public class Window extends JFrame {
         JMenuItem saveAsMenuItem = new SaveAsMenuItem(this, invoker).createMenuItem();
         saveAsMenuItem.setFocusable(false);
         fileMenu.add(saveAsMenuItem);
+
+        JMenuItem exitMenuItem = new ExitMenuItem(this, invoker).createMenuItem();
+        saveAsMenuItem.setFocusable(false);
+        fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
@@ -231,5 +240,13 @@ public class Window extends JFrame {
 
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
+    }
+
+    public boolean isModified() {
+        return modified;
+    }
+
+    public void setModified(boolean modified) {
+        this.modified = modified;
     }
 }

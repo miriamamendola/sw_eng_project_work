@@ -8,11 +8,13 @@ import drawing_software.view.FileDialog;
 import drawing_software.view.Window;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.logging.Logger;
 
 public class SaveAsMenuItem extends MenuItemFactory {
@@ -31,6 +33,8 @@ public class SaveAsMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem saveAsMenuItem = new JMenuItem("Save as...");
+        URL url = getClass().getResource("/saveAs.png");
+        saveAsMenuItem.setIcon(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
 
         saveAsMenuItem.setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         saveAsMenuItem.addActionListener(new ActionListener() {

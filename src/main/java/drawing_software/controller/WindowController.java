@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 public class WindowController {
     private final Window window;
-    private boolean modified = false;
 
     public WindowController(String appTitle) {
         window = new Window(appTitle);
@@ -29,9 +28,7 @@ public class WindowController {
             public void windowClosing(WindowEvent windowEvent) {
                 //check if modified
                 Logger.getLogger("root").info("Closing...");
-                if (!modified) {
-                    window.dispose();
-                } else {
+                if (window.isModified()) {
                     String title;
                     if (window.getCurrentFile() == null) {
                         title = "untitled";
@@ -44,13 +41,10 @@ public class WindowController {
                             message, Main.appTitle,
                             JOptionPane.YES_NO_CANCEL_OPTION);
 
-                    if (confirmed == JOptionPane.YES_OPTION) {
+                    if (confirmed == JOptionPane.YES_OPTION)
                         new SaveMenuItem(window, window.getInvoker()).actionPerformed(null);
-                        window.dispose();
-                    } else if (confirmed == JOptionPane.NO_OPTION) {
-                        window.dispose();
-                    }
                 }
+                window.dispose();
             }
         });
 
@@ -105,15 +99,17 @@ public class WindowController {
         window.getCanvas().addPropertyChangeListener("MODIFIED", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-                modified = (boolean) propertyChangeEvent.getNewValue();
-                if (modified) {
-                    if (window.getCurrentFile() == null) {
-                        window.setTitle("untitled" + " * - " + Main.appTitle);
-                    } else {
-                        window.setTitle(window.getCurrentFile().getName() + " * - " + Main.appTitle);
-                    }
+                window.setModified((boolean) propertyChangeEvent.getNewValue());
+                String title;
+                if (window.getCurrentFile() == null) {
+                    title = "untitled";
                 } else {
-                    window.setTitle(window.getCurrentFile().getName() + " - " + Main.appTitle);
+                    title = window.getCurrentFile().getName();
+                }
+                if (window.isModified()) {
+                    window.setTitle(title + " * - " + Main.appTitle);
+                } else {
+                    window.setTitle(title + " - " + Main.appTitle);
                 }
             }
         });

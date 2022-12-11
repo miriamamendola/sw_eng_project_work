@@ -1,5 +1,6 @@
 package drawing_software.view.menu;
 
+import drawing_software.Main;
 import drawing_software.controller.command.Invoker;
 import drawing_software.controller.command.LoadCommand;
 import drawing_software.view.Canvas;
@@ -7,11 +8,13 @@ import drawing_software.view.FileDialog;
 import drawing_software.view.Window;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.logging.Logger;
 
 public class LoadMenuItem extends MenuItemFactory {
@@ -30,6 +33,8 @@ public class LoadMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem loadMenuItem = new JMenuItem("Open...");
+        URL url = getClass().getResource("/open.png");
+        loadMenuItem.setIcon(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         loadMenuItem.setAccelerator(KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
         loadMenuItem.addActionListener(new ActionListener() {
             /**
@@ -47,6 +52,23 @@ public class LoadMenuItem extends MenuItemFactory {
                     selectedFile = fileDialog.show(canvas, FileDialog.OPEN_DIALOG);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger("root").info("No such file selected");
+                }
+
+                if (window.isModified()) {
+                    String title;
+                    if (window.getCurrentFile() == null) {
+                        title = "untitled";
+                    } else {
+                        title = window.getCurrentFile().getName();
+                    }
+                    String message = "Do you want to save changes to " + title + " ? ";
+
+                    int confirmed = JOptionPane.showConfirmDialog(null,
+                            message, Main.appTitle,
+                            JOptionPane.YES_NO_CANCEL_OPTION);
+
+                    if (confirmed == JOptionPane.YES_OPTION)
+                        new SaveMenuItem(window, window.getInvoker()).actionPerformed(null);
                 }
 
                 invoker.executeCommand(new LoadCommand(window, selectedFile));

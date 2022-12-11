@@ -100,16 +100,16 @@ public class SelectionTool implements Tool {
         JMenuItem deleteMenuItem = new DeleteMenuItem(canvas, invoker).createMenuItem();
         deleteMenuItem.setFocusable(false);
         popupMenu.add(deleteMenuItem);
-        popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
 
         JMenuItem bringForward = new BringForwardItem(canvas, invoker).createMenuItem();
         bringForward.setFocusable(false);
         popupMenu.add(bringForward);
 
-        JMenuItem bringBackward = new BringBackwardItem(canvas, invoker).createMenuItem();
-        bringBackward.setFocusable(false);
-        popupMenu.add(bringBackward);
+        JMenuItem sendBackward = new SendBackwardItem(canvas, invoker).createMenuItem();
+        sendBackward.setFocusable(false);
+        popupMenu.add(sendBackward);
 
+        popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
     }
 
 }

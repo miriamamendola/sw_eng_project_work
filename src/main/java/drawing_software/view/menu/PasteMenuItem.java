@@ -5,9 +5,11 @@ import drawing_software.controller.command.PasteCommand;
 import drawing_software.view.Canvas;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.net.URL;
 
 public class PasteMenuItem extends MenuItemFactory {
 
@@ -18,6 +20,8 @@ public class PasteMenuItem extends MenuItemFactory {
     @Override
     public JMenuItem createMenuItem() {
         JMenuItem pasteMenuItem = new JMenuItem("Paste");
+        URL url = getClass().getResource("/paste.png");
+        pasteMenuItem.setIcon(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke('V', InputEvent.CTRL_DOWN_MASK));
         pasteMenuItem.addActionListener(new ActionListener() {
             /**

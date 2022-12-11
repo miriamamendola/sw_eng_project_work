@@ -5,15 +5,18 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.view.Canvas;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 /**
  * Allows to create the apposite item in the "Edit" menu.
  */
-public class BringBackwardItem extends MenuItemFactory {
+public class SendBackwardItem extends MenuItemFactory {
 
 
-    public BringBackwardItem(Canvas canvas, Invoker invoker) {
+    public SendBackwardItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 
@@ -22,8 +25,10 @@ public class BringBackwardItem extends MenuItemFactory {
      */
     @Override
     public JMenuItem createMenuItem() {
-        JMenuItem bringBackwardMenuItem = new JMenuItem("Bring Backwards");
-        bringBackwardMenuItem.addActionListener(new ActionListener() {
+        JMenuItem sendBackwardMenuItem = new JMenuItem("Send Backward");
+        URL url = getClass().getResource("/sendBackward.png");
+        sendBackwardMenuItem.setIcon(new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+        sendBackwardMenuItem.addActionListener(new ActionListener() {
             /**
              * When the menu item is pressed, the BringForward Command will be called and its actions
              * will be executed.
@@ -35,6 +40,6 @@ public class BringBackwardItem extends MenuItemFactory {
                 invoker.executeCommand(new BackwardCommand(canvas));
             }
         });
-        return bringBackwardMenuItem;
+        return sendBackwardMenuItem;
     }
 }
