@@ -18,7 +18,9 @@ import java.awt.event.MouseWheelEvent;
 import java.io.File;
 import java.net.URL;
 
-
+/**
+ * The main window
+ */
 public class Window extends JFrame {
     private final Invoker invoker;
     private final Canvas canvas;
@@ -37,6 +39,22 @@ public class Window extends JFrame {
     private File currentFile;
     private boolean modified = false;
 
+    /**
+     * Creates the JFrame and sets all its properties.
+     * Creates a new canvas and the canvas controller.
+     * <p>
+     * Adds the scrollpane to the window.
+     * The mouseWheelMoved event checks if the CTRL key button is pressed while the mouseWheel scrolls;
+     * in that case it resizes the canvas; otherwise it acts normally and scrolls the canvas.
+     * <p>
+     * Adds the toolbar with all the tools.
+     * <p>
+     * Adds the bottom panel containing the Fill and Stroke buttons, the respective labels and the checkbox used for the fixed resize.
+     * <p>
+     * Adds the menubar with all the menu items.
+     *
+     * @param appTitle the title of the application
+     */
     public Window(String appTitle) {
         super("untitled - " + appTitle);
         invoker = new Invoker();
@@ -52,14 +70,14 @@ public class Window extends JFrame {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
 
-                if(e.isControlDown()){
+                if (e.isControlDown()) {
                     scrollPane.setWheelScrollingEnabled(false);
                     int scaleFactor = canvas.getScaleFactor();
 
                     canvas.setScalePoint(e.getPoint());
-                    if(e.getWheelRotation()<0 && scaleFactor < 18){
+                    if (e.getWheelRotation() < 0 && scaleFactor < 18) {
                         scaleFactor += 1;
-                    } else if (e.getWheelRotation()>0 && scaleFactor > 2){
+                    } else if (e.getWheelRotation() > 0 && scaleFactor > 2) {
                         scaleFactor -= 1;
                     }
 
@@ -118,6 +136,13 @@ public class Window extends JFrame {
 
     }
 
+    /**
+     * Creates the menu bar and adds to it all the MenuItems.
+     *
+     * @param canvas  canvas
+     * @param invoker invoker
+     * @return
+     */
     private JMenuBar createMenuBar(Canvas canvas, Invoker invoker) {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setFocusable(false);

@@ -6,10 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+/**
+ * The about dialog with the dev names
+ */
 public class AboutDialog extends JDialog implements ActionListener{
 
     private JTextArea name = new JTextArea("                Designed with <3 by: Miriam Amendola, Valerio Battipaglia, Antonio Caso, Giuseppe Dell'Orto ");
-    
+
     public AboutDialog() {
         setTitle("About");
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));

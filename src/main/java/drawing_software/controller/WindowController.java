@@ -23,7 +23,7 @@ public class WindowController {
     private final Window window;
 
     /**
-     * Creates the window and sets all the properties.
+     * Creates the window and sets all its properties.
      * Adds a window listener for the WindowClosing event. Thanks to this, it will prevent an unsaved exit.
      * <p>
      * Adds a new Property Change Listener to the invoker for the undo logic.
