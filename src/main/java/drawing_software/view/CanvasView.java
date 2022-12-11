@@ -58,12 +58,22 @@ public class CanvasView extends JPanel implements ClipboardOwner {
             public void mouseReleased(MouseEvent e) {
                 currentTool.mouseReleased(e);
             }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                currentTool.mouseMoved(e);
+            }
         });
 
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 currentTool.mouseDragged(e);
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                currentTool.mouseMoved(e);
             }
         });
     }

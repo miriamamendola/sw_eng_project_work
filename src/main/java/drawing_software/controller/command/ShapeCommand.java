@@ -32,6 +32,7 @@ public class ShapeCommand implements Command {
     public void execute() {
         updateTitle(canvas);
         canvas.getDrawing().addDrawable(shape);
+        canvas.repaint();
     }
 
     @Override

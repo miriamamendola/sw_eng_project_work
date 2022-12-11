@@ -6,10 +6,7 @@ import drawing_software.controller.command.Invoker;
 import drawing_software.view.colors.FillPanel;
 import drawing_software.view.colors.StrokePanel;
 import drawing_software.view.menu.*;
-import drawing_software.view.toolbar.EllipseToolbarItem;
-import drawing_software.view.toolbar.LineToolbarItem;
-import drawing_software.view.toolbar.RectangleToolbarItem;
-import drawing_software.view.toolbar.SelectionToolbarItem;
+import drawing_software.view.toolbar.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -191,6 +188,11 @@ public class FrameView {
         ellipseButton.setFocusable(false);
         group.add(ellipseButton);
         toolPanel.add(ellipseButton);
+
+        JToggleButton polygonButton = new PolygonToolbarItem(canvas, invoker).itemCreate();
+        polygonButton.setFocusable(false);
+        group.add(polygonButton);
+        toolPanel.add(polygonButton);
 
         return toolPanel;
     }

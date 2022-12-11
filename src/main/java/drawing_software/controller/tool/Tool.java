@@ -37,4 +37,8 @@ public interface Tool {
 
     }
 
+    default void mouseMoved(MouseEvent mouseEvent) {
+
+    }
+
 }
