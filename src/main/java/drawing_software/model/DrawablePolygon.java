@@ -1,14 +1,22 @@
 package drawing_software.model;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Path2D;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DrawablePolygon extends Polygon implements Shape {
     private ArrayList<Point2D> points; // holds the points of the polygon
     private Rectangle bounds;
     private Paint fillColor;
     private Paint strokeColor;
+
+    private int[] allX;
+
+    private int[] allY;
 
     public DrawablePolygon(ArrayList<Point2D> points, Paint fillColor, Paint strokeColor, int[] allX, int[] allY) {
         super(allX, allY, points.size());
@@ -19,41 +27,47 @@ public class DrawablePolygon extends Polygon implements Shape {
     }
 
     public void draw(Graphics2D g2d) {
-        if (points.size() > 1) {
-            // draw the lines of the polygon
-            for (int i = 0; i < points.size() - 1; i++) {
-                double x1 = points.get(i).getX();
-                double y1 = points.get(i).getY();
-                double x2 = points.get(i + 1).getX();
-                double y2 = points.get(i + 1).getY();
-                DrawableLine line1 = new DrawableLine(points.get(i), points.get(i + 1));
-                line1.draw(g2d);
-            }
-            // draw the last line connecting the last point to the first point
-            double x1 = points.get(points.size() - 1).getX();
-            double y1 = points.get(points.size() - 1).getY();
-            double x2 = points.get(0).getX();
-            double y2 = points.get(0).getY();
-            Point2D p1 = new Point2D.Double(x1, y1);
-            Point2D p2 = new Point2D.Double(x2, y2);
-            DrawableLine line2 = new DrawableLine(p1, p2);
-            line2.draw(g2d);
-            if (fillColor != null) {
-                g2d.setPaint(fillColor);
-                g2d.fill(this);
-            }
-            g2d.setPaint(strokeColor);
-            g2d.draw(this);
-        }
+        g2d.setPaint(fillColor);
+        g2d.fill(this);
+        g2d.setPaint(strokeColor);
+        g2d.draw(this);
+
     }
 
-    public void addPoint(int x, int y) {
+    public void addInternalPoint(int x, int y) {
         points.add(new Point2D.Double(x, y));
     }
 
     @Override
     public void setFrame(Point2D point, Dimension size) {
-        super.bounds = bounds;
+        double ratioX = (double) size.width / bounds.width;
+        double ratioY = (double) size.height / bounds.height;
+        System.out.println(ratioX);
+        System.out.println(ratioY);
+        AffineTransform at = new AffineTransform();
+        at.scale(ratioX, ratioY);
+        Path2D.Double polygon = (Path2D.Double) at.createTransformedShape(this);
+        ArrayList<Point2D> points = new ArrayList<>();
+        this.reset();
+
+        PathIterator iterator = polygon.getPathIterator(null);
+        while (!iterator.isDone()) {
+            double segment[] = new double[6];
+            iterator.currentSegment(segment);
+            System.out.println(Arrays.toString(segment));
+            if (segment[0] != 0 && segment[1] != 0) {
+                this.addPoint((int) segment[0], (int) segment[1]);
+            }
+            iterator.next();
+        }
+
+        /*for(int i = 0; i < polygon.npoints; i++){
+
+             points.add(new Point2D.Double(polygon.xpoints[i], polygon.ypoints[i]));
+             this.addPoint(polygon.xpoints[i], polygon.ypoints[i]);
+        }
+        this.setPoints(points);*/
+
     }
 
     @Override
@@ -105,5 +119,26 @@ public class DrawablePolygon extends Polygon implements Shape {
 
     public void setPoints(ArrayList<Point2D> points) {
         this.points = points;
+    }
+
+    public int[] getAllX() {
+        return allX;
+    }
+
+    public void setAllX(int[] allX) {
+        this.allX = allX;
+    }
+
+    public int[] getAllY() {
+        return allY;
+    }
+
+    public void setAllY(int[] allY) {
+        this.allY = allY;
+    }
+
+    @Override
+    public void setFillColor(Paint fillColor) {
+        this.fillColor = fillColor;
     }
 }
