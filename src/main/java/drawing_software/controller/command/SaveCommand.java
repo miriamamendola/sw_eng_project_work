@@ -30,10 +30,8 @@ public class SaveCommand implements Command {
 
     /**
      * Saves the current drawing inside the file.
-     * Updates the saved property and the currentFile property and
-     * changes the current app title with the name of the saved file.
-     * Implicitly removes the * (used for letting know the user that the drawing is modified).
-     * The action that is required for the receiver to perform is the getDrawing() method.
+     * Updates currentFile property.
+     * The operation is completed by firing a PropertyChange that sets the MODIFIED property to false.
      */
     @Override
     public void execute() {

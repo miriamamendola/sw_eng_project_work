@@ -29,10 +29,11 @@ public class LoadCommand implements Command {
     }
 
     /**
-     * First, it opens a windows that allows to choose the file to be loaded, and then loads
-     * the selected file.
-     * The operation is completed by adding the shapes in the file to the Drawing data structure
-     * and then repainting the canvas in order to show such drawn shapes.
+     * Opens the previously selected file .
+     * Adds the shapes contained in the file to the Drawing data structure
+     * and then repaints the canvas in order to show such drawn shapes.
+     * Updates currentFile property.
+     * The operation is completed by firing a PropertyChange that sets the MODIFIED property to false.
      */
     @Override
     public void execute() {
