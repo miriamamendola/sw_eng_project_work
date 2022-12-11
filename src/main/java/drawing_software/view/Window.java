@@ -13,6 +13,8 @@ import drawing_software.view.toolbar.SelectionToolbarItem;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseWheelEvent;
 import java.io.File;
 import java.net.URL;
 
@@ -46,7 +48,30 @@ public class Window extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(canvas);
 
+        scrollPane.addMouseWheelListener(new MouseAdapter() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
 
+                if(e.isControlDown()){
+                    scrollPane.setWheelScrollingEnabled(false);
+                    int scaleFactor = canvas.getScaleFactor();
+
+                    canvas.setScalePoint(e.getPoint());
+                    if(e.getWheelRotation()<0 && scaleFactor < 18){
+                        scaleFactor += 1;
+                    } else if (e.getWheelRotation()>0 && scaleFactor > 2){
+                        scaleFactor -= 1;
+                    }
+
+                    canvas.setScaleFactor(scaleFactor);
+                    canvas.repaint();
+
+                } else {
+                    scrollPane.setWheelScrollingEnabled(true);
+                }
+
+            }
+        });
 
         /* ToolBar */
 
