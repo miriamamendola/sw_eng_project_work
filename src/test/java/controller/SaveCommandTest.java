@@ -69,6 +69,6 @@ public class SaveCommandTest {
 
     @After
     public void tearDown() {
-        //file.delete();
+        file.delete();
     }
 }
