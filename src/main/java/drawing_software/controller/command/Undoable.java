@@ -1,5 +1,9 @@
 package drawing_software.controller.command;
 
-public interface Undoable {
+/**
+ * Represents the contract for the undo functionality. Every class implementing
+ * this interface represents a command which can be canceled.
+ */
+interface Undoable {
     void undo();
 }

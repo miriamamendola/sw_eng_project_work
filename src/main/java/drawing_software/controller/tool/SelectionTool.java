@@ -69,8 +69,8 @@ public class SelectionTool implements Tool {
         Shape selectedShape = request.getSelectedShape();
         if (selectedShape == null || canvas.getSelectionGrid() == null) return;
 
-        Dimension oldShapeSize = request.getOldShapeSize();
-        Point2D oldShapeLocation = request.getOldShapeLocation();
+        Dimension oldShapeSize = request.getPreviousShapeSize();
+        Point2D oldShapeLocation = request.getPreviousShapeLocation();
         Rectangle bounds = canvas.getSelectionGrid().getSelectedShape().getBounds();
 
         if (oldShapeSize != null && !bounds.getSize().equals(oldShapeSize)) {

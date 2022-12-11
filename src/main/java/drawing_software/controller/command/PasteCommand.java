@@ -57,6 +57,9 @@ public class PasteCommand implements Command, Undoable {
 
     }
 
+    /**
+     * Deletes from the drawing the shape created by the command.
+     */
     @Override
     public void undo() {
         if (pastedShape != null) {

@@ -7,9 +7,7 @@ import java.util.Deque;
 
 /**
  * Invoker class of the Command pattern. Through this class, ConcreteCommand can
- * be carried out by the receiver.
- * When the undo function will be implemented, it will hold a data structure
- * in order to memorize the executed commands.
+ * be carried out by the receiver and it can be undone (if the undo method is provided).
  */
 public class Invoker {
 
@@ -19,7 +17,8 @@ public class Invoker {
 
     /**
      * Allows the invoker to call for the execution of a command given as
-     * an input parameter.
+     * an input parameter. If the command implements the Undo interface, it is
+     * stored inside the "commands" stack, then it notifies that the stack is no more empty.
      *
      * @param command is the command to be executed by the receiver, and is
      *                given by the Client classed who want that command to be executed.
@@ -32,6 +31,10 @@ public class Invoker {
         command.execute();
     }
 
+    /**
+     * Removes an undoable command from the stack and calls the undo method. When
+     * the stack is empty, it notifies its subscribers, so that the undo menu item is disabled.
+     */
     public void undoLastCommand() {
         Undoable last = commands.pollLast();
         if (last != null) {

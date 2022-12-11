@@ -39,10 +39,10 @@ public class SelectionHandler extends Handler {
 
             if (canvas.getSelectionGrid() != null) {
                 // salviamo la vecchia dimensione della shape per il resize command
-                request.setOldShapeSize(s.getBounds().getSize());
+                request.setPreviousShapeSize(s.getBounds().getSize());
                 // salvo la vecchia posizione della shape per move e resize
-                request.setOldShapeLocation(request.getSelectedShape().getBounds().getLocation());
-                request.setPrevMouse(point);
+                request.setPreviousShapeLocation(request.getSelectedShape().getBounds().getLocation());
+                request.setPreviousMousePoint(point);
                 // controllo che la shape selezionata è la shape corrente...
                 // e ho cliccato su un vertice
                 if (canvas.getSelectionGrid().getSelectedShape().equals(s) && canvas.getSelectionGrid().isVertexClicked(point)) {               //se ho selezionato un vertice
@@ -64,7 +64,7 @@ public class SelectionHandler extends Handler {
                 // imposta la ratio per fare la resize
                 request.setRatio(grid.getWidth() / grid.getHeight());
                 // serve alla move per determinare il vettore di traslazione
-                request.setPrevMouse(point);
+                request.setPreviousMousePoint(point);
                 canvas.repaint();
                 found = true;
                 break;

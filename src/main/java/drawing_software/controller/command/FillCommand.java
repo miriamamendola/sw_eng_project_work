@@ -42,6 +42,10 @@ public class FillCommand implements Command, Undoable {
         }
     }
 
+    /**
+     * Restores the previous fill color of the canvas or of the shape, based on the data
+     * stored by this concrete command.
+     */
     @Override
     public void undo() {
         if (modifiedShape == null) {

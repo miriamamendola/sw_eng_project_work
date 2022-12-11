@@ -41,6 +41,10 @@ public class StrokeCommand implements Command, Undoable {
         }
     }
 
+    /**
+     * Restores the previous stroke color of the canvas or of the shape, based on the data
+     * stored by this concrete command.
+     */
     @Override
     public void undo() {
         if (modifiedShape == null) {

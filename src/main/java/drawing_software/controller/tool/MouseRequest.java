@@ -6,14 +6,41 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
+/**
+ * Represents the action performed by an user while using selection tool.
+ * This class needs to store:
+ * <ul>
+ *     <li>
+ *         mouseEvent: the MouseEvent instance called by the selection tool.
+ *     </li>
+ *     <li>
+ *         selectedShape: the shape currently selected in the canvas.
+ *     </li>
+ *     <li>
+ *          previousShapeLocation: the location of the shape before the user interaction.
+ *     </li>
+ *     <li>
+ *          previousShapeSize: the size of the shape before the user interaction.
+ *     </li>
+ *     <li>
+ *         previousMousePoint: the location of the mouse during the previous request.
+ *     </li>
+ *     <li>
+ *         startingPoint: the top left point of the shape that needs to be modified.
+ *     </li>
+ *     <li>
+ *         ratio: the ratio between the width and the height of the shape, used by the resize functionality.
+ *     </li>
+ * </ul>
+ */
 public class MouseRequest {
 
     private MouseEvent mouseEvent;
 
     private Shape selectedShape;
-    private Point2D oldShapeLocation;
-    private Dimension oldShapeSize;
-    private Point2D prevMouse;
+    private Point2D previousShapeLocation;
+    private Dimension previousShapeSize;
+    private Point2D previousMousePoint;
     private Point2D startingPoint;
     private double ratio;
 
@@ -33,28 +60,28 @@ public class MouseRequest {
         this.selectedShape = selectedShape;
     }
 
-    public Point2D getOldShapeLocation() {
-        return oldShapeLocation;
+    public Point2D getPreviousShapeLocation() {
+        return previousShapeLocation;
     }
 
-    public void setOldShapeLocation(Point2D oldShapeLocation) {
-        this.oldShapeLocation = oldShapeLocation;
+    public void setPreviousShapeLocation(Point2D previousShapeLocation) {
+        this.previousShapeLocation = previousShapeLocation;
     }
 
-    public Dimension getOldShapeSize() {
-        return oldShapeSize;
+    public Dimension getPreviousShapeSize() {
+        return previousShapeSize;
     }
 
-    public void setOldShapeSize(Dimension oldShapeSize) {
-        this.oldShapeSize = oldShapeSize;
+    public void setPreviousShapeSize(Dimension previousShapeSize) {
+        this.previousShapeSize = previousShapeSize;
     }
 
-    public Point2D getPrevMouse() {
-        return prevMouse;
+    public Point2D getPreviousMousePoint() {
+        return previousMousePoint;
     }
 
-    public void setPrevMouse(Point2D prevMouse) {
-        this.prevMouse = prevMouse;
+    public void setPreviousMousePoint(Point2D previousMousePoint) {
+        this.previousMousePoint = previousMousePoint;
     }
 
     public Point2D getStartingPoint() {
