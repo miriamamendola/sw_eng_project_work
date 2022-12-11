@@ -32,7 +32,7 @@ public class SelectionTool implements Tool {
 
     /**
      * When pressing the mouse, this method checks if the user is pressing a valid shape,
-     * then saves the current shape location and the  initial mouse position.
+     * then saves the current shape location and the initial mouse position.
      *
      * @param mouseEvent the event to be processed
      */
@@ -83,11 +83,27 @@ public class SelectionTool implements Tool {
         canvas.getSelectionGrid().clearSelectedVertex();
     }
 
+    /**
+     * Simply shows up the PopUpMenu when mouse is right-clicked.
+     *
+     * @param mouseEvent
+     */
     @Override
     public void mouseRightClicked(MouseEvent mouseEvent) {
         popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
     }
 
+    /**
+     * Creates all the menuItem which will be added to the PopUpMenu
+     * Initially sets them disabled.
+     * <p>
+     * Adds a PropertyChangeListener to the canvas. This is used for enabling and disabling the menuItems accordingly to
+     * the current state of the program.
+     * When there's no selected shape, all the menu items(except for the paste one) will be disabled; otherwise it will enable them.
+     * When the clipboard is empty, the paste menu item will be disabled; otherwise it will enable it.
+     *
+     * @return JPopupMenu with all the menuItems
+     */
     private JPopupMenu createPopupMenu() {
 
         JPopupMenu popupMenu = new JPopupMenu();

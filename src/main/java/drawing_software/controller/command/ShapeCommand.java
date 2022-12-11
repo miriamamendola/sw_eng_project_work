@@ -34,6 +34,10 @@ public class ShapeCommand implements Command, Undoable {
         canvas.getDrawing().addDrawable(shape);
     }
 
+    /**
+     * Removes the previously added shape to the data structure.
+     * Clears the selected drawable and calls the repaint method.
+     */
     @Override
     public void undo() {
 

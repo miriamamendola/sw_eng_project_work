@@ -3,7 +3,9 @@ package drawing_software.model;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-
+/**
+ * The Vertex used for the selectionGrid.
+ */
 public class Vertex extends DrawableRectangle {
 
     private int vertexType;
@@ -13,6 +15,12 @@ public class Vertex extends DrawableRectangle {
     private static final Dimension sizeVertex = new Dimension(offsetVertex * 2, offsetVertex * 2);
     private static final int hitBoxVertex = offsetVertex * 8;
 
+    /**
+     * Creates the vertex and according to the type, chooses the right position for it.
+     *
+     * @param rect       the selection grid rectangle, used for compute the correct position of the vertex
+     * @param vertexType the type of the vertex: UPLEFT, UPRIGHT, BOTTOMLEFT, BOTTOMRIGHT
+     */
     public Vertex(DrawableRectangle rect, int vertexType) {
         super(0, 0);
         this.vertexType = vertexType;
@@ -31,16 +39,28 @@ public class Vertex extends DrawableRectangle {
         this.setFrame(point, sizeVertex);
     }
 
-
+    /**
+     * Used to improve the ux, by increasing the hitbox of the vertex.
+     */
     private void setLargeHitBox() {
         this.setRect(this.getX() - 12, this.getY() - 12, hitBoxVertex, hitBoxVertex);
     }
 
+    /**
+     * Resets the size to the standard one.
+     */
     private void setStandardHitBox() {
         this.setRect(this.getX() + 12, this.getY() + 12, sizeVertex.getWidth(), sizeVertex.getHeight());
     }
 
 
+    /**
+     * Firstly increases the hitbox size, then checks if the points is contained.
+     * Then resets the size of the vertex.
+     *
+     * @param point the point to test for inclusion
+     * @return if the point is contained or not
+     */
     @Override
     public boolean contains(Point2D point) {
         this.setLargeHitBox();

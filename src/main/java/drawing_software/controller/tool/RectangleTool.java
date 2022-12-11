@@ -78,7 +78,9 @@ public class RectangleTool implements Tool {
         rect = null;
     }
 
-
+    /**
+     * @return top left corner Point of the rectangle
+     */
     public Point2D getStartingPoint() {
         return startingPoint;
     }

@@ -5,7 +5,9 @@ import drawing_software.view.Canvas;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-
+/**
+ * Implements the command to be called in order to resize a shape.
+ */
 public class ResizeCommand implements Command, Undoable {
 
     private final Canvas canvas;
@@ -27,6 +29,9 @@ public class ResizeCommand implements Command, Undoable {
         updateTitle(canvas);
     }
 
+    /**
+     * Reverts the resize by changing back the old shape location and the old shape size.
+     */
     @Override
     public void undo() {
         if (selectedShape != null) {

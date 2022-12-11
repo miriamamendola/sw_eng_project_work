@@ -16,9 +16,33 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.logging.Logger;
 
+/**
+ * Implements the business logic for the Window view.
+ */
 public class WindowController {
     private final Window window;
 
+    /**
+     * Creates the window and sets all the properties.
+     * Adds a window listener for the WindowClosing event. Thanks to this, it will prevent an unsaved exit.
+     * <p>
+     * Adds a new Property Change Listener to the invoker for the undo logic.
+     * <p>
+     * Adds a new PropertyChangeListener to the canvas. This is used for enabling and disabling the menuItems accordingly to
+     * the current state of the program.
+     * When there's no selected shape, all the menu items(except for the paste one) will be disabled; otherwise it will enable them.
+     * When the clipboard is empty, the paste menu item will be disabled; otherwise it will enable it.
+     * <p>
+     * Adds a new PropertyChangeListener to the canvas. This is used for enabling and disabling
+     * the CheckBox (used for the Fixed Resize) and the FillColor button.
+     * When the current tool is SelectionTool, it enables the checkbox; otherwise it will disable it.
+     * When the current tool is LineTool, it enables the FillColor button; otherwise it will disable it.
+     * <p>
+     * Adds a new PropertyChangeListener to the canvas. This is used for updating the title with the "*" mark
+     * in case of modifies.
+     *
+     * @param appTitle title of the application
+     */
     public WindowController(String appTitle) {
         window = new Window(appTitle);
         window.setSize(1280, 720);
@@ -56,14 +80,15 @@ public class WindowController {
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setVisible(true);
 
-        {
-            setCheckBoxScaleVisible(false);
-            setCutMenuItemEnabled(false);
-            setCopyMenuItemEnabled(false);
-            setPasteMenuItemEnabled(false);
-            setDeleteMenuItemEnabled(false);
-            setUndoItemEnabled(false);
-        }
+
+        setCheckBoxScaleVisible(false);
+        setCutMenuItemEnabled(false);
+        setCopyMenuItemEnabled(false);
+        setPasteMenuItemEnabled(false);
+        setDeleteMenuItemEnabled(false);
+        setUndoItemEnabled(false);
+
+
         window.getInvoker().addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
