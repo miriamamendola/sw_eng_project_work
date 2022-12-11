@@ -32,8 +32,12 @@ public class IncreaseGridSizeMenuItem extends MenuItemFactory {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                int newCellSize = canvas.getGrid().getCellSize() + 10;
-                invoker.executeCommand(new GridCommand(canvas, newCellSize));
+                int newCellSize = canvas.getGrid().getCellSize();
+                if (newCellSize <= 100) {
+                    newCellSize += 10;
+                    invoker.executeCommand(new GridCommand(canvas, newCellSize));
+                }
+
             }
         });
         return IncreaseGridSizeMenuItem;

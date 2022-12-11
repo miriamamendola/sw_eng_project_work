@@ -36,9 +36,11 @@ public class DecreaseGridSizeMenuItem extends MenuItemFactory {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int newCellSize = canvas.getGrid().getCellSize();
-                if (canvas.getGrid().getCellSize() != 10)
-                    newCellSize = canvas.getGrid().getCellSize() - 10;
-                invoker.executeCommand(new GridCommand(canvas, newCellSize));
+                if (newCellSize > 10) {
+                    newCellSize -= 10;
+                    invoker.executeCommand(new GridCommand(canvas, newCellSize));
+                }
+
             }
         });
         return decreaseGridSizeMenuItem;
