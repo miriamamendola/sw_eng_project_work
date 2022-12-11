@@ -5,6 +5,7 @@ import drawing_software.controller.tool.SelectionTool;
 import drawing_software.controller.tool.Tool;
 import drawing_software.model.Drawable;
 import drawing_software.model.Drawing;
+import drawing_software.model.Grid;
 import drawing_software.model.SelectionGrid;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CanvasView extends JPanel implements ClipboardOwner {
-
+    private Grid grid;
     private Drawing drawing;
     private Drawable dummyDrawable;
     private Tool currentTool;
@@ -29,9 +30,9 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
     private Drawable copiedShape;
 
-
     public CanvasView(Invoker invoker) {
         this.drawing = new Drawing();
+        this.grid = new Grid(999999999, this);
         currentTool = new SelectionTool(this, invoker);
         this.addMouseListener(new MouseAdapter() {
 
@@ -140,6 +141,8 @@ public class CanvasView extends JPanel implements ClipboardOwner {
 
         g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 
+        this.grid.draw(g2d);
+
         g2d.setStroke(new BasicStroke(1));
 
         for (Drawable d : this.drawing) {
@@ -155,6 +158,7 @@ public class CanvasView extends JPanel implements ClipboardOwner {
         if (selectionGrid != null) {
             selectionGrid.draw((Graphics2D) g);
         }
+
     }
 
     public Drawable getCopiedShape() {
@@ -168,5 +172,13 @@ public class CanvasView extends JPanel implements ClipboardOwner {
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         System.out.println("ClipboardTest: Lost ownership");
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
     }
 }
