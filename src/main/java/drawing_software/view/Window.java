@@ -153,7 +153,7 @@ public class Window extends JFrame {
         menuBar.add(editMenu);
 
         JMenu viewMenu = new JMenu("View");
-        editMenu.setFocusable(false);
+        viewMenu.setFocusable(false);
 
         JMenuItem showGridMenuItem = new ShowGridMenuItem(canvas, invoker).createMenuItem();
         showGridMenuItem.setFocusable(false);
@@ -168,6 +168,15 @@ public class Window extends JFrame {
         viewMenu.add(decreaseGridSizeMenuItem);
 
         menuBar.add(viewMenu);
+
+        JMenu helpMenu = new JMenu("Help");
+        helpMenu.setFocusable(false);
+
+        JMenuItem aboutMenuItem = new AboutMenuItem(canvas, invoker).createMenuItem();
+        aboutMenuItem.setFocusable(false);
+        helpMenu.add(aboutMenuItem);
+
+        menuBar.add(helpMenu);
 
         return menuBar;
     }
