@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Implements a ConcreteCommand class; in this case, the Command is the Fill command.
  */
-public class FillCommand implements Command {
+public class FillCommand implements Command, Undoable {
     private final Canvas canvas;
     private final Color color;
 

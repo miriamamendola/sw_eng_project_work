@@ -5,7 +5,7 @@ import drawing_software.view.Canvas;
 
 import java.util.logging.Logger;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand implements Command, Undoable {
 
     private final Canvas canvas;
 

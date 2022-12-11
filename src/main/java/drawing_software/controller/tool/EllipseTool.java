@@ -52,6 +52,7 @@ public class EllipseTool implements Tool {
      */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
+        if (ellipse == null) return;
         double x = min(startingPoint.getX(), mouseEvent.getX());
         double y = min(startingPoint.getY(), mouseEvent.getY());
         double width = abs(startingPoint.getX() - mouseEvent.getX());
@@ -70,11 +71,13 @@ public class EllipseTool implements Tool {
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        if (ellipse == null) return;
         if (ellipse.getWidth() > 0 && ellipse.getHeight() > 0) {
             invoker.executeCommand(new ShapeCommand(canvas, ellipse));
         }
 
         canvas.clearDummyDrawable();
+        ellipse = null;
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Defines the Cut Command, which will first store the selected Drawable in the clipboard and then will ask the
  * receiver (canvas) to remove it in order to avoid duplicates, being this a CUT command.
  */
-public class CutCommand implements Command {
+public class CutCommand implements Command, Undoable {
     private Canvas canvas;
 
     private Drawable selectedShape;

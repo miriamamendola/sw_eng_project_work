@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class SelectionTool implements Tool {
     private final Canvas canvas;
@@ -19,10 +21,13 @@ public class SelectionTool implements Tool {
 
     private final MouseRequest request = new MouseRequest();
 
+    private final JPopupMenu popupMenu;
+
     public SelectionTool(Canvas canvas, Invoker invoker) {
         this.canvas = canvas;
         this.invoker = invoker;
         request.setStartingPoint(new Point2D.Double(0, 0));
+        popupMenu = createPopupMenu();
     }
 
     /**
@@ -66,7 +71,7 @@ public class SelectionTool implements Tool {
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         Shape selectedShape = request.getSelectedShape();
-        if (selectedShape == null) return;
+        if (selectedShape == null || canvas.getSelectionGrid() == null) return;
 
         Dimension oldShapeSize = request.getOldShapeSize();
         Point2D oldShapeLocation = request.getOldShapeLocation();
@@ -84,6 +89,11 @@ public class SelectionTool implements Tool {
 
     @Override
     public void mouseRightClicked(MouseEvent mouseEvent) {
+        popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
+    }
+
+    private JPopupMenu createPopupMenu() {
+
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem cutMenuItem = new CutMenuItem(canvas, invoker).createMenuItem();
         cutMenuItem.setFocusable(false);
@@ -109,7 +119,40 @@ public class SelectionTool implements Tool {
         sendBackward.setFocusable(false);
         popupMenu.add(sendBackward);
 
-        popupMenu.show(canvas, mouseEvent.getX(), mouseEvent.getY());
+        cutMenuItem.setEnabled(false);
+        copyMenuItem.setEnabled(false);
+        pasteMenuItem.setEnabled(false);
+        deleteMenuItem.setEnabled(false);
+        bringForward.setEnabled(false);
+        sendBackward.setEnabled(false);
+
+        canvas.addPropertyChangeListener("SELECTION", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                if (propertyChangeEvent.getNewValue() != null) {
+                    cutMenuItem.setEnabled(true);
+                    copyMenuItem.setEnabled(true);
+                    deleteMenuItem.setEnabled(true);
+                    bringForward.setEnabled(true);
+                    sendBackward.setEnabled(true);
+                } else {
+                    cutMenuItem.setEnabled(false);
+                    copyMenuItem.setEnabled(false);
+                    deleteMenuItem.setEnabled(false);
+                    bringForward.setEnabled(false);
+                    sendBackward.setEnabled(false);
+                }
+            }
+        });
+
+        canvas.addPropertyChangeListener("CLIPBOARD_EMPTY", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                pasteMenuItem.setEnabled(!(boolean) propertyChangeEvent.getNewValue());
+            }
+        });
+
+        return popupMenu;
     }
 
 }

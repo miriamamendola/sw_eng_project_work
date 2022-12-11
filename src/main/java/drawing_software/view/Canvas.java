@@ -146,6 +146,7 @@ public class Canvas extends JPanel implements ClipboardOwner {
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         Logger.getLogger("root").info("ClipboardTest: Lost ownership");
+        firePropertyChange("CLIPBOARD_EMPTY", false, true);
     }
 
     public boolean isFixedResize() {

@@ -21,8 +21,4 @@ public interface Command {
         canvas.firePropertyChange("MODIFIED", false, true);
     }
 
-    default void undo() {
-        throw new UnsupportedOperationException();
-    }
-
 }

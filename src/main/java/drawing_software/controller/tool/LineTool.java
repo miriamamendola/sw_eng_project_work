@@ -36,7 +36,6 @@ public class LineTool implements Tool {
         line = new DrawableLine(canvas.getCurrentStrokeColor(), mouseEvent.getPoint(), mouseEvent.getPoint());
         canvas.setDummyDrawable(line);
     }
-
     /**
      * Defines how the canvas reacts to dragging the mouse.
      * The line is rendered according to the direction of the dragging.
@@ -45,6 +44,8 @@ public class LineTool implements Tool {
      */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
+        if (line == null) return;
+
         line.setLine(line.getP1(), mouseEvent.getPoint());
         canvas.repaint();
     }
@@ -57,10 +58,12 @@ public class LineTool implements Tool {
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        if (line == null) return;
         if (!line.getP1().equals(line.getP2())) {
             invoker.executeCommand(new ShapeCommand(canvas, line));
         }
         canvas.clearDummyDrawable();
+        line = null;
     }
 
 }

@@ -6,7 +6,7 @@ import drawing_software.view.Canvas;
 /**
  * Allows to add a desired shape to the drawing, thus implementing a ConcreteCommand.
  */
-public class ShapeCommand implements Command {
+public class ShapeCommand implements Command, Undoable {
 
     private final Canvas canvas;
     private final Drawable shape;

@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 /**
  * Memorize the previous shape location, modified in Selection tool.
  */
-public class MoveCommand implements Command {
+public class MoveCommand implements Command, Undoable {
 
     private final Canvas canvas;
     private final Point2D oldShapeLocation;

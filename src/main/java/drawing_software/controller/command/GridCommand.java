@@ -1,15 +1,15 @@
 package drawing_software.controller.command;
 
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 /**
  * Implements the command to be called in order to have the grid drawn.
  */
 public class GridCommand implements Command {
-    private final CanvasView canvas;
+    private final Canvas canvas;
     private int cellSize;
 
-    public GridCommand(CanvasView canvas, int cellSize) {
+    public GridCommand(Canvas canvas, int cellSize) {
         this.canvas = canvas;
         this.cellSize = cellSize;
     }

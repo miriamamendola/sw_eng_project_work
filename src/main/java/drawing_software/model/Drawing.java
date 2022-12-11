@@ -112,5 +112,7 @@ public class Drawing implements Serializable, Iterable<Drawable> {
         listDrawables.addFirst(d);
     }
 
-
+    public void addDrawableAtIndex(Drawable d, int index) {
+        listDrawables.add(index, d);
+    }
 }

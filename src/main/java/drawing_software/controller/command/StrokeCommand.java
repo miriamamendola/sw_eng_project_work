@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Implements a ConcreteCommand class; in this case, the Command is the Stroke command.
  */
-public class StrokeCommand implements Command {
+public class StrokeCommand implements Command, Undoable {
 
     private final Canvas canvas;
 

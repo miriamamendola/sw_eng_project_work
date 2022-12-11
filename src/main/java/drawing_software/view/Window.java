@@ -67,11 +67,7 @@ public class Window extends JFrame {
 
         checkBoxScale = new JCheckBox("Fixed proportions");
         checkBoxScale.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                canvas.setFixedResize(true);
-            } else {
-                canvas.setFixedResize(false);
-            }
+            canvas.setFixedResize(e.getStateChange() == ItemEvent.SELECTED);
         });
         bottomPanel.add(checkBoxScale);
 
@@ -156,6 +152,22 @@ public class Window extends JFrame {
 
         menuBar.add(editMenu);
 
+        JMenu viewMenu = new JMenu("View");
+        editMenu.setFocusable(false);
+
+        JMenuItem showGridMenuItem = new ShowGridMenuItem(canvas, invoker).createMenuItem();
+        showGridMenuItem.setFocusable(false);
+        viewMenu.add(showGridMenuItem);
+
+        JMenuItem increaseGridSizeMenuItem = new IncreaseGridSizeMenuItem(canvas, invoker).createMenuItem();
+        increaseGridSizeMenuItem.setFocusable(false);
+        viewMenu.add(increaseGridSizeMenuItem);
+
+        JMenuItem decreaseGridSizeMenuItem = new DecreaseGridSizeMenuItem(canvas, invoker).createMenuItem();
+        decreaseGridSizeMenuItem.setFocusable(false);
+        viewMenu.add(decreaseGridSizeMenuItem);
+
+        menuBar.add(viewMenu);
 
         return menuBar;
     }

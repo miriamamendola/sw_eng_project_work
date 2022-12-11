@@ -2,7 +2,7 @@ package drawing_software.view.menu;
 
 import drawing_software.controller.command.GridCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class IncreaseGridSizeMenuItem extends MenuItemFactory {
 
-    public IncreaseGridSizeMenuItem(CanvasView canvas, Invoker invoker) {
+    public IncreaseGridSizeMenuItem(Canvas canvas, Invoker invoker) {
         super(canvas, invoker);
     }
 

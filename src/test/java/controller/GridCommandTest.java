@@ -2,7 +2,7 @@ package controller;
 
 import drawing_software.controller.command.GridCommand;
 import drawing_software.controller.command.Invoker;
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,14 +11,14 @@ import static org.junit.Assert.assertNotNull;
 
 public class GridCommandTest {
 
-    private CanvasView canvas;
+    private Canvas canvas;
     private Invoker invoker;
     private GridCommand gc;
 
     @Before
     public void setUp() {
         invoker = new Invoker();
-        canvas = new CanvasView(invoker);
+        canvas = new Canvas(invoker);
         gc = new GridCommand(canvas, 30);
     }
 

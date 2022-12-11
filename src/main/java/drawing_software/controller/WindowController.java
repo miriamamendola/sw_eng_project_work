@@ -41,8 +41,12 @@ public class WindowController {
                             message, Main.appTitle,
                             JOptionPane.YES_NO_CANCEL_OPTION);
 
-                    if (confirmed == JOptionPane.YES_OPTION)
+                    if (confirmed == JOptionPane.YES_OPTION) {
                         new SaveMenuItem(window, window.getInvoker()).actionPerformed(null);
+                    }
+                    if (confirmed == JOptionPane.CANCEL_OPTION) {
+                        return;
+                    }
                 }
                 window.dispose();
             }
@@ -113,7 +117,12 @@ public class WindowController {
                 }
             }
         });
-
+        window.getCanvas().addPropertyChangeListener("CLIPBOARD_EMPTY", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                setPasteMenuItemEnabled(!(boolean) propertyChangeEvent.getNewValue());
+            }
+        });
     }
 
     public void setFrameTitle(String title) {

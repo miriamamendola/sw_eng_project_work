@@ -13,7 +13,7 @@ import java.util.Deque;
  */
 public class Invoker {
 
-    private final Deque<Command> commands = new ArrayDeque<>();
+    private final Deque<Undoable> commands = new ArrayDeque<>();
 
     private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
 
@@ -25,13 +25,15 @@ public class Invoker {
      *                given by the Client classed who want that command to be executed.
      */
     public void executeCommand(Command command) {
-        commands.offerLast(command);
+        if (command instanceof Undoable undoable) {
+            commands.offerLast(undoable);
+            changes.firePropertyChange("IS_INVOKER_EMPTY", true, false);
+        }
         command.execute();
-        changes.firePropertyChange("IS_INVOKER_EMPTY", true, false);
     }
 
     public void undoLastCommand() {
-        Command last = commands.pollLast();
+        Undoable last = commands.pollLast();
         if (last != null) {
             last.undo();
         }

@@ -6,7 +6,7 @@ import drawing_software.view.Canvas;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class ResizeCommand implements Command {
+public class ResizeCommand implements Command, Undoable {
 
     private final Canvas canvas;
     private final Point2D oldShapeLocation;

@@ -9,9 +9,10 @@ import drawing_software.view.Canvas;
  * The oldIndex parameter is used to aid the undo() method, so that it is possible to revert to the old position,
  * inside the list, that was previously occupied by the shape.
  */
-public class BackwardCommand implements Command {
+public class BackwardCommand implements Command, Undoable {
     private Canvas canvas;
     private int oldIndex;
+    private Drawable toFirst;
 
     public BackwardCommand(Canvas canvas) {
         this.canvas = canvas;
@@ -24,9 +25,16 @@ public class BackwardCommand implements Command {
      */
     @Override
     public void execute() {
-        Drawable toFirst = canvas.getSelectionGrid().getSelectedShape();
+        toFirst = canvas.getSelectionGrid().getSelectedShape();
         canvas.getDrawing().removeDrawable(toFirst);
         canvas.getDrawing().addDrawableFirst(toFirst);
+        canvas.repaint();
+    }
+
+    @Override
+    public void undo() {
+        canvas.getDrawing().removeDrawable(toFirst);
+        canvas.getDrawing().addDrawableAtIndex(toFirst, oldIndex);
         canvas.repaint();
     }
 }

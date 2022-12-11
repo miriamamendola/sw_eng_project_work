@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * Defines the Paste Command, which will ask the receiver (canvas) to paste the clipboard's Drawable at a point
  * on the canvas defined by left click of the mouse (received as a parameter from the tool class).
  */
-public class PasteCommand implements Command {
+public class PasteCommand implements Command, Undoable {
     private Canvas canvas;
     private Point2D point;
 

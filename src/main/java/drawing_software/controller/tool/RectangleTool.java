@@ -51,6 +51,7 @@ public class RectangleTool implements Tool {
      */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
+        if (rect == null) return;
         double x = min(startingPoint.getX(), mouseEvent.getX());
         double y = min(startingPoint.getY(), mouseEvent.getY());
         double width = abs(startingPoint.getX() - mouseEvent.getX());
@@ -69,10 +70,12 @@ public class RectangleTool implements Tool {
      */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        if (rect == null) return;
         if (rect.getWidth() > 0 && rect.getHeight() > 0) {
             invoker.executeCommand(new ShapeCommand(canvas, rect));
         }
         canvas.clearDummyDrawable();
+        rect = null;
     }
 
 

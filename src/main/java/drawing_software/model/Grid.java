@@ -1,6 +1,6 @@
 package drawing_software.model;
 
-import drawing_software.view.CanvasView;
+import drawing_software.view.Canvas;
 
 import java.awt.*;
 
@@ -10,16 +10,16 @@ import java.awt.*;
  */
 public class Grid implements Drawable {
     private int cellSize;
-    private CanvasView canvas;
+    private Canvas canvas;
     private int canvasHeight;
     private int canvasWidth;
 
-    public Grid(int cellSize, CanvasView canvas) {
+    public Grid(int cellSize, Canvas canvas) {
         this.cellSize = cellSize;
         this.canvas = canvas;
     }
 
-    public Grid(int canvasHeight, int canvasWidth, int cellSize, CanvasView canvas) {
+    public Grid(int canvasHeight, int canvasWidth, int cellSize, Canvas canvas) {
         this.cellSize = cellSize;
         this.canvas = canvas;
         this.canvasHeight = canvasHeight;
@@ -53,7 +53,7 @@ public class Grid implements Drawable {
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
-    /*
+
     public int getCanvasWidth() {
         return canvasWidth;
     }
@@ -70,5 +70,4 @@ public class Grid implements Drawable {
         this.canvasHeight = canvasHeight;
     }
 
-     */
 }
