@@ -154,6 +154,22 @@ public class FrameView {
 
         menuBar.add(editMenu);
 
+        JMenu viewMenu = new JMenu("View");
+        editMenu.setFocusable(false);
+
+        JMenuItem showGridMenuItem = new ShowGridMenuItem(canvasView, invoker).createMenuItem();
+        showGridMenuItem.setFocusable(false);
+        viewMenu.add(showGridMenuItem);
+
+        JMenuItem increaseGridSizeMenuItem = new IncreaseGridSizeMenuItem(canvasView, invoker).createMenuItem();
+        increaseGridSizeMenuItem.setFocusable(false);
+        viewMenu.add(increaseGridSizeMenuItem);
+
+        JMenuItem decreaseGridSizeMenuItem = new DecreaseGridSizeMenuItem(canvasView, invoker).createMenuItem();
+        decreaseGridSizeMenuItem.setFocusable(false);
+        viewMenu.add(decreaseGridSizeMenuItem);
+
+        menuBar.add(viewMenu);
         return menuBar;
     }
 
