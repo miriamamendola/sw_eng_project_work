@@ -19,6 +19,12 @@ public class ResizeHandler extends Handler {
         super(canvas);
     }
 
+    /**
+     * This method determines the "starting point" of the resize based on
+     * which vertex has been pressed by the user. The starting point is the
+     * top left point of the shape, which we need to calculate based on the position
+     * of the vertex on which the resize is performed.
+     */
     @Override
     void handlePressed(MouseRequest request) {
         Point2D startingPoint = null;
@@ -45,6 +51,13 @@ public class ResizeHandler extends Handler {
         canvas.repaint();
     }
 
+    /**
+     * When dragging a selected vertex, the shape is resized accordingly to the motion of the user.
+     * In particular, the calculations are made so that the vertex "follows" the mouse during dragging.
+     * The behaviour of the method changes depending on the flag "isFixedResize".
+     *
+     * @param request the request to be processed
+     */
     @Override
     void handleDragged(MouseRequest request) {
 

@@ -6,18 +6,18 @@ import drawing_software.view.Canvas;
 import java.awt.geom.Point2D;
 
 /**
- * Memorize the previous shape location, modified in Selection tool.
+ * Memorize the modified shape and the previous location, modified in Selection tool.
  */
 public class MoveCommand implements Command, Undoable {
 
     private final Canvas canvas;
     private final Point2D oldShapeLocation;
 
-    private final Shape selectedShape;
+    private final Shape modifiedShape;
 
     public MoveCommand(Canvas canvas, Shape selectedShape, Point2D oldShapeLocation) {
         this.canvas = canvas;
-        this.selectedShape = selectedShape;
+        this.modifiedShape = selectedShape;
         this.oldShapeLocation = oldShapeLocation;
     }
 
@@ -26,10 +26,14 @@ public class MoveCommand implements Command, Undoable {
         updateTitle(canvas);
     }
 
+    /**
+     * With the data saved while executing the command, the undo function restores
+     * the previous position of the figure.
+     */
     @Override
     public void undo() {
-        if (selectedShape != null) {
-            selectedShape.setLocation(oldShapeLocation);
+        if (modifiedShape != null) {
+            modifiedShape.setLocation(oldShapeLocation);
             canvas.clearSelectedDrawable();
             canvas.repaint();
         }

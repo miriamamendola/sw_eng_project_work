@@ -17,6 +17,11 @@ public interface Command {
      */
     void execute();
 
+    /**
+     * When called, it notifies their subscribers that the drawing has been modified.
+     *
+     * @param canvas a reference to the canvas object
+     */
     default void updateTitle(Canvas canvas) {
         canvas.firePropertyChange("MODIFIED", false, true);
     }

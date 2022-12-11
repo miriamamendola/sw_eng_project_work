@@ -18,6 +18,15 @@ public class MoveHandler extends Handler {
 
     }
 
+    /**
+     * When dragging a selected shape, this function moves the shape recalculating the location.
+     * new position of the figure is given translating the location of the figure by a
+     * vector (delta_x, delta_y), which components are given by the difference between the
+     * coordinates between the current mouse position and the previous mouse position, stored inside
+     * the MouseRequest instance.
+     *
+     * @param request the request to be processed
+     */
     @Override
     void handleDragged(MouseRequest request) {
         MouseEvent mouseEvent = request.getMouseEvent();

@@ -16,6 +16,17 @@ public class SelectionHandler extends Handler {
     }
 
 
+    /**
+     * This method checks if the user has pressed a valid shape,
+     * then saves the initial mouse position.
+     * If a shape was previously selected, the user may attempt to
+     * resize or move the shape. Consequently, the current size and location of the
+     * selected shape are saved in the mouse request, as they may be required by
+     * ResizeCommand or MoveCommand.
+     * If the user has pressed on a vertex, then the control is passed to ResizeHandler.
+     *
+     * @param request the request to be processed
+     */
     @Override
     public void handlePressed(MouseRequest request) {
 
@@ -73,6 +84,13 @@ public class SelectionHandler extends Handler {
         }
     }
 
+    /**
+     * If the user is dragging a selected item, then the control is passed
+     * either to ResizeHandler or MoveHandler whether the user has previously selected
+     * a vertex of the Selection grid.
+     *
+     * @param request the request to be processed
+     */
     @Override
     public void handleDragged(MouseRequest request) {
 
